@@ -4,11 +4,11 @@
       <span class="linkUpd" @Click="modalTogglerVM()">Добавить сосуд</span>
       <div id="layer_bg" class="layer_bg" @Click="modalTogglerVM()" v-show="isFormActive"></div>
       <div v-show="isFormActive" class="modal_wrap_container">
-        <div id="createTable" class="fieldTable">
+        <div id="createTable" class="field-table">
           <info-field></info-field>
           <info-chart></info-chart>
         </div>
-        <!-- .fieldTable -->
+        <!-- .field-table -->
         <info-history></info-history>
         <div @click="modalTogglerVM()" class="closeContainer">
           <a id="closeIModal" class="close" href="#"></a>

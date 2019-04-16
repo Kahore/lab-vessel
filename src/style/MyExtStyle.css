@@ -154,6 +154,35 @@
   border-color: #ff9900 !important;
 }
 
+.field-table {
+  width: 60%;
+  margin-right: 10px;
+}
+
+.field-container {
+  background-color: transparent;
+}
+
+.field-row {
+  padding-left: 25px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+.field-block {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 25%;
+}
+
+.field-block_huge {
+  width: 75%;
+}
+
+.field-block_full {
+  width: 100%;
+}
+
 .history-block {
   display: inline-block;
   width: 40%;

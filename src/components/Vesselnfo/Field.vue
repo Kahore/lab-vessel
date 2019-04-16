@@ -1,21 +1,21 @@
 <template>
   <section>
-    <div class="fieldContainer">
-      <div class="fieldRow">
-        <div class="fieldBlock fieldBlock_Huge">
+    <div class="field-container">
+      <div class="field-row">
+        <div class="field-block field-block_huge">
           <fld-input rus-desc="Статус" input-id="Condition" v-model="condition"/>
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
 
-        <div class="fieldBlock">
+        <div class="field-block">
           <fld-input rus-desc="Серийный номер" input-id="Serial" v-model="serial"/>
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
       </div>
-      <!--fieldRow -->
+      <!-- .field-row -->
 
-      <div class="fieldRow">
-        <div class="fieldBlock">
+      <div class="field-row">
+        <div class="field-block">
           <date-picker
             @update-date="updateDate($event)"
             date-format="dd/mm/yy"
@@ -24,9 +24,9 @@
             v-model="commissioningDate"
           />
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
 
-        <div class="fieldBlock">
+        <div class="field-block">
           <date-picker
             @update-date="updateDate($event)"
             date-format="dd/mm/yy"
@@ -35,9 +35,9 @@
             v-model="certificationDate"
           />
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
 
-        <div class="fieldBlock">
+        <div class="field-block">
           <date-picker
             @update-date="updateDate($event)"
             date-format="dd/mm/yy"
@@ -46,9 +46,9 @@
             v-model="lastCheckDate"
           />
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
 
-        <div class="fieldBlock">
+        <div class="field-block">
           <select-block
             rus-desc="Локация"
             select-id="Location"
@@ -56,22 +56,22 @@
             :item-types="locations"
           />
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
       </div>
-      <!--fieldRow -->
+      <!-- .field-row -->
 
-      <div class="fieldRow">
-        <div class="fieldBlock">
+      <div class="field-row">
+        <div class="field-block">
           <fld-input rus-desc="Состояние" input-id="Status" v-model="status" readonly/>
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
 
-        <div class="fieldBlock">
+        <div class="field-block">
           <fld-input rus-desc="Оценка" input-id="Score" v-model="score"/>
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
 
-        <div class="fieldBlock">
+        <div class="field-block">
           <div class="FiCon">
             <select-block
               rus-desc="Тип сосуда"
@@ -81,9 +81,9 @@
             />
           </div>
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
 
-        <div class="fieldBlock">
+        <div class="field-block">
           <template v-if="canIEditVessel==='true'">
             <div class="FiCon floatRContainer">
               <span name="btnSaveContainer" @click="saveAction(id)" v-html="btn_save"></span>
@@ -100,11 +100,11 @@
             </div>
           </template>
         </div>
-        <!--fieldBlock -->
+        <!-- .field-block -->
       </div>
-      <!--fieldRow -->
+      <!-- .field-row -->
     </div>
-    <!--fieldContainer -->
+    <!-- .field-container -->
   </section>
 </template>
 

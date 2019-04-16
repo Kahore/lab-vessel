@@ -112,7 +112,31 @@ $info-color: #ff9900;
   background-color: $info-color !important;
   border-color: $info-color !important;
 }
-
+.field{
+  &-table{
+    width: 60%; 
+    margin-right: 10px;
+  }
+  &-container {
+    background-color: transparent;
+  }
+  &-row {
+    padding-left: 25px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+  }
+  &-block{
+    display: inline-block;
+    vertical-align: bottom;
+    width: 25%;
+    &_huge{
+      width: 75%;
+    }
+    &_full{
+      width: 100%;
+    }
+  }
+}
 .history{
   &-block{
     display: inline-block;
