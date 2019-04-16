@@ -112,6 +112,33 @@ $info-color: #ff9900;
   background-color: $info-color !important;
   border-color: $info-color !important;
 }
+
+.history{
+  &-block{
+    display: inline-block;
+    width: 40%;
+    margin-left: 5px;
+    overflow: scroll;
+  }
+  &-table{
+    display:inline-block;	
+    width: 33.33%;
+    &__header-row{
+      @extend %historyRowShared;
+    }
+    &__row {
+      @extend %historyRowShared;
+      &:hover {
+        background: linear-gradient(to bottom, #eeeeee 1%,#cccccc 100%);
+        border-bottom: 1px solid $corp-primary-color;
+      }
+    }
+  }
+}
+%historyRowShared{
+  text-align: center;
+  border-bottom: 2px solid #EAEAEA;
+}
 /*=================Close btn=================*/
 .close {
   opacity: 0.3;
