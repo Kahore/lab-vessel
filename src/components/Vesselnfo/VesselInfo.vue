@@ -1,8 +1,22 @@
 <template>
   <section>
-    <info-field></info-field>
-    <info-chart></info-chart>
-    <info-history></info-history>
+    <div id="wrapper">
+      <span class="linkUpd" @Click="modalTogglerVM()">Добавить сосуд</span>
+      <div id="layer_bg" class="layer_bg" @Click="modalTogglerVM()" v-show="isFormActive"></div>
+      <div v-show="isFormActive" class="modal_wrap_container">
+        <div id="createTable" class="fieldTable">
+          <info-field></info-field>
+          <info-chart></info-chart>
+        </div>
+        <!-- .fieldTable -->
+        <info-history></info-history>
+        <div @click="modalTogglerVM()" class="closeContainer">
+          <a id="closeIModal" class="close" href="#"></a>
+        </div>
+      </div>
+      <!-- .modal_wrap_container -->
+    </div>
+    <!-- #wrapper -->
   </section>
 </template>
 

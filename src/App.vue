@@ -3,8 +3,11 @@
     <div id="center">
       <div id="content">
         <span id="ctl00_Content_ctl00_PageText">
-          <vessel-info/>
+          <vessel-info></vessel-info>
+          <vessel-single-info/>
+          <vessel-multi-info></vessel-multi-info>
           <vessel-table></vessel-table>
+          <vessel-error></vessel-error>
         </span>
       </div>
     </div>
@@ -13,13 +16,19 @@
 
 <script>
 import VesselInfo from './components/VesselInfo/VesselInfo';
+import VesselMultiInfo from './components/MultiVesselInfo';
 import VesselTable from './components/VesselTable/VesselTable';
 
+import Error from './components/Error';
+import Info from './components/Info';
 export default {
   name: 'VesselMonitoring',
   components: {
-    'vessel-info': VesselInfo,
-    'vessel-table': VesselTable
+    'vessel-single-info': VesselInfo,
+    'vessel-multi-info': VesselMultiInfo,
+    'vessel-table': VesselTable,
+    'vessel-error': Error,
+    'vessel-info': Info
   }
 };
 </script>
