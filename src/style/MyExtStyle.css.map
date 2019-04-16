@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,IAAI,CAAC;EACH,MAAM,EAAE,CAAC;CACV",
+    "sources": [
+        "MyExtStyle.scss"
+    ],
+    "names": [],
+    "file": "MyExtStyle.css"
+}
