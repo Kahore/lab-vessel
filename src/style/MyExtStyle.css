@@ -1,4 +1,213 @@
-body {
-  margin: 0;
+@charset "UTF-8";
+.layer_bg {
+  background: transparent;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -10;
+}
+
+/*Слайдер загрузки*/
+.lds-ring {
+  display: inline-block;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  margin: 10% 20%;
+}
+
+.lds-ring.list-ring {
+  margin: -15px -13x;
+}
+
+.lds-ring.list-ring div {
+  width: 15px;
+  height: 15px;
+  border: 3px solid orange;
+  -webkit-animation: lds-ring 1.2s cubic-bezier(0.7, 0, 0.5, 1) infinite;
+          animation: lds-ring 1.2s cubic-bezier(0.7, 0, 0.5, 1) infinite;
+  border-color: orange transparent transparent transparent;
+}
+
+.lds-ring.centered {
+  margin: 0% 50%;
+}
+
+.lds-ring div {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  margin: 6px;
+  border: 6px solid orange;
+  border-radius: 50%;
+  -webkit-animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+          animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: orange transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  -webkit-animation-delay: -0.45s;
+          animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  -webkit-animation-delay: -0.3s;
+          animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  -webkit-animation-delay: -0.15s;
+          animation-delay: -0.15s;
+}
+
+@-webkit-keyframes lds-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes lds-ring {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+/*Message snack*/
+.v-snack {
+  position: -webkit-sticky;
+  position: sticky;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #fff;
+  pointer-events: none;
+  z-index: 1000;
+  font-size: 14px;
+  left: 0;
+  right: 0;
+}
+
+.v-snack--bottom {
+  bottom: 0;
+  left: -40%;
+  position: fixed;
+}
+
+.v-snack__content {
+  width: 100%;
+  padding: 14px 24px;
+  margin: -2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  overflow: hidden;
+  color: white;
+}
+
+.v-snack_wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #323232;
+  pointer-events: auto;
+  width: 100%;
+  -webkit-box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+          box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 5px;
+}
+
+.error {
+  background-color: #ff8181 !important;
+  border-color: #ff8181 !important;
+}
+
+.info {
+  background-color: #ff9900 !important;
+  border-color: #ff9900 !important;
+}
+
+/*=================Close btn=================*/
+.close {
+  opacity: 0.3;
+}
+
+.closeContainer {
+  position: -webkit-sticky;
+  position: sticky;
+  right: 0;
+  top: 0;
+  margin-right: -35px;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+}
+
+.closeContainer:hover a {
+  opacity: 1;
+}
+
+.close:hover {
+  opacity: 1;
+}
+
+.close:before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.close:after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+
+.close:before,
+.close :after {
+  position: absolute;
+  top: -4px;
+  left: 10px;
+  content: " ";
+  height: 25px;
+  width: 2px;
+  background-color: #fff;
+  background: #323232;
+}
+
+/* media */
+@media only screen and (min-width: 600px) {
+  .v-snack__wrapper {
+    width: auto;
+    max-width: 568px;
+    min-width: 288px;
+    margin: 0 auto;
+    border-radius: 2px;
+  }
 }
 /*# sourceMappingURL=MyExtStyle.css.map */

@@ -17,12 +17,8 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import './style/CorpStyle/CorpV2.css';
+@import './style/CorpStyle/SGSRapidFramework.css';
+@import './style/CorpStyle/jq_ui_1.8.6.css';
+@import './style/MyExtStyle.css';
 </style>
