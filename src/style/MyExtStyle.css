@@ -178,16 +178,6 @@
   opacity: 1;
 }
 
-.close:before {
-  -webkit-transform: rotate(45deg);
-          transform: rotate(45deg);
-}
-
-.close:after {
-  -webkit-transform: rotate(-45deg);
-          transform: rotate(-45deg);
-}
-
 .close:before,
 .close :after {
   position: absolute;
@@ -198,6 +188,16 @@
   width: 2px;
   background-color: #fff;
   background: #323232;
+}
+
+.close:before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.close:after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
 }
 
 /* media */

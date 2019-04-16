@@ -1,17 +1,25 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+  <div id="container" class="container">
+    <div id="center">
+      <div id="content">
+        <span id="ctl00_Content_ctl00_PageText">
+          <vessel-info/>
+          <vessel-table></vessel-table>
+        </span>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import VesselInfo from './components/VesselInfo/VesselInfo';
+import VesselTable from './components/VesselTable/VesselTable';
 
 export default {
-  name: 'App',
+  name: 'VesselMonitoring',
   components: {
-    HelloWorld
+    'vessel-info': VesselInfo,
+    'vessel-table': VesselTable
   }
 };
 </script>

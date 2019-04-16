@@ -132,7 +132,14 @@ $info-color: #ff9900;
   }
   &:before,
   :after {
-    @extend %close-shared;
+    position: absolute;
+    top: -4px;
+    left: 10px;
+    content: " ";
+    height: 25px;
+    width: 2px;
+    background-color: #fff;
+    background: #323232;
   }
   &:before{
     transform: rotate(45deg);
@@ -141,18 +148,6 @@ $info-color: #ff9900;
     transform: rotate(-45deg);
   }
 }
-
-%close-shared {
-  position: absolute;
-  top: -4px;
-  left: 10px;
-  content: " ";
-  height: 25px;
-  width: 2px;
-  background-color: #fff;
-  background: #323232;
-}
-
 
 /* media */
 @media only screen and (min-width: 600px) {
