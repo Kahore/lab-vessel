@@ -1,4 +1,5 @@
 $corp-primary-color:orange;
+$corp-secondary-color:gray;
 $error-color: #ff8181;
 $info-color: #ff9900;
 
@@ -162,6 +163,45 @@ $info-color: #ff9900;
 %historyRowShared{
   text-align: center;
   border-bottom: 2px solid #EAEAEA;
+}
+
+.vessel{
+  &-container {
+    text-align: center;
+    width: 105%;
+    &__chb{
+      text-align: right;
+      padding-right: 40px; 
+    }
+  }
+  &-header{
+    width: 109%;
+	  background: linear-gradient(to bottom, #eeeeee 50%,#cccccc 100%);
+	  align-items: center;
+    display: flex;
+    font-weight: bold;
+    &_line {
+      display: inline-grid;
+      align-items: center
+    }
+  }
+  &-block {
+    border-bottom: 1px solid $corp-secondary-color;
+    display: inline-grid;
+	  height: 25px;
+    align-items: center;
+	  max-width: 100px;
+    min-width: 95px;
+    position: relative;
+    &__row {
+      display: flex;
+      width: 109%;
+      &:hover {
+        background: linear-gradient(to bottom, #eeeeee 1%,#cccccc 100%);
+        border-bottom: 1px solid $corp-primary-color;
+      }
+    }
+  }
 }
 /*=================Close btn=================*/
 .close {
