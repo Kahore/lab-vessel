@@ -2,7 +2,7 @@
   <section>
     <div class="vessel-container" id="vesselContainer">
       <div class="vessel-container__chb">
-        <input type="checkbox" id="checkbox" v-model="hideUtil" true-value="true" @click="load">
+        <input type="checkbox" id="checkbox" v-model="hideUtil" true-value="true" @click="load()">
         <label
           for="checkbox"
           title="Значение может быть задано через Мои настройки"
@@ -157,6 +157,17 @@ export default {
   methods: {
     loadVessel(orderId) {
       console.log('TCL: loadVessel -> orderId', orderId);
+    }
+  },
+  computed: {
+    loading() {
+      return this.$store.getters.loadingVesselsTable;
+    },
+    vessels() {
+      return this.$store.getters.GET_VESSELS_LIST;
+    },
+    hideUtil() {
+      return this.$store.getters.GET_FILTER_HIDE;
     }
   },
   mounted() {
