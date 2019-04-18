@@ -287,8 +287,7 @@
   opacity: 1;
 }
 
-.close:before,
-.close :after {
+.close:before, .close:after {
   position: absolute;
   top: -4px;
   left: 10px;
