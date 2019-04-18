@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import EventBus from '../../../EventBus';
+
 import Field from './Field';
 import Chart from './Chart';
 import History from './History';
@@ -31,6 +33,10 @@ export default {
     'info-field': Field,
     'info-chart': Chart,
     'info-history': History
+  },
+  mounted() {
+    let _unid = this.$store.getters.getCurrentUnid;
+    EventBus.$emit('LOAD_VESSEL_INFO', _unid);
   }
 };
 </script>

@@ -21,7 +21,7 @@
             date-format="dd/mm/yy"
             rus-desc="Дата создания"
             input-id="CommissioningDate"
-            v-model="commissioningDate"
+            v-model="vesselInfo.CommissioningDate"
           />
         </div>
         <!-- .field-block -->
@@ -32,7 +32,7 @@
             date-format="dd/mm/yy"
             rus-desc="Испытание в ЦСМ"
             input-id="CertificationDate"
-            v-model="certificationDate"
+            v-model="vesselInfo.CertificationDate"
           />
         </div>
         <!-- .field-block -->
@@ -43,7 +43,7 @@
             date-format="dd/mm/yy"
             rus-desc="Дата проверки"
             input-id="LastCheckDate"
-            v-model="lastCheckDate"
+            v-model="vesselInfo.LastCheckDate"
           />
         </div>
         <!-- .field-block -->
@@ -52,8 +52,9 @@
           <select-block
             rus-desc="Локация"
             select-id="Location"
-            v-model="currentLocation"
-            :item-types="locations"
+            v-model="vesselInfo.Location"
+            :item-types="Locations"
+            :isRequired="true"
           />
         </div>
         <!-- .field-block -->
@@ -62,12 +63,12 @@
 
       <div class="field-row">
         <div class="field-block">
-          <fld-input rus-desc="Состояние" input-id="Status" v-model="status" readonly/>
+          <fld-input rus-desc="Состояние" input-id="Status" v-model="vesselInfo.Status" readonly/>
         </div>
         <!-- .field-block -->
 
         <div class="field-block">
-          <fld-input rus-desc="Оценка" input-id="Score" v-model="score"/>
+          <fld-input rus-desc="Оценка" input-id="Score" v-model="vesselInfo.Score"/>
         </div>
         <!-- .field-block -->
 
@@ -76,8 +77,9 @@
             <select-block
               rus-desc="Тип сосуда"
               select-id="VesselType"
-              v-model="currentVesselType"
-              :item-types="vesselTypes"
+              v-model="vesselInfo.VesselType"
+              :item-types="VesselTypes"
+              :isRequired="true"
             />
           </div>
         </div>
@@ -86,7 +88,7 @@
         <div class="field-block">
           <template v-if="canIEditVessel==='true'">
             <div class="FiCon floatRContainer">
-              <span name="btnSaveContainer" @click="saveAction(id)" v-html="btn_save"></span>
+              <span name="btnSaveContainer" @click="saveAction()" v-html="vesselInfo.Btn_save"></span>
             </div>
           </template>
           <template v-else-if="loading">
@@ -96,7 +98,7 @@
           </template>
           <template v-else>
             <div class="FiCon floatRContainer">
-              <span name="btnSaveContainer" v-html="btn_save"></span>
+              <span name="btnSaveContainer" v-html="vesselInfo.Btn_save"></span>
             </div>
           </template>
         </div>
@@ -109,5 +111,31 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    saveAction() {
+      let _unid = this.$store.getters.getCurrentUnid;
+      console.log('TCL: saveAction -> _unid', _unid);
+    }
+  },
+  computed: {
+    vesselInfo() {
+      if (typeof this.$store.getters.vesselInfo !== 'undefined') {
+        return this.$store.getters.vesselInfo;
+      } else {
+        return {};
+      }
+    },
+    Locations() {
+      if (typeof this.$store.getters.vesselInfo !== 'undefined') {
+        return this.$store.getters.GET_DD_Locations;
+      }
+    },
+    VesselTypes() {
+      if (typeof this.$store.getters.vesselInfo !== 'undefined') {
+        return this.$store.getters.GET_DD_VesselTypes;
+      }
+    }
+  }
+};
 </script>

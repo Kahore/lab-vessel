@@ -152,5 +152,17 @@
 </template>
 
 <script>
-export default {};
+import EventBus from '../../EventBus';
+export default {
+  methods: {
+    loadVessel(orderId) {
+      console.log('TCL: loadVessel -> orderId', orderId);
+    }
+  },
+  mounted() {
+    EventBus.$on('LOAD_VESSEL_INFO', payload => {
+      this.loadVessel(payload);
+    });
+  }
+};
 </script>
