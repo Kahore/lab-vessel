@@ -3,12 +3,11 @@
     <div class="field-container">
       <div class="field-row">
         <div class="field-block field-block_huge">
-          <fld-input rus-desc="Статус" input-id="Condition" v-model="condition"/>
+          <fld-input rus-desc="Статус" input-id="Condition" v-model="vesselInfo.Condition"/>
         </div>
         <!-- .field-block -->
-
         <div class="field-block">
-          <fld-input rus-desc="Серийный номер" input-id="Serial" v-model="serial"/>
+          <fld-input rus-desc="Серийный номер" input-id="Serial" v-model="vesselInfo.Serial"/>
         </div>
         <!-- .field-block -->
       </div>
@@ -91,11 +90,6 @@
               <span name="btnSaveContainer" @click="saveAction()" v-html="vesselInfo.Btn_save"></span>
             </div>
           </template>
-          <template v-else-if="loading">
-            <div class="FiCon">
-              <span class="awaitWhenLoad">SomeText</span>
-            </div>
-          </template>
           <template v-else>
             <div class="FiCon floatRContainer">
               <span name="btnSaveContainer" v-html="vesselInfo.Btn_save"></span>
@@ -135,6 +129,10 @@ export default {
       if (typeof this.$store.getters.vesselInfo !== 'undefined') {
         return this.$store.getters.GET_DD_VesselTypes;
       }
+    },
+    canIEditVessel() {
+      /* TODO: Fix it */
+      return true;
     }
   }
 };

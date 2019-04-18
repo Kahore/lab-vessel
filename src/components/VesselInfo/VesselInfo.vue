@@ -2,8 +2,8 @@
   <section>
     <div id="wrapper">
       <span class="linkUpd" @Click="modalTogglerVM()">Добавить сосуд</span>
-      <div id="layer_bg" class="layer_bg" @Click="modalTogglerVM()" v-show="isFormActive"></div>
-      <div v-show="isFormActive" class="modal_wrap_container">
+      <div id="layer_bg" class="layer_bg" @Click="modalTogglerVM()" v-show="isVesselInfoActive"></div>
+      <div v-show="isVesselInfoActive" class="modal_wrap_container">
         <div id="createTable" class="field-table">
           <info-field></info-field>
           <info-chart></info-chart>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import EventBus from '../../../EventBus';
+import EventBus from '../../EventBus';
 
 import Field from './Field';
 import Chart from './Chart';
@@ -33,6 +33,16 @@ export default {
     'info-field': Field,
     'info-chart': Chart,
     'info-history': History
+  },
+  methods: {
+    modalTogglerVM() {
+      console.log('modalTogglerVM');
+    }
+  },
+  computed: {
+    isVesselInfoActive() {
+      return this.$store.getters.GET_IS_VESSELINFO_ACTIVE;
+    }
   },
   mounted() {
     let _unid = this.$store.getters.getCurrentUnid;
