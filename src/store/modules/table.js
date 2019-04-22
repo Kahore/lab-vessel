@@ -3,7 +3,7 @@
 const state = {
   Vessels: [],
   loadingVesselsTable: false,
-  hideUtil: 'true' // '@UtilVesselFilter@',
+  hideUtil: 'true', // '@UtilVesselFilter@',
 };
 const getters = {
   loadingVesselsTable: state => {
@@ -14,7 +14,7 @@ const getters = {
   },
   GET_FILTER_HIDE: state => {
     return state.hideUtil;
-  }
+  },
 };
 const mutations = {};
 const actions = {};
@@ -23,5 +23,5 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 };

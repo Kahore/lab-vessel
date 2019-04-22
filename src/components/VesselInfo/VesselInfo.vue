@@ -32,21 +32,21 @@ export default {
   components: {
     'info-field': Field,
     'info-chart': Chart,
-    'info-history': History
+    'info-history': History,
   },
   methods: {
     modalTogglerVM() {
       console.log('modalTogglerVM');
-    }
+    },
   },
   computed: {
     isVesselInfoActive() {
       return this.$store.getters.GET_IS_VESSELINFO_ACTIVE;
-    }
+    },
   },
   mounted() {
     let _unid = this.$store.getters.getCurrentUnid;
     EventBus.$emit('LOAD_VESSEL_INFO', _unid);
-  }
+  },
 };
 </script>

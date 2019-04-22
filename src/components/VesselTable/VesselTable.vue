@@ -157,7 +157,7 @@ export default {
   methods: {
     loadVessel(orderId) {
       console.log('TCL: loadVessel -> orderId', orderId);
-    }
+    },
   },
   computed: {
     loading() {
@@ -168,12 +168,12 @@ export default {
     },
     hideUtil() {
       return this.$store.getters.GET_FILTER_HIDE;
-    }
+    },
   },
   mounted() {
     EventBus.$on('LOAD_VESSEL_INFO', payload => {
       this.loadVessel(payload);
     });
-  }
+  },
 };
 </script>

@@ -110,7 +110,7 @@ export default {
     saveAction() {
       let _unid = this.$store.getters.getCurrentUnid;
       console.log('TCL: saveAction -> _unid', _unid);
-    }
+    },
   },
   computed: {
     vesselInfo() {
@@ -133,7 +133,7 @@ export default {
     canIEditVessel() {
       /* TODO: Fix it */
       return true;
-    }
-  }
+    },
+  },
 };
 </script>
