@@ -7,42 +7,42 @@ import { store } from './store/store';
 Vue.config.productionTip = false;
 Vue.component('fld-textarea', {
   template:
-    '<div class="FiCon">' +
-    '<textarea class="fld" row="1" :required="isRequired" name="Field" :id="inputId" v-model="inputVal" @focus="toggleLabel($event)" @blur="toggleLabel($event)" @keyup="searchData($event)"></textarea>' +
+    '<div class="field-block__wrapper">' +
+    '<textarea class="field-block__wrapper_item" row="1" :required="isRequired" name="Field" :id="inputId" v-model="inputVal" @focus="toggleLabel($event)" @blur="toggleLabel($event)" @keyup="searchData($event)"></textarea>' +
     '<div class="likePlaceholder " v-text="rusDesc"></div>' +
     '<div class="borderPseudo"></div>' +
     '</div>',
   props: ['rusDesc', 'value', 'inputId', 'isRequired'],
   methods: {
-    toggleLabel (e) {
+    toggleLabel(e) {
       likeLabelV(e);
       textareaAutoGrow();
     },
-    searchData (e) {}
+    searchData(e) {}
   },
   computed: {
     inputVal: {
-      get () {
+      get() {
         return this.value;
       },
-      set (value) {
+      set(value) {
         this.$emit('input', value);
       }
     }
   },
-  created () {
+  created() {
     const component = this;
-    this.handler = function (e) {
+    this.handler = function(e) {
       component.$emit('keyup', e);
     };
     window.addEventListener('keyup', this.handler);
   },
-  updated () {
+  updated() {
     var thisEl = document.getElementById(this.inputId);
     likeLabelOnCreateV(thisEl);
     textareaAutoGrow();
   },
-  mounted () {
+  mounted() {
     var thisEl = document.getElementById(this.inputId);
     likeLabelOnCreateV(thisEl);
     textareaAutoGrow();
@@ -51,8 +51,8 @@ Vue.component('fld-textarea', {
 
 Vue.component('select-block', {
   template:
-    '<div class="FiCon">' +
-    '<select class="fld" name="Field" :id="selectId" v-model="currentItem" :required="isRequired" @focus="toggleLabel($event)" @blur="toggleLabel($event)">' +
+    '<div class="field-block__wrapper">' +
+    '<select class="field-block__wrapper_item" name="Field" :id="selectId" v-model="currentItem" :required="isRequired" @focus="toggleLabel($event)" @blur="toggleLabel($event)">' +
     '<option :selected="true">{{currentItem}}</option>' +
     '<option></option>' +
     '<option v-for="itemType in itemTypesPars" :value="itemType" >{{ itemType }}</option>' +
@@ -62,22 +62,22 @@ Vue.component('select-block', {
     '</div>',
   props: ['rusDesc', 'value', 'selectId', 'itemTypes', 'isRequired'],
   methods: {
-    toggleLabel (e) {
+    toggleLabel(e) {
       likeLabelV(e);
     }
   },
   computed: {
     currentItem: {
-      get: function () {
+      get: function() {
         return this.value;
       },
-      set: function (value) {
+      set: function(value) {
         if (typeof this.itemTypesPars !== 'undefined') {
           this.$emit('input', value);
         }
       }
     },
-    itemTypesPars () {
+    itemTypesPars() {
       if (
         typeof this.itemTypes !==
         'undefined' /* && this.itemTypes.length !== 0 */
@@ -92,11 +92,11 @@ Vue.component('select-block', {
       }
     }
   },
-  updated: function () {
+  updated: function() {
     var thisEl = document.getElementById(this.selectId);
     likeLabelOnCreateV(thisEl);
   },
-  mounted () {
+  mounted() {
     var thisEl = document.getElementById(this.selectId);
     likeLabelOnCreateV(thisEl);
   }
@@ -104,40 +104,40 @@ Vue.component('select-block', {
 
 Vue.component('fld-input', {
   template:
-    '<div class="FiCon">' +
-    '<input class="fld" :required="isRequired" name="Field" :id="inputId" :readonly="isReadonly" v-model="inputVal" @focus="toggleLabel($event)" @blur="toggleLabel($event)" @keyup="searchData($event)"/>' +
+    '<div class="field-block__wrapper">' +
+    '<input class="field-block__wrapper_item" :required="isRequired" name="Field" :id="inputId" :readonly="isReadonly" v-model="inputVal" @focus="toggleLabel($event)" @blur="toggleLabel($event)" @keyup="searchData($event)"/>' +
     '<div class="likePlaceholder" v-text="rusDesc"></div>' +
     '<div class="borderPseudo"></div>' +
     '</div >',
   props: ['rusDesc', 'value', 'inputId', 'isReadonly', 'isRequired'],
   methods: {
-    toggleLabel (e) {
+    toggleLabel(e) {
       likeLabelV(e);
     },
-    searchData (e) {}
+    searchData(e) {}
   },
   computed: {
     inputVal: {
-      get: function () {
+      get: function() {
         return this.value;
       },
-      set: function (value) {
+      set: function(value) {
         this.$emit('input', value);
       }
     }
   },
-  created: function () {
+  created: function() {
     const component = this;
-    this.handler = function (e) {
+    this.handler = function(e) {
       component.$emit('keyup', e);
     };
     window.addEventListener('keyup', this.handler);
   },
-  updated: function () {
+  updated: function() {
     var thisEl = document.getElementById(this.inputId);
     likeLabelOnCreateV(thisEl);
   },
-  mounted () {
+  mounted() {
     var thisEl = document.getElementById(this.inputId);
     likeLabelOnCreateV(thisEl);
   }
@@ -145,30 +145,30 @@ Vue.component('fld-input', {
 
 Vue.component('date-picker', {
   template:
-    '<div class="FiCon">' +
-    '<input autocomplete="off" v-model="inputVal" class="fld" name ="Field" :id ="inputId" required @focus="toggleLabel($event)" @blur="toggleLabel($event)" />' +
+    '<div class="field-block__wrapper">' +
+    '<input autocomplete="off" v-model="inputVal" class="field-block__wrapper_item" name ="Field" :id ="inputId" required @focus="toggleLabel($event)" @blur="toggleLabel($event)" />' +
     '<div class="likePlaceholder " v-text="rusDesc"></div>' +
     '<div class="borderPseudo"></div>' +
     '</div>',
   props: ['dateFormat', 'value', 'inputId', 'rusDesc'],
 
   methods: {
-    toggleLabel (e) {
+    toggleLabel(e) {
       likeLabelV(e);
     }
   },
   computed: {
     inputVal: {
-      get: function () {
+      get: function() {
         return this.value;
       },
-      set: function (value) {
+      set: function(value) {
         this.$emit('input', value);
       }
     }
   },
 
-  mounted: function () {
+  mounted: function() {
     var self = this;
     var thisEl = document.getElementById(self.inputId);
     // eslint-disable-next-line no-undef
@@ -177,7 +177,7 @@ Vue.component('date-picker', {
       firstDay: 1,
       changeMonth: true,
       changeYear: true,
-      onSelect: function (date) {
+      onSelect: function(date) {
         self.$emit('input', date);
         if (date !== '') {
           likeLabelOnCreateV(thisEl);
@@ -189,13 +189,13 @@ Vue.component('date-picker', {
     // eslint-disable-next-line no-undef
     $(thisEl).removeClass('hasDatepicker');
   },
-  updated: function () {
+  updated: function() {
     var self = this;
     var thisEl = document.getElementById(self.inputId);
     likeLabelOnCreateV(thisEl);
   },
 
-  beforeDestroy: function () {
+  beforeDestroy: function() {
     // eslint-disable-next-line no-undef
     $(this.$el)
       .datepicker('hide')
@@ -203,14 +203,14 @@ Vue.component('date-picker', {
   }
 });
 
-function textareaAutoGrow () {
+function textareaAutoGrow() {
   var inputs = document.getElementsByTagName('textarea');
   for (var i = 0; i < inputs.length; i += 1) {
     autoGrow(inputs[i]);
   }
 }
 
-function likeLabelV (e) {
+function likeLabelV(e) {
   e.target.nextSibling.classList.add('likeLabel');
   if (e.target.value === '' && e.type === 'blur') {
     e.target.nextSibling.classList.remove('likeLabel');
@@ -219,13 +219,13 @@ function likeLabelV (e) {
   e.target.parentNode.lastElementChild.classList.toggle('borderPseudoLine');
 }
 
-function likeLabelOnCreateV (elem) {
+function likeLabelOnCreateV(elem) {
   if (elem.value !== '') {
     elem.nextSibling.classList.add('likeLabel');
   }
 }
 
-function autoGrow (element) {
+function autoGrow(element) {
   if (element.value.length > 1) {
     element.style.height = element.scrollHeight + 'px';
     if (element.scrollHeight === 0) {

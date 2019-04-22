@@ -72,7 +72,7 @@
         <!-- .field-block -->
 
         <div class="field-block">
-          <div class="FiCon">
+          <div class="field-block__wrapper">
             <select-block
               rus-desc="Тип сосуда"
               select-id="VesselType"
@@ -86,12 +86,12 @@
 
         <div class="field-block">
           <template v-if="canIEditVessel==='true'">
-            <div class="FiCon floatRContainer">
+            <div class="field-block__wrapper floatRContainer">
               <span name="btnSaveContainer" @click="saveAction()" v-html="vesselInfo.Btn_save"></span>
             </div>
           </template>
           <template v-else>
-            <div class="FiCon floatRContainer">
+            <div class="field-block__wrapper floatRContainer">
               <span name="btnSaveContainer" v-html="vesselInfo.Btn_save"></span>
             </div>
           </template>
