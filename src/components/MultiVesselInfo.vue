@@ -1,14 +1,14 @@
 <template>
   <section>
     <div id="containerChartMulti">
-      <div id="layer_bg" class="layer_bg" @Click="modalTogglerVM()" v-show="isBoxVisible"></div>
-      <div v-show="isBoxVisible" class="modal_wrap_container">
+      <div class="layer_bg" @click="modalTogglerVM()" v-show="isMultiBoxVisible"></div>
+      <div v-show="isMultiBoxVisible" class="modal_wrap_container">
         <div class="field-block_full">
           <h2 v-text="chartTitle"></h2>
           <div id="containerChartHlMulti" class="mt-5per"></div>
         </div>
         <!--.field-block_full -->
-        <div class="closeContainer" @Click="modalTogglerVM()">
+        <div class="closeContainer" @click="modalTogglerVM()">
           <a id="closeIModal" class="close" href="#"></a>
         </div>
       </div>
@@ -22,7 +22,7 @@ import EventBus from '../EventBus';
 export default {
   data() {
     return {
-      isBoxVisible: false,
+      isMultiBoxVisible: false,
       // mock
       chartTitle: 'chartTitle',
     };
@@ -31,7 +31,7 @@ export default {
     modalTogglerVM(payload) {
       window.scrollTo(0, 0);
       var self = this;
-      self.isBoxVisible = !self.isBoxVisible;
+      self.isMultiBoxVisible = !self.isMultiBoxVisible;
       self.$store.dispatch('LOAD_CHART_MULTI', payload).then(response => {
         self.groupChartBulder(self);
       });

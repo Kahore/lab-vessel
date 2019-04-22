@@ -2,7 +2,7 @@
   <section>
     <div id="wrapper">
       <span class="link_upd" @click="modalTogglerVM()">Добавить сосуд</span>
-      <div id="layer_bg" class="layer_bg" @click="modalTogglerVM()" v-show="isBoxVisible"></div>
+      <div class="layer_bg" @click="modalTogglerVM()" v-show="isBoxVisible"></div>
       <div v-show="isBoxVisible" class="modal_wrap_container">
         <div id="createTable" class="field-table">
           <info-field></info-field>
