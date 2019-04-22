@@ -59,6 +59,21 @@ BEGIN
       ORDER BY Created DESC
       FOR XML PATH ('r2'), TYPE
   ) AS [History]
+  , (SELECT /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@, @UserName@, @GetDate@*/
+        ELEH.[ItemGroup] AS [ItemGroup]
+		   , [ItemVal] AS [ItemVal]
+		   , 5000 as [PreLim]
+		   , 10000 as [Lim]
+
+      FROM [LabProtocols].[dbo].[Ent_Lab_Entity_History] as ELEH
+      WHERE CAST
+(ELEH.[EntityID] AS nvarchar
+(50)) = '@unid@' AND ELEH.[ItemGroup] IS NOT NULL
+      ORDER BY [Created] ASC
+
+      FOR XML PATH
+('r3'), TYPE
+  ) AS [ChartData]
     FROM [LabProtocols].[dbo].[Ent_Lab_Entity] as ELE
     WHERE CAST(ELE.[ID] AS nvarchar(50)) = '@unid@'
     FOR xml path(''), root																								

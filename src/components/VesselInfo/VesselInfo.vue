@@ -44,8 +44,71 @@ export default {
       window.scrollTo(0, 0);
       var self = this;
       self.isBoxVisible = !self.isBoxVisible;
-      self.$store.dispatch('LOAD_VESSEL_INFO', vesselID);
+      self.$store.dispatch('LOAD_VESSEL_INFO', vesselID).then(response => {
+        self.chartBulder(self);
+      });
       console.log('modalTogglerVM');
+    },
+    chartBulder(self) {
+      let chartData = self.$store.getters.vesselInfo.ChartData;
+      self.chart = $('#chartContainer').highcharts({
+        chart: { type: 'column' },
+        colors: ['#ff9900', '#666666', '#333333', '#ff6600', '#ff3300'],
+        credits: {
+          text: 'Мониторинг состояния сосудов',
+          href: '.',
+        },
+        title: { text: null },
+        xAxis: {
+          categories: chartData.map(function(e) {
+            return e.ItemGroup;
+          }),
+          title: { text: null },
+        },
+        yAxis: {
+          min: 0,
+          title: {
+            text: 'Накопительное количество поджигов',
+            align: 'high',
+          },
+          labels: { overflow: 'justify' },
+        },
+        plotOptions: {
+          bar: {
+            dataLabels: {
+              enabled: true,
+            },
+          },
+        },
+        marker: { enabled: false },
+        creditsNA: { enabled: false },
+        series: [
+          {
+            name: 'fired',
+            data: chartData.map(function(e) {
+              return parseInt(e.ItemVal);
+            }),
+          },
+          {
+            type: 'line',
+            name: 'Pre-Lim',
+            color: 'red',
+            dashStyle: 'longdash',
+            data: chartData.map(function(e) {
+              return parseInt(e.PreLim);
+            }),
+          },
+          {
+            type: 'line',
+            name: 'Lim',
+            color: 'red',
+            dashStyle: 'longdash',
+            data: chartData.map(function(e) {
+              return parseInt(e.Lim);
+            }),
+          },
+        ],
+      });
     },
   },
   mounted() {
