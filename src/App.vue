@@ -29,6 +29,10 @@ export default {
     'vessel-table': VesselTable,
     'vessel-error': Error,
     'vessel-info': Info
+  },
+  created() {
+    let unid = this.$store.getters.getCurrentUnid;
+    this.$store.dispatch('loadField', { unid: unid });
   }
 };
 </script>
