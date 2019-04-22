@@ -1,13 +1,33 @@
 @charset "UTF-8";
 .layer_bg {
-  background: transparent;
+  Background: #000;
+  opacity: 0.8;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  z-index: -10;
+  z-index: 500;
+}
+
+.link_string {
+  cursor: pointer;
+  color: #666;
+  font-weight: bold;
+}
+
+.link_string:hover {
+  text-decoration: underline;
+}
+
+.link_upd {
+  cursor: pointer;
+  color: #FF6600;
+}
+
+.link_upd:hover {
+  text-decoration: underline;
 }
 
 /*Слайдер загрузки*/
@@ -152,6 +172,18 @@
 .info {
   background-color: #ff9900 !important;
   border-color: #ff9900 !important;
+}
+
+.modal_wrap_container {
+  position: absolute;
+  background: #fff;
+  z-index: 900;
+  padding-top: 2%;
+  padding-left: 5%;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  border-radius: 6px 4px 4px 4px;
 }
 
 .field-table {
@@ -391,6 +423,11 @@
           transform: rotate(-45deg);
 }
 
+.close__ligth:before, .close__ligth:after {
+  background-color: #fff;
+  background: #fff;
+}
+
 /* media */
 @media only screen and (min-width: 600px) {
   .v-snack__wrapper {
@@ -399,6 +436,60 @@
     min-width: 288px;
     margin: 0 auto;
     border-radius: 2px;
+  }
+}
+
+@media (min-width: 576px) {
+  .modal_wrap_container {
+    width: 500px;
+    height: 600px;
+    margin-left: -10%;
+    margin-top: -14%;
+  }
+}
+
+@media (min-width: 768px) {
+  .modal_wrap_container {
+    width: 700px;
+    height: 550px;
+    margin-left: -20%;
+    margin-top: -14%;
+  }
+}
+
+@media (min-width: 992px) {
+  .modal_wrap_container {
+    width: 900px;
+    height: 600px;
+    margin-left: -10%;
+    margin-top: -20%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .modal_wrap_container {
+    width: 1100px;
+    height: 600px;
+    margin-left: -10%;
+    margin-top: -15%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .modal_wrap_container {
+    width: 1200px;
+    height: 600px;
+    margin-left: -5%;
+    margin-top: -15%;
+  }
+}
+
+@media (min-width: 1600px) {
+  .modal_wrap_container {
+    width: 1300px;
+    height: 700px;
+    margin-left: 0%;
+    margin-top: -10%;
   }
 }
 /*# sourceMappingURL=MyExtStyle.css.map */

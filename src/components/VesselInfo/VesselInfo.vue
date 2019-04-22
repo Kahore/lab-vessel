@@ -1,9 +1,9 @@
 <template>
   <section>
     <div id="wrapper">
-      <span class="linkUpd" @Click="modalTogglerVM()">Добавить сосуд</span>
-      <div id="layer_bg" class="layer_bg" @Click="modalTogglerVM()" v-show="isVesselInfoActive"></div>
-      <div v-show="isVesselInfoActive" class="modal_wrap_container">
+      <span class="link_upd" @click="modalTogglerVM()">Добавить сосуд</span>
+      <div id="layer_bg" class="layer_bg" @click="modalTogglerVM()" v-show="isBoxVisible"></div>
+      <div v-show="isBoxVisible" class="modal_wrap_container">
         <div id="createTable" class="field-table">
           <info-field></info-field>
           <info-chart></info-chart>
@@ -11,7 +11,7 @@
         <!-- .field-table -->
         <info-history></info-history>
         <div @click="modalTogglerVM()" class="closeContainer">
-          <a id="closeIModal" class="close" href="#"></a>
+          <a id="closeIModal" class="close close__ligth" href="#"></a>
         </div>
       </div>
       <!-- .modal_wrap_container -->
@@ -29,6 +29,11 @@ import History from './History';
 
 export default {
   name: 'VesselInfo',
+  data() {
+    return {
+      isBoxVisible: false,
+    };
+  },
   components: {
     'info-field': Field,
     'info-chart': Chart,
@@ -36,12 +41,10 @@ export default {
   },
   methods: {
     modalTogglerVM() {
+      window.scrollTo(0, 0);
+      var self = this;
+      self.isBoxVisible = !self.isBoxVisible;
       console.log('modalTogglerVM');
-    },
-  },
-  computed: {
-    isVesselInfoActive() {
-      return this.$store.getters.GET_IS_VESSELINFO_ACTIVE;
     },
   },
   mounted() {

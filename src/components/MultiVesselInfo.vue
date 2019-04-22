@@ -1,8 +1,8 @@
 <template>
   <section>
     <div id="containerChartMulti">
-      <div id="layer_bg" class="layer_bg" @Click="modalTogglerVM()" v-show="isFormActive"></div>
-      <div v-show="isFormActive" class="modal_wrap_container">
+      <div id="layer_bg" class="layer_bg" @Click="modalTogglerVM()" v-show="isBoxVisible"></div>
+      <div v-show="isBoxVisible" class="modal_wrap_container">
         <div class="field-block_full">
           <h2 v-text="chartTitle"></h2>
           <div id="containerChartHlMulti" class="mt-5per"></div>
@@ -18,5 +18,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      isBoxVisible: false,
+      // mock
+      chartTitle: 'chartTitle',
+    };
+  },
+  methods: {
+    modalTogglerVM() {
+      window.scrollTo(0, 0);
+      var self = this;
+      self.isBoxVisible = !self.isBoxVisible;
+      console.log('modalTogglerVM multi');
+    },
+  },
+};
 </script>

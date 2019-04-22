@@ -33,5 +33,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      // mock
+      histories: [],
+    };
+  },
+};
 </script>

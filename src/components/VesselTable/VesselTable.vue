@@ -28,7 +28,7 @@
         <div v-for="(sub, index) in vessel.ConditionDetails" :key="index">
           <div
             v-text="sub.Condition"
-            class="vessel-header vessel-header_line linkStrg"
+            class="vessel-header vessel-header_line link_string"
             @click="clickOnCondition(sub.Condition, vessel.Location )"
           ></div>
           <div
@@ -37,7 +37,7 @@
             :id="vd.ID"
             :key="index"
           >
-            <div class="vessel-block linkStrg">
+            <div class="vessel-block link_string">
               <span @click="clickOnVessel(vd.ID)">{{vd.Serial}}</span>
             </div>
 
@@ -138,7 +138,7 @@
               <template v-else>
                 <div
                   v-text="vd.LastAutoCounterDate"
-                  class="vessel-block linkUpd"
+                  class="vessel-block link_upd"
                   @click="VMUpdateInfoManually( vd.ID ,sub,vessel)"
                 ></div>
               </template>
