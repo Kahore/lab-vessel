@@ -18,6 +18,7 @@
 </template>
 
 <script>
+import EventBus from '../EventBus';
 export default {
   data() {
     return {
@@ -33,6 +34,11 @@ export default {
       self.isBoxVisible = !self.isBoxVisible;
       console.log('modalTogglerVM multi');
     },
+  },
+  mounted() {
+    EventBus.$on('MILTI_CHART_RISE', payload => {
+      this.modalTogglerVM(payload);
+    });
   },
 };
 </script>

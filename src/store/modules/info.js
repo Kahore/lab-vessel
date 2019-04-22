@@ -32,6 +32,12 @@ const actions = {
     let myDataParse = JSON.parse(resp);
     commit('loadField', myDataParse);
   },
+  LOAD_VESSEL_INFO: ({ commit }, payload) => {
+    let resp =
+      '[ {"Status":"OK","ID":"30005D94-8D64-4B8D-926A-8EC7644C071C","Condition":"IKA_C2000 (ЛИМИТ 30000)","CommissioningDate":"01/03/2016","CertificationDate":"25/06/2018","Serial":100006814,"LastCheckDate":"25/06/2018","Score":4,"Location":"Новокузнецк","VesselType":"Тип 1 - IKA C5010","btn_Save":"<input class=\\"btn\\" type=\\"button\\" name=\\"save\\" id=\\"save\\" value=\\"Сохранить\\" />","CanIEditVessel":"true","Lists":[ {"Locations":"Киселевск;Новокузнецк;Черногорск;","VesselTypes":"Тип 1 - IKA C5010;Тип 2 - AC500/6200;Тип 3 - AC600;Тип 4 - 5E-C5500;"}]}]';
+    let myDataParse = JSON.parse(resp);
+    commit('loadField', myDataParse);
+  },
 };
 
 export default {

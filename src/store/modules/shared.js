@@ -1,7 +1,7 @@
 const state = {
   unid: '@unid@',
   error_Msg: '',
-  info_Msg: 'инфо',
+  info_Msg: '',
 };
 const getters = {
   getCurrentUnid: state => {

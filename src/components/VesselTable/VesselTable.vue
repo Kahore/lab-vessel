@@ -155,8 +155,9 @@
 import EventBus from '../../EventBus';
 export default {
   methods: {
-    loadVessel(orderId) {
-      console.log('TCL: loadVessel -> orderId', orderId);
+    clickOnVessel(orderId) {
+      EventBus.$emit('FIELD_RISE', orderId);
+      console.log("TCL: clickOnVessel -> EventBus.$emit('FIELD_RISE', orderId);", orderId);
     },
   },
   computed: {
@@ -169,11 +170,6 @@ export default {
     hideUtil() {
       return this.$store.getters.GET_FILTER_HIDE;
     },
-  },
-  mounted() {
-    EventBus.$on('LOAD_VESSEL_INFO', payload => {
-      this.loadVessel(payload);
-    });
   },
 };
 </script>

@@ -40,16 +40,19 @@ export default {
     'info-history': History,
   },
   methods: {
-    modalTogglerVM() {
+    modalTogglerVM(vesselID) {
       window.scrollTo(0, 0);
       var self = this;
       self.isBoxVisible = !self.isBoxVisible;
+      self.$store.dispatch('LOAD_VESSEL_INFO', vesselID);
       console.log('modalTogglerVM');
     },
   },
   mounted() {
     let _unid = this.$store.getters.getCurrentUnid;
-    EventBus.$emit('LOAD_VESSEL_INFO', _unid);
+    EventBus.$on('FIELD_RISE', payload => {
+      this.modalTogglerVM(_unid);
+    });
   },
 };
 </script>
