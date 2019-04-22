@@ -298,6 +298,22 @@
   height: 2px;
 }
 
+.errorMsg {
+  color: red;
+}
+
+.ok {
+  color: green;
+}
+
+.normal {
+  color: blue;
+}
+
+.warning {
+  color: #ef7a13;
+}
+
 .history-block {
   display: inline-block;
   width: 40%;
