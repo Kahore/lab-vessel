@@ -47,6 +47,18 @@ BEGIN
         for xml path('') ) as VesselTypes
       FOR XML PATH ('r1'), TYPE
     ) as [Lists]
+    
+, (SELECT /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@, @UserName@, @GetDate@*/
+
+        ELEH.[Item]
+		  , ELEH.[ItemVal]
+		 , ELEH.[CreatedBy]
+	   , convert(char(19),ELEH.[Created],120)  AS [Created]
+      FROM [LabProtocols].[dbo].[Ent_Lab_Entity_History] as ELEH
+      WHERE CAST(ELEH.[EntityID] AS nvarchar(50)) = '@EntityID@' AND ELEH.[ItemGroup] IS NULL
+      ORDER BY Created DESC
+      FOR XML PATH ('r2'), TYPE
+  ) AS [History]
     FROM [LabProtocols].[dbo].[Ent_Lab_Entity] as ELE
     WHERE CAST(ELE.[ID] AS nvarchar(50)) = '@unid@'
     FOR xml path(''), root																								

@@ -244,9 +244,11 @@ $info-color: #ff9900;
   .warning{ color:#ef7a13 }
   
 .history{
+
   &-block{
-    display: inline-block;
     width: 40%;
+    height: 100%;
+    display: inline-block;
     margin-left: 5px;
     overflow: scroll;
   }

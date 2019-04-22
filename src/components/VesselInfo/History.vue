@@ -34,11 +34,14 @@
 
 <script>
 export default {
-  data() {
-    return {
-      // mock
-      histories: [],
-    };
+  computed: {
+    histories() {
+      if (typeof this.$store.getters.vesselInfo !== 'undefined') {
+        return this.$store.getters.vesselInfo.History;
+      } else {
+        return [];
+      }
+    },
   },
 };
 </script>
