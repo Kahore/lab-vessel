@@ -279,7 +279,7 @@
 .likeLabel {
   -webkit-transform: scale(0.75);
           transform: scale(0.75);
-  color: grey;
+  color: gray;
   font-weight: 600;
   left: -4px;
   bottom: 100%;

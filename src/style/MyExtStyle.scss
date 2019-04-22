@@ -216,13 +216,13 @@ $info-color: #ff9900;
   height: 1px;
 }
 .borderPseudo.borderPseudoLine {
-  background-color: orange;
+  background-color: $corp-primary-color;
   height: 2px;
 }  
     							  
 .likeLabel {
   transform: scale(.75);
-  color: grey;
+  color: $corp-secondary-color;
   font-weight: 600;
   left: -4px;
   bottom: 100%;
@@ -231,7 +231,7 @@ $info-color: #ff9900;
 }
     
 .lineIt {
-  background-color: orange;
+  background-color: $corp-primary-color;
   transform-origin: 90px center 0px;position: absolute;
   width: 100%;
   bottom: -2px;
