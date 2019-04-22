@@ -28,12 +28,13 @@ export default {
     'vessel-multi-info': VesselMultiInfo,
     'vessel-table': VesselTable,
     'vessel-error': Error,
-    'vessel-info': Info
+    'vessel-info': Info,
   },
   created() {
     let unid = this.$store.getters.getCurrentUnid;
     this.$store.dispatch('loadField', { unid: unid });
-  }
+    this.$store.dispatch('loadVessels', { unid: unid });
+  },
 };
 </script>
 
