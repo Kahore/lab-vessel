@@ -159,6 +159,9 @@ export default {
       EventBus.$emit('FIELD_RISE', orderId);
       console.log("TCL: clickOnVessel -> EventBus.$emit('FIELD_RISE', orderId);", orderId);
     },
+    clickOnCondition(condition, location) {
+      EventBus.$emit('MILTI_CHART_RISE', { condition: condition, location: location });
+    },
   },
   computed: {
     loading() {
