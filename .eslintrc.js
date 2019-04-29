@@ -29,7 +29,7 @@ module.exports = {
     'generator-star-spacing': 'off',
     // allow debugger during development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'space-before-function-paren': 'always',
+    'space-before-function-paren': 0,
     // 'prettier/prettier': [
     //   'error',
     //   {},
