@@ -114,7 +114,8 @@ export default {
   mounted() {
     let _unid = this.$store.getters.getCurrentUnid;
     EventBus.$on('FIELD_RISE', payload => {
-      this.modalTogglerVM(_unid);
+      this.$store.dispatch('mutateNewUnid', payload);
+      this.modalTogglerVM(payload);
     });
   },
 };

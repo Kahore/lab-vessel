@@ -87,12 +87,12 @@
         <div class="field-block">
           <template v-if="canIEditVessel==='true'">
             <div class="field-block__wrapper floatRContainer">
-              <span name="btnSaveContainer" @click="saveAction()" v-html="vesselInfo.Btn_save"></span>
+              <span name="btnSaveContainer" @click="saveAction()" v-html="vesselInfo.Btn_Save"></span>
             </div>
           </template>
           <template v-else>
             <div class="field-block__wrapper floatRContainer">
-              <span name="btnSaveContainer" v-html="vesselInfo.Btn_save"></span>
+              <span name="btnSaveContainer" v-html="vesselInfo.Btn_Save"></span>
             </div>
           </template>
         </div>
