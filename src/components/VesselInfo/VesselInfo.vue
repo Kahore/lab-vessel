@@ -47,6 +47,9 @@ export default {
       self.$store.dispatch('LOAD_VESSEL_INFO', vesselID).then(response => {
         self.chartBulder(self);
       });
+      if (typeof vesselID === 'undefined') {
+        this.$store.dispatch('mutateNewUnid', '@unid@');
+      }
       console.log('modalTogglerVM');
     },
     chartBulder(self) {
