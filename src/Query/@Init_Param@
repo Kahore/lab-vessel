@@ -1,0 +1,2 @@
+SELECT '6689ec57-389c-445d-8a26-cfa437a93d96' AS [NavID]
+,'b7b30791-f1f9-434b-a9f7-c8794c76b68d' AS [Nav_Backend]
