@@ -109,13 +109,21 @@ export default {
   methods: {
     saveAction() {
       let _unid = this.$store.getters.getCurrentUnid;
-      console.log('TCL: saveAction -> _unid', _unid);
+      let _fldData = this.$store.getters.vesselInfo.Field[0];
+      let _data = Object.assign(_fldData, {
+        PARAM2: 'SaveVessel',
+        unid: _unid,
+      });
+      console.log('TCL: saveAction -> _unid', _data);
+      this.$store.dispatch('Field_Save', _data).then(response => {
+        this.$store.dispatch('Table_UpdateVessel', response);
+      });
     },
   },
   computed: {
     vesselInfo() {
       if (typeof this.$store.getters.vesselInfo !== 'undefined') {
-        return this.$store.getters.vesselInfo;
+        return this.$store.getters.vesselInfo.Field[0];
       } else {
         return {};
       }
@@ -132,7 +140,7 @@ export default {
     },
     canIEditVessel() {
       /* TODO: Fix it */
-      return true;
+      return 'true';
     },
   },
 };
