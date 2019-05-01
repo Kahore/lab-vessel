@@ -155,9 +155,9 @@
 import EventBus from '../../EventBus';
 export default {
   methods: {
-    clickOnVessel(orderId) {
-      EventBus.$emit('FIELD_RISE', orderId);
-      console.log("TCL: clickOnVessel -> EventBus.$emit('FIELD_RISE', orderId);", orderId);
+    clickOnVessel(vesselId) {
+      EventBus.$emit('FIELD_RISE', vesselId);
+      console.log("TCL: clickOnVessel -> EventBus.$emit('FIELD_RISE', vesselId);", vesselId);
     },
     clickOnCondition(condition, location) {
       EventBus.$emit('MILTI_CHART_RISE', { condition: condition, location: location });
