@@ -1,4 +1,3 @@
-// import './src/data/VesselData.json';
 ('use strict');
 const path = require('path');
 const utils = require('./utils');

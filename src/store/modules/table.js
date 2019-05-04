@@ -1,5 +1,5 @@
 // import Vue from 'vue';
-import VesselData from '../../data/VesselData.json';
+import VesselData from '../../data/Table_Load_Vessels.json';
 const state = {
   Vessels: [],
   loadingVesselsTable: false,
