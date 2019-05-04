@@ -116,7 +116,7 @@ export default {
       });
       console.log('TCL: saveAction -> _unid', _data);
       this.$store.dispatch('Field_Save', _data).then(response => {
-        this.$store.dispatch('Table_UpdateVessel', { unid: response, mode: 'udpRow' });
+        this.$store.dispatch('MUTATION_TABLE_UPDATE_ROW', { unid: response, mode: 'udpRow' });
       });
     },
   },

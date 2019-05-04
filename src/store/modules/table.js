@@ -1,6 +1,7 @@
-// import Vue from 'vue';
+import Vue from 'vue';
 import VesselData from '../../data/Table_Load_Vessels.json';
 import VesselAfterChange from '../../data/Table_Response_AfterChange.json';
+import VesselAfterCounter from '../../data/Table_Response_CounterUpd.json';
 
 const state = {
   Vessels: [],
@@ -49,7 +50,7 @@ const mutations = {
       state.Vessels.splice(headerIndex, 1);
     }
   },
-  MUTATION_TABLE_UPDATE: (state, payload) => {
+  MUTATION_TABLE_UPDATE_ROW: (state, payload) => {
     let headerIndex = state.Vessels.findIndex(function(block) {
       return block.Location === payload.Location;
     });
@@ -83,13 +84,34 @@ const mutations = {
       state.Vessels.unshift(payload);
     } /* headerIndex END */
   },
+  MUTATION_TABLE_UPDATE_COUNT: (state, payload) => {
+    console.log('TCL: payload', payload);
+    let headerIndex = state.Vessels.findIndex(function(block) {
+      return block.Location === payload.Location;
+    });
+    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex(function(block) {
+      return block.Condition === payload.Condition;
+    });
+    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex(function(
+      block
+    ) {
+      return block.ID === payload.unid;
+    });
+
+    let updatedVessel = Object.assign(
+      {},
+      state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails[vesselIndex],
+      payload[0]
+    );
+    Vue.set(state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails, vesselIndex, updatedVessel);
+  },
 };
 const actions = {
   loadVessels: async ({ commit }, payload) => {
     const myDataParse = VesselData;
     commit('loadVessels', myDataParse);
   },
-  Table_UpdateVessel: ({ commit }, payload) => {
+  MUTATION_TABLE_UPDATE_ROW: ({ commit }, payload) => {
     // $.ajax({
     //   url: './GetPageText.ashx?Id=@Nav_Backend@',
     //   type: 'POST',
@@ -105,7 +127,7 @@ const actions = {
     //     }
     //     /* MEMO: Берём ответ от сервера чтобы можно было обновлять данные в таблице вне зависимости откуда пришёл запрос - для обновления счётчика или параметров */
     //     if (typeof myDataParse[0] !== 'undefined') {
-    //       commit('MUTATION_TABLE_UPDATE', myDataParse[0]);
+    //       commit('MUTATION_TABLE_UPDATE_ROW', myDataParse[0]);
     //     }
     //   },
     //   error: function(resp) {
@@ -119,8 +141,47 @@ const actions = {
     }
     let myDataParse = VesselAfterChange;
     if (typeof myDataParse[0] !== 'undefined') {
-      commit('MUTATION_TABLE_UPDATE', myDataParse[0]);
+      commit('MUTATION_TABLE_UPDATE_ROW', myDataParse[0]);
     }
+  },
+  MUTATION_TABLE_UPDATE_COUNT: async ({ commit }, payload) => {
+    console.log('TCL: payload', payload);
+
+    let result;
+    result = await VesselAfterCounter;
+    let completeData = Object.assign(result, payload);
+    commit('MUTATION_TABLE_UPDATE_COUNT', completeData);
+    /* old var */
+    // return new Promise( function ( resolve, reject ) {
+    //   $.ajax( {
+    //     url: "./GetPageText.ashx?Id=@Nav_Backend@",
+    //     type: "POST",
+    //     dataType: "json",
+    //     data: { PARAM2: "UpdateVesselInfoManually", unid: selectedId },
+    //     complete: function ( resp ) {
+    //       resolve( resp )
+    //     },
+    //     error: function ( resp ) { $( "#errorMsg" ).text( resp.responseText ); }
+    //   } );
+    // });
+
+    /* new var */
+
+    // let result;
+
+    // try {
+    //   result = await $.ajax({
+    //     url: './GetPageText.ashx?Id=@Nav_Backend@',
+    //     type: 'POST',
+    //     data: { PARAM2: 'UpdateVesselInfoManually', unid: payload },
+    //   });
+
+    //   // return result;
+    //   let completeData = Object.assign(result, payload);
+    //   commit('MUTATION_TABLE_UPDATE_ROW', completeData);
+    // } catch (error) {
+    //   console.error(error);
+    // }
   },
 };
 

@@ -139,7 +139,7 @@
                 <div
                   v-text="vd.LastAutoCounterDate"
                   class="vessel-block link_upd"
-                  @click="VMUpdateInfoManually( vd.ID ,sub,vessel)"
+                  @click="VMUpdateInfoManually( vd.ID ,sub,vessel,index)"
                 ></div>
               </template>
             </template>
@@ -161,6 +161,15 @@ export default {
     },
     clickOnCondition(condition, location) {
       EventBus.$emit('MILTI_CHART_RISE', { condition: condition, location: location });
+    },
+    VMUpdateInfoManually(id, sub, vessel, index) {
+      console.log('TCL: VMUpdateInfoManually -> id,sub,vessel,index', id, sub, vessel, index);
+      this.$store.dispatch('MUTATION_TABLE_UPDATE_COUNT', {
+        unid: id,
+        Condition: sub.Condition,
+        Location: vessel.Location,
+        index,
+      });
     },
   },
   computed: {
