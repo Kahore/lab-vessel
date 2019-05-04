@@ -20,6 +20,67 @@ const mutations = {
   loadVessels: (state, payload) => {
     state.Vessels = payload;
   },
+  MUTATION_TABLE_REMOVE_OLD: (state, payload) => {
+    let conditionValOld = document.getElementById(payload).parentElement.firstElementChild.textContent;
+    let locationValOld = document.getElementById(payload).parentElement.parentElement.firstElementChild.textContent;
+
+    let headerIndex_mode = state.Vessels.findIndex(function(block) {
+      return block.Location === locationValOld;
+    });
+
+    let subHeaderIndex_mode = state.Vessels[headerIndex_mode].ConditionDetails.findIndex(function(block) {
+      return block.Condition === conditionValOld;
+    });
+    let vesselIndex = state.Vessels[headerIndex_mode].ConditionDetails[subHeaderIndex_mode].VesselDetails.findIndex(
+      function(block) {
+        return block.ID === payload;
+      }
+    );
+
+    state.Vessels[headerIndex_mode].ConditionDetails[subHeaderIndex_mode].VesselDetails.splice(vesselIndex, 1);
+    /*MEMO: Удалить заголовок, если больше ничего нет*/
+    if (state.Vessels[headerIndex_mode].ConditionDetails[subHeaderIndex_mode].VesselDetails.length === 0) {
+      state.Vessels[headerIndex_mode].ConditionDetails.splice(subHeaderIndex_mode, 1);
+    }
+    /*MEMO: Удалить локацию, если больше ничего нет*/
+    if (state.Vessels[headerIndex_mode].ConditionDetails.length === 0) {
+      state.Vessels.splice(headerIndex_mode, 1);
+    }
+  },
+  MUTATION_TABLE_UPDATE: (state, payload) => {
+    let headerIndex = state.Vessels.findIndex(function(block) {
+      return block.Location === payload.Location;
+    });
+
+    if (headerIndex !== -1) {
+      let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex(function(block) {
+        return block.Condition === payload.ConditionDetails[0].Condition;
+      });
+
+      if (subHeaderIndex !== -1) {
+        let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex(function(
+          block
+        ) {
+          return block.ID === payload.ConditionDetails[0].VesselDetails[0].ID;
+        });
+
+        if (vesselIndex !== -1) {
+          state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.splice(vesselIndex, 1);
+          state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.unshift(
+            payload.ConditionDetails[0].VesselDetails[0]
+          );
+        } else {
+          state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.unshift(
+            payload.ConditionDetails[0].VesselDetails[0]
+          );
+        } /*vesselIndex END*/
+      } else {
+        state.Vessels[headerIndex].ConditionDetails.unshift(payload.ConditionDetails[0]);
+      } /*subHeaderIndex END*/
+    } else {
+      state.Vessels.unshift(payload);
+    } /*headerIndex END*/
+  },
 };
 const actions = {
   loadVessels: ({ commit }, payload) => {
@@ -28,6 +89,31 @@ const actions = {
 
     let myDataParse = JSON.parse(resp);
     commit('loadVessels', myDataParse);
+  },
+  Table_UpdateVessel: ({ commit }, payload) => {
+    $.ajax({
+      url: './GetPageText.ashx?Id=@Nav_Backend@',
+      type: 'POST',
+      dataType: 'json',
+      data: { PARAM2: 'Vessels_GetData', unid: payload.unid },
+      complete: function(resp) {
+        var myDataParse = JSON.parse(resp.response);
+        /*MEMO: Мод на поиск и удаление старого значения, в случае изменения глобальной инфы по сосуду - состояния или локации*/
+
+        if (typeof payload.mode !== 'undefined') {
+          if (typeof payload.unid !== 'undefined') {
+            commit('MUTATION_TABLE_REMOVE_OLD', payload.unid);
+          }
+        }
+        /*MEMO: Берём ответ от сервера чтобы можно было обновлять данные в таблице вне зависимости откуда пришёл запрос - для обновления счётчика или параметров*/
+        if (typeof myDataParse[0] !== 'undefined') {
+          commit('MUTATION_TABLE_UPDATE', myDataParse[0]);
+        }
+      },
+      error: function(resp) {
+        commit('SET_ERROR', resp.statusText);
+      },
+    });
   },
 };
 
