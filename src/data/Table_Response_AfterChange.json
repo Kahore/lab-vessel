@@ -1,0 +1,26 @@
+[
+  {
+    "Location": "Новокузнецк",
+    "ConditionDetails": [
+      {
+        "Condition": "5E-C5500 (Лимит 10000) Резерв",
+        "VesselDetails": [
+          {
+            "ID": "3F78FE86-9B97-482A-841D-0414158136CA",
+            "Serial": "YD50201901036",
+            "Status": "OK",
+            "CommissioningDate": "01/04/2019",
+            "CertificationDate": "Нет данных",
+            "LastCheckDate": "01/04/2019",
+            "Score": 5,
+            "CommissioningCount": 1082,
+            "LastCheckCount": 1082,
+            "LastAutoCounterDate": "2019-04-30 23:59:00",
+            "LastChangedBy": "Auto_Procedure",
+            "onAction": "false"
+          }
+        ]
+      }
+    ]
+  }
+]

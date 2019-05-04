@@ -1,5 +1,7 @@
 // import Vue from 'vue';
 import VesselData from '../../data/Table_Load_Vessels.json';
+import VesselAfterChange from '../../data/Table_Response_AfterChange.json';
+
 const state = {
   Vessels: [],
   loadingVesselsTable: false,
@@ -110,6 +112,15 @@ const actions = {
     //     commit('SET_ERROR', resp.statusText);
     //   },
     // });
+    if (typeof payload.mode !== 'undefined') {
+      if (typeof payload.unid !== 'undefined') {
+        commit('MUTATION_TABLE_REMOVE_OLD', payload.unid);
+      }
+    }
+    let myDataParse = VesselAfterChange;
+    if (typeof myDataParse[0] !== 'undefined') {
+      commit('MUTATION_TABLE_UPDATE', myDataParse[0]);
+    }
   },
 };
 
