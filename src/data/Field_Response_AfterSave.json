@@ -1,0 +1,13 @@
+[
+  {
+    "unid": "someID",
+    "HistoryPart": [
+      {
+        "Created": "2019-05-01 08:31:00",
+        "CreatedBy": "New",
+        "Item": "data",
+        "ItemVal": 0
+      }
+    ]
+  }
+]

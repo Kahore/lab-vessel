@@ -1,0 +1,186 @@
+[
+  {
+    "SERIAL": 6669,
+    "vd": [
+      {
+        "ItemGroup": "2018-Oct",
+        "ItemVal": 0
+      },
+      {
+        "ItemGroup": "2018-Nov",
+        "ItemVal": 0
+      },
+      {
+        "ItemGroup": "2018-Dec",
+        "ItemVal": 1655
+      },
+      {
+        "ItemGroup": "2019-Jan",
+        "ItemVal": 2951
+      },
+      {
+        "ItemGroup": "2019-Feb",
+        "ItemVal": 3750
+      },
+      {
+        "ItemGroup": "2019-Mar",
+        "ItemVal": 7323
+      },
+      {
+        "ItemGroup": "2019-Apr",
+        "ItemVal": 9044
+      }
+    ],
+    "Category": [
+      {
+        "ItemGroup": "2018-Oct"
+      },
+      {
+        "ItemGroup": "2018-Nov"
+      },
+      {
+        "ItemGroup": "2018-Dec"
+      },
+      {
+        "ItemGroup": "2019-Jan"
+      },
+      {
+        "ItemGroup": "2019-Feb"
+      },
+      {
+        "ItemGroup": "2019-Mar"
+      },
+      {
+        "ItemGroup": "2019-Apr"
+      }
+    ]
+  },
+  {
+    "SERIAL": 6789,
+    "vd": [
+      {
+        "ItemGroup": "2019-Feb",
+        "ItemVal": 0
+      },
+      {
+        "ItemGroup": "2019-Mar",
+        "ItemVal": 748
+      },
+      {
+        "ItemGroup": "2019-Apr",
+        "ItemVal": 2430
+      }
+    ],
+    "Category": [
+      {
+        "ItemGroup": "2018-Oct"
+      },
+      {
+        "ItemGroup": "2018-Nov"
+      },
+      {
+        "ItemGroup": "2018-Dec"
+      },
+      {
+        "ItemGroup": "2019-Jan"
+      },
+      {
+        "ItemGroup": "2019-Feb"
+      },
+      {
+        "ItemGroup": "2019-Mar"
+      },
+      {
+        "ItemGroup": "2019-Apr"
+      }
+    ]
+  },
+  {
+    "SERIAL": 6790,
+    "vd": [
+      {
+        "ItemGroup": "2019-Feb",
+        "ItemVal": 0
+      },
+      {
+        "ItemGroup": "2019-Mar",
+        "ItemVal": 0
+      },
+      {
+        "ItemGroup": "2019-Apr",
+        "ItemVal": 1084
+      }
+    ],
+    "Category": [
+      {
+        "ItemGroup": "2018-Oct"
+      },
+      {
+        "ItemGroup": "2018-Nov"
+      },
+      {
+        "ItemGroup": "2018-Dec"
+      },
+      {
+        "ItemGroup": "2019-Jan"
+      },
+      {
+        "ItemGroup": "2019-Feb"
+      },
+      {
+        "ItemGroup": "2019-Mar"
+      },
+      {
+        "ItemGroup": "2019-Apr"
+      }
+    ]
+  },
+  {
+    "SERIAL": 6726,
+    "vd": [
+      {
+        "ItemGroup": "2018-Dec",
+        "ItemVal": 0
+      },
+      {
+        "ItemGroup": "2019-Jan",
+        "ItemVal": 0
+      },
+      {
+        "ItemGroup": "2019-Feb",
+        "ItemVal": 825
+      },
+      {
+        "ItemGroup": "2019-Mar",
+        "ItemVal": 4218
+      },
+      {
+        "ItemGroup": "2019-Apr",
+        "ItemVal": 5841
+      }
+    ],
+    "Category": [
+      {
+        "ItemGroup": "2018-Oct"
+      },
+      {
+        "ItemGroup": "2018-Nov"
+      },
+      {
+        "ItemGroup": "2018-Dec"
+      },
+      {
+        "ItemGroup": "2019-Jan"
+      },
+      {
+        "ItemGroup": "2019-Feb"
+      },
+      {
+        "ItemGroup": "2019-Mar"
+      },
+      {
+        "ItemGroup": "2019-Apr"
+      }
+    ]
+  }
+]
