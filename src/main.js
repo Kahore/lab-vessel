@@ -3,7 +3,6 @@
 import Vue from 'vue';
 import App from './App';
 import { store } from './store/store';
-
 Vue.config.productionTip = false;
 Vue.component('fld-textarea', {
   template:
@@ -18,7 +17,7 @@ Vue.component('fld-textarea', {
       likeLabelV(e);
       textareaAutoGrow();
     },
-    searchData(e) {}
+    searchData(e) {},
   },
   computed: {
     inputVal: {
@@ -27,8 +26,8 @@ Vue.component('fld-textarea', {
       },
       set(value) {
         this.$emit('input', value);
-      }
-    }
+      },
+    },
   },
   created() {
     const component = this;
@@ -46,7 +45,7 @@ Vue.component('fld-textarea', {
     var thisEl = document.getElementById(this.inputId);
     likeLabelOnCreateV(thisEl);
     textareaAutoGrow();
-  }
+  },
 });
 
 Vue.component('select-block', {
@@ -64,7 +63,7 @@ Vue.component('select-block', {
   methods: {
     toggleLabel(e) {
       likeLabelV(e);
-    }
+    },
   },
   computed: {
     currentItem: {
@@ -75,22 +74,17 @@ Vue.component('select-block', {
         if (typeof this.itemTypesPars !== 'undefined') {
           this.$emit('input', value);
         }
-      }
+      },
     },
     itemTypesPars() {
-      if (
-        typeof this.itemTypes !==
-        'undefined' /* && this.itemTypes.length !== 0 */
-      ) {
+      if (typeof this.itemTypes !== 'undefined' /* && this.itemTypes.length !== 0 */) {
         let itemTypesTemp = this.itemTypes;
-        itemTypesTemp = itemTypesTemp
-          .substring(0, itemTypesTemp.length - 1)
-          .split(';');
+        itemTypesTemp = itemTypesTemp.substring(0, itemTypesTemp.length - 1).split(';');
         return itemTypesTemp;
       } else {
         return '';
       }
-    }
+    },
   },
   updated: function() {
     var thisEl = document.getElementById(this.selectId);
@@ -99,7 +93,7 @@ Vue.component('select-block', {
   mounted() {
     var thisEl = document.getElementById(this.selectId);
     likeLabelOnCreateV(thisEl);
-  }
+  },
 });
 
 Vue.component('fld-input', {
@@ -114,7 +108,7 @@ Vue.component('fld-input', {
     toggleLabel(e) {
       likeLabelV(e);
     },
-    searchData(e) {}
+    searchData(e) {},
   },
   computed: {
     inputVal: {
@@ -123,8 +117,8 @@ Vue.component('fld-input', {
       },
       set: function(value) {
         this.$emit('input', value);
-      }
-    }
+      },
+    },
   },
   created: function() {
     const component = this;
@@ -140,7 +134,7 @@ Vue.component('fld-input', {
   mounted() {
     var thisEl = document.getElementById(this.inputId);
     likeLabelOnCreateV(thisEl);
-  }
+  },
 });
 
 Vue.component('date-picker', {
@@ -155,7 +149,7 @@ Vue.component('date-picker', {
   methods: {
     toggleLabel(e) {
       likeLabelV(e);
-    }
+    },
   },
   computed: {
     inputVal: {
@@ -164,8 +158,8 @@ Vue.component('date-picker', {
       },
       set: function(value) {
         this.$emit('input', value);
-      }
-    }
+      },
+    },
   },
 
   mounted: function() {
@@ -182,7 +176,7 @@ Vue.component('date-picker', {
         if (date !== '') {
           likeLabelOnCreateV(thisEl);
         }
-      }
+      },
     });
 
     likeLabelOnCreateV(thisEl);
@@ -200,7 +194,7 @@ Vue.component('date-picker', {
     $(this.$el)
       .datepicker('hide')
       .datepicker('destroy');
-  }
+  },
 });
 
 function textareaAutoGrow() {
@@ -238,5 +232,5 @@ new Vue({
   el: '#app',
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
 });
