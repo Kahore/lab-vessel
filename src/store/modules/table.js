@@ -108,6 +108,36 @@ const mutations = {
 };
 const actions = {
   loadVessels: async ({ commit }, payload) => {
+    /* NKReports */
+    // $.ajax({
+    //   url: './GetPageText.ashx?Id=@Nav_Backend@',
+    //   type: 'GET',
+    //   dataType: 'json',
+    //   data: { PARAM2: 'Vessels_GetData' },
+    //   success: function(resp) {
+    //     var myDataParse = JSON.parse(resp);
+    //     // if (self.hideUtil === 'true') {
+    //     var array = myDataParse;
+    //     myDataParse = array.filter(
+    //       top =>
+    //         (top.ConditionDetails = top.ConditionDetails.filter(
+    //           cat =>
+    //             (cat.VesselDetails = cat.VesselDetails.filter(
+    //               i =>
+    //                 i.Status.match(/OK/) ||
+    //                 i.Status.match(/Требуется проверка/) ||
+    //                 i.Status.match(/Требуется испытание/)
+    //             )).length
+    //         )).length
+    //     );
+    //     // }
+    //     commit('loadVessels', myDataParse);
+    //   },
+    //   error: function(resp) {
+    //     /* TODO: ERROR bus */
+    //   },
+    // });
+    /* TEST */
     const myDataParse = VesselData;
     commit('loadVessels', myDataParse);
   },

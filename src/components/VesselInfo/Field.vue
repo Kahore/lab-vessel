@@ -122,7 +122,9 @@ export default {
   },
   computed: {
     vesselInfo() {
-      if (typeof this.$store.getters.vesselInfo !== 'undefined') {
+      // Default does not contain any value in field
+      // TODO: Check with default(no) data - it can be smth bad there
+      if (typeof this.$store.getters.vesselInfo.Field !== 'undefined') {
         return this.$store.getters.vesselInfo.Field[0];
       } else {
         return {};

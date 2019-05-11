@@ -40,6 +40,18 @@ const mutations = {
 };
 const actions = {
   loadField: ({ commit }, payload) => {
+    /* NKReports */
+    // $.ajax({
+    //   url: './GetPageText.ashx?Id=@Nav_Backend@',
+    //   type: 'GET',
+    //   dataType: 'json',
+    //   data: { PARAM2: 'Vessels_GetData_Default' },
+    //   success: function(resp) {
+    //     let myDataParse = resp; /* JSON.parse( resp ) */
+    //     commit('loadField', myDataParse);
+    //   },
+    // });
+    /* TEST */
     let myDataParse = FieldDefault;
     commit('loadField', myDataParse);
   },
