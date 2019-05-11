@@ -6,7 +6,7 @@
       <div v-show="isBoxVisible" class="modal_wrap_container">
         <div id="createTable" class="field-table">
           <info-field></info-field>
-          <info-chart></info-chart>
+          <info-chart-single></info-chart-single>
         </div>
         <!-- .field-table -->
         <info-history></info-history>
@@ -36,7 +36,7 @@ export default {
   },
   components: {
     'info-field': Field,
-    'info-chart': Chart,
+    'info-chart-single': Chart,
     'info-history': History,
   },
   methods: {

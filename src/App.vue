@@ -5,11 +5,11 @@
         <span id="ctl00_Content_ctl00_PageText">
           <vessel-use-info></vessel-use-info>
           <br>
-          <vessel-info></vessel-info>
+          <app-info></app-info>
           <vessel-single-info/>
           <vessel-multi-info></vessel-multi-info>
           <vessel-table></vessel-table>
-          <vessel-error></vessel-error>
+          <app-error></app-error>
         </span>
       </div>
     </div>
@@ -31,8 +31,8 @@ export default {
     'vessel-single-info': VesselInfo,
     'vessel-multi-info': VesselMultiInfo,
     'vessel-table': VesselTable,
-    'vessel-error': Error,
-    'vessel-info': Info,
+    'app-error': Error,
+    'app-info': Info,
   },
   created() {
     let unid = this.$store.getters.getCurrentUnid;
