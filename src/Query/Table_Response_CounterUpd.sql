@@ -59,31 +59,34 @@ BEGIN
 	SET @Count = ( SELECT VesselCnt
   FROM @t_VesselCnt )
 	/*SELECT @Count*/
-
-	SET @CommissioningCount = ( SELECT CAST( [CommissioningCount] AS int )
+  IF @Count IS NOT NULL
+  BEGIN
+    SET @Count = 0
+  END/* Null check of @Count */
+    SET @CommissioningCount = ( SELECT CAST( [CommissioningCount] AS int )
   FROM [LabProtocols].[dbo].[Ent_Lab_Entity]
   WHERE  CAST([ID] AS nvarchar(50))='@unid@' )
-	SET @LastCheckCount = ( SELECT CAST( [LastCheckCount] AS int )
+    SET @LastCheckCount = ( SELECT CAST( [LastCheckCount] AS int )
   FROM [LabProtocols].[dbo].[Ent_Lab_Entity]
   WHERE  CAST([ID] AS nvarchar(50))='@unid@' )
 
-	SET @CommissioningCount = @CommissioningCount+@Count
-	SET @LastCheckCount  = @LastCheckCount+@Count
+    SET @CommissioningCount = @CommissioningCount+@Count
+    SET @LastCheckCount  = @LastCheckCount+@Count
 
-	UPDATE /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@, @UserName@, @GetDate@*/ [LabProtocols].[dbo].[Ent_Lab_Entity]
+    UPDATE /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@, @UserName@, @GetDate@*/ [LabProtocols].[dbo].[Ent_Lab_Entity]
 		  SET [CommissioningCount] = CAST( @CommissioningCount AS nvarchar(50) )
 			 ,[LastCheckCount] = CAST( @LastCheckCount AS nvarchar(50) ) 
 			 ,[LastAutoCounterDate] = @NewLastAutoCounterDate
 			 ,[LastChangedBy] = '@UserName@'
 	WHERE  CAST( [ID] AS nvarchar(50) ) = '@unid@'
 
-/*Вставка истории*/
-	INSERT INTO  /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@, @UserName@, @GetDate@*/ [LabProtocols].[dbo].[Ent_Lab_Entity_History]
+    /*Вставка истории*/
+    INSERT INTO  /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@, @UserName@, @GetDate@*/ [LabProtocols].[dbo].[Ent_Lab_Entity_History]
     ([ID],[EntityID],[Item],[ItemGroup] ,[ItemVal] ,[Created],[CreatedBy])
   VALUES
     (NewID(), '@unid@', 'Поджиги', NULL, @Count, @NewLastAutoCounterDate, '@UserName@')
 
-/*Вставка истории в месячное накопление для графиков*/
+    /*Вставка истории в месячное накопление для графиков*/
     SET @CummMonthCount = ( SELECT CAST([ItemVal] AS int)
   FROM [LabProtocols].[dbo].[Ent_Lab_Entity_History]
   WHERE [EntityID] = '@unid@' AND [ItemGroup] = CAST( YEAR( @NewLastAutoCounterDate ) AS CHAR(4) ) + '-'+ LEFT( DATENAME ( MONTH, @NewLastAutoCounterDate ),3 ) 
