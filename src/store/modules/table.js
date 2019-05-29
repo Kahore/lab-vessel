@@ -6,7 +6,7 @@ import VesselAfterCounter from '../../data/Table_Response_CounterUpd.json';
 const state = {
   Vessels: [],
   loadingVesselsTable: false,
-  hideUtil: 'true', // '@UtilVesselFilter@',
+  hideUtil: 'true' // '@UtilVesselFilter@',
 };
 const getters = {
   loadingVesselsTable: state => {
@@ -17,58 +17,58 @@ const getters = {
   },
   GET_FILTER_HIDE: state => {
     return state.hideUtil;
-  },
+  }
 };
 const mutations = {
-  loadVessels: (state, payload) => {
+  loadVessels: ( state, payload ) => {
     state.Vessels = payload;
   },
-  MUTATION_TABLE_REMOVE_OLD: (state, payload) => {
-    let conditionValOld = document.getElementById(payload).parentElement.firstElementChild.textContent;
-    let locationValOld = document.getElementById(payload).parentElement.parentElement.firstElementChild.textContent;
+  MUTATION_TABLE_REMOVE_OLD: ( state, payload ) => {
+    let conditionValOld = document.getElementById( payload ).parentElement.firstElementChild.textContent;
+    let locationValOld = document.getElementById( payload ).parentElement.parentElement.firstElementChild.textContent;
 
-    let headerIndex = state.Vessels.findIndex(function(block) {
+    let headerIndex = state.Vessels.findIndex( function ( block ) {
       return block.Location === locationValOld;
-    });
+    } );
 
-    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex(function(block) {
+    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
       return block.Condition === conditionValOld;
-    });
-    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex(function(
+    } );
+    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
       block
     ) {
       return block.ID === payload;
-    });
+    } );
 
-    state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.splice(vesselIndex, 1);
+    state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.splice( vesselIndex, 1 );
     /* MEMO: Удалить заголовок, если больше ничего нет */
-    if (state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.length === 0) {
-      state.Vessels[headerIndex].ConditionDetails.splice(subHeaderIndex, 1);
+    if ( state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.length === 0 ) {
+      state.Vessels[headerIndex].ConditionDetails.splice( subHeaderIndex, 1 );
     }
     /* MEMO: Удалить локацию, если больше ничего нет */
-    if (state.Vessels[headerIndex].ConditionDetails.length === 0) {
-      state.Vessels.splice(headerIndex, 1);
+    if ( state.Vessels[headerIndex].ConditionDetails.length === 0 ) {
+      state.Vessels.splice( headerIndex, 1 );
     }
   },
-  MUTATION_TABLE_UPDATE_ROW: (state, payload) => {
-    let headerIndex = state.Vessels.findIndex(function(block) {
+  MUTATION_TABLE_UPDATE_ROW: ( state, payload ) => {
+    let headerIndex = state.Vessels.findIndex( function ( block ) {
       return block.Location === payload.Location;
-    });
+    } );
 
-    if (headerIndex !== -1) {
-      let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex(function(block) {
+    if ( headerIndex !== -1 ) {
+      let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
         return block.Condition === payload.ConditionDetails[0].Condition;
-      });
+      } );
 
-      if (subHeaderIndex !== -1) {
-        let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex(function(
+      if ( subHeaderIndex !== -1 ) {
+        let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
           block
         ) {
           return block.ID === payload.ConditionDetails[0].VesselDetails[0].ID;
-        });
+        } );
 
-        if (vesselIndex !== -1) {
-          state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.splice(vesselIndex, 1);
+        if ( vesselIndex !== -1 ) {
+          state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.splice( vesselIndex, 1 );
           state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.unshift(
             payload.ConditionDetails[0].VesselDetails[0]
           );
@@ -78,36 +78,36 @@ const mutations = {
           );
         } /* vesselIndex END */
       } else {
-        state.Vessels[headerIndex].ConditionDetails.unshift(payload.ConditionDetails[0]);
+        state.Vessels[headerIndex].ConditionDetails.unshift( payload.ConditionDetails[0] );
       } /* subHeaderIndex END */
     } else {
-      state.Vessels.unshift(payload);
+      state.Vessels.unshift( payload );
     } /* headerIndex END */
   },
-  MUTATION_TABLE_UPDATE_COUNT: (state, payload) => {
-    console.log('TCL: payload', payload);
-    let headerIndex = state.Vessels.findIndex(function(block) {
+  MUTATION_TABLE_UPDATE_COUNT: ( state, payload ) => {
+    console.log( 'TCL: payload', payload );
+    let headerIndex = state.Vessels.findIndex( function ( block ) {
       return block.Location === payload.Location;
-    });
-    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex(function(block) {
+    } );
+    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
       return block.Condition === payload.Condition;
-    });
-    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex(function(
+    } );
+    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
       block
     ) {
       return block.ID === payload.unid;
-    });
+    } );
 
     let updatedVessel = Object.assign(
       {},
       state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails[vesselIndex],
       payload[0]
     );
-    Vue.set(state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails, vesselIndex, updatedVessel);
-  },
+    Vue.set( state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails, vesselIndex, updatedVessel );
+  }
 };
 const actions = {
-  loadVessels: async ({ commit }, payload) => {
+  loadVessels: async ( { commit }, payload ) => {
     /* NKReports */
     // $.ajax({
     //   url: './GetPageText.ashx?Id=@Nav_Backend@',
@@ -139,9 +139,9 @@ const actions = {
     // });
     /* TEST */
     const myDataParse = VesselData;
-    commit('loadVessels', myDataParse);
+    commit( 'loadVessels', myDataParse );
   },
-  MUTATION_TABLE_UPDATE_ROW: ({ commit }, payload) => {
+  MUTATION_TABLE_UPDATE_ROW: ( { commit }, payload ) => {
     // $.ajax({
     //   url: './GetPageText.ashx?Id=@Nav_Backend@',
     //   type: 'POST',
@@ -164,23 +164,23 @@ const actions = {
     //     commit('SET_ERROR', resp.statusText);
     //   },
     // });
-    if (typeof payload.mode !== 'undefined') {
-      if (typeof payload.unid !== 'undefined') {
-        commit('MUTATION_TABLE_REMOVE_OLD', payload.unid);
+    if ( typeof payload.mode !== 'undefined' ) {
+      if ( typeof payload.unid !== 'undefined' ) {
+        commit( 'MUTATION_TABLE_REMOVE_OLD', payload.unid );
       }
     }
     let myDataParse = VesselAfterChange;
-    if (typeof myDataParse[0] !== 'undefined') {
-      commit('MUTATION_TABLE_UPDATE_ROW', myDataParse[0]);
+    if ( typeof myDataParse[0] !== 'undefined' ) {
+      commit( 'MUTATION_TABLE_UPDATE_ROW', myDataParse[0] );
     }
   },
-  MUTATION_TABLE_UPDATE_COUNT: async ({ commit }, payload) => {
-    console.log('TCL: payload', payload);
+  MUTATION_TABLE_UPDATE_COUNT: async ( { commit }, payload ) => {
+    console.log( 'TCL: payload', payload );
 
     let result;
     result = await VesselAfterCounter;
-    let completeData = Object.assign(result, payload);
-    commit('MUTATION_TABLE_UPDATE_COUNT', completeData);
+    let completeData = Object.assign( result, payload );
+    commit( 'MUTATION_TABLE_UPDATE_COUNT', completeData );
     /* old var */
     // return new Promise( function ( resolve, reject ) {
     //   $.ajax( {
@@ -212,12 +212,12 @@ const actions = {
     // } catch (error) {
     //   console.error(error);
     // }
-  },
+  }
 };
 
 export default {
   state,
   getters,
   mutations,
-  actions,
+  actions
 };
