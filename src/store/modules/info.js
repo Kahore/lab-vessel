@@ -6,6 +6,25 @@ import ChartMulti from '../../data/Chart_Load_Multi.json';
 
 const state = {
   VesselInfo: {},
+  DefaultInfo: {
+    Field: [
+      {
+        CertificationDate: '',
+        CommissioningDate: '',
+        Condition: '',
+        LastCheckDate: '',
+        Location: '',
+        Score: '',
+        Serial: '',
+        Status: '',
+        VesselType: '',
+        ID: '@' + 'unid' + '@',
+        CanIEditVessel: 'true'
+      }
+    ],
+    History: [],
+    ChartData: []
+  },
   ChartMultiData: [],
   loadingVesselInfo: false
 };
@@ -30,9 +49,16 @@ const getters = {
 const mutations = {
   loadField: ( state, payload ) => {
     state.VesselInfo = payload[0];
+    if ( typeof payload[0].Field !== 'undefined' ) {
+      window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + payload[0].Field[0].ID );
+    }
   },
   LOAD_CHART_MULTI: ( state, payload ) => {
     state.ChartMultiData = payload;
+  },
+  MUTATE_FIELD_RESET: ( state, payload ) => {
+    state.VesselInfo = Object.assign( {}, state.DefaultInfo );
+    window.history.pushState( '', '', './Default?Id=@NavID@' );
   },
   MUTATE_FIELD_HISTORY: ( state, payload ) => {
     state.VesselInfo.History.unshift( payload );

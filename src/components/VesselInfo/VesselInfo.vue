@@ -43,13 +43,23 @@ export default {
     modalTogglerVM(vesselID) {
       window.scrollTo(0, 0);
       var self = this;
-      self.isBoxVisible = !self.isBoxVisible;
-      self.$store.dispatch('LOAD_VESSEL_INFO', vesselID).then(response => {
-        self.chartBulder(self);
-      });
-      if (typeof vesselID === 'undefined') {
-        this.$store.dispatch('mutateNewUnid', '@unid@');
+
+      if (self.isBoxVisible) {
+        self.$store.commit('MUTATE_FIELD_RESET');
+        if (Highcharts.charts[0]) {
+          Highcharts.charts[0].destroy();
+          /* MEMO: reset charts array */
+          Highcharts.charts.shift();
+        }
+        self.$store.dispatch('mutateNewUnid', '@unid@');
+      } else {
+        if (typeof vesselID !== 'undefined') {
+          self.$store.dispatch('LOAD_VESSEL_INFO', vesselID).then(response => {
+            self.chartBulder(self);
+          });
+        }
       }
+      self.isBoxVisible = !self.isBoxVisible;
       console.log('modalTogglerVM');
     },
     chartBulder(self) {

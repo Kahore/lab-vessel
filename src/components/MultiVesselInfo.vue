@@ -35,6 +35,8 @@ export default {
         let resetChartMultiData = [];
         self.$store.commit('LOAD_CHART_MULTI', resetChartMultiData);
         Highcharts.charts[0].destroy();
+        /* MEMO: reset charts array */
+        Highcharts.charts.shift();
       } else {
         self.chartTitle = payload.condition + ' ' + payload.location;
         self.$store.dispatch('LOAD_CHART_MULTI', payload).then(response => {
