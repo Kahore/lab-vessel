@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="history">
     <div class="history-block">
       <h2>История по сосуду</h2>
       <div class="history-container">

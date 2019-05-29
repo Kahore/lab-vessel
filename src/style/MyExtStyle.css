@@ -204,11 +204,11 @@
 .field-block {
   display: inline-block;
   vertical-align: bottom;
-  width: 25%;
+  width: 24%;
 }
 
 .field-block_huge {
-  width: 75%;
+  width: 73%;
 }
 
 .field-block_full {
@@ -314,17 +314,22 @@
   color: #ef7a13;
 }
 
+.history {
+  width: 35%;
+}
+
 .history-block {
-  width: 40%;
+  width: 100%;
   height: 100%;
   display: inline-block;
+  margin-top: -19px;
   margin-left: 5px;
   overflow: scroll;
 }
 
 .history-table {
   display: inline-block;
-  width: 33.33%;
+  width: 32.33%;
 }
 
 .history-table__row:hover {
@@ -401,11 +406,10 @@
 }
 
 .closeContainer {
-  position: -webkit-sticky;
-  position: sticky;
+  position: absolute;
   right: 0;
   top: 0;
-  margin-right: -35px;
+  margin-right: -40px;
   width: 35px;
   height: 35px;
   cursor: pointer;
