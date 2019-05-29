@@ -87,12 +87,16 @@
         <div class="field-block">
           <template v-if="canIEditVessel==='true'">
             <div class="field-block__wrapper floatRContainer">
-              <span name="btnSaveContainer" @click="saveAction()" v-html="vesselInfo.Btn_Save"></span>
+              <span name="btnSaveContainer" @click="saveAction()">
+                <input class="button" type="button" name="save" id="save" value="Сохранить">
+              </span>
             </div>
           </template>
           <template v-else>
             <div class="field-block__wrapper floatRContainer">
-              <span name="btnSaveContainer" v-html="vesselInfo.Btn_Save"></span>
+              <span name="btnSaveContainer">
+                <span class="error">У вас нет прав на редактирование</span>
+              </span>
             </div>
           </template>
         </div>

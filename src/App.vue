@@ -36,7 +36,7 @@ export default {
   },
   created() {
     let unid = this.$store.getters.getCurrentUnid;
-    this.$store.dispatch('loadField', { unid: unid });
+    EventBus.$emit('FIELD_RISE', { unid: unid, firstInit: true });
     this.$store.dispatch('loadVessels', { unid: unid });
   },
 };

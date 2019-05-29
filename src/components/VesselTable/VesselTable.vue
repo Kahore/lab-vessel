@@ -156,7 +156,7 @@ import EventBus from '../../EventBus';
 export default {
   methods: {
     clickOnVessel(vesselId) {
-      EventBus.$emit('FIELD_RISE', vesselId);
+      EventBus.$emit('FIELD_RISE', { unid: vesselId });
       console.log("TCL: clickOnVessel -> EventBus.$emit('FIELD_RISE', vesselId);", vesselId);
     },
     clickOnCondition(condition, location) {

@@ -1,22 +1,43 @@
+
+DECLARE @ListsData XML;
+DECLARE @VesselData XML;
 IF ('@PARAM2@' = 'VesselFieldFiller')
 BEGIN
   BEGIN TRY
-
- SET @btnSave = '<input class="btn" type="button" name="save" id="save" value="Сохранить" />'
-  SET @No_btnSave = '<span class="errorMsg">Нет прав на редактирование</span>'
 
   SET @AccessList =(SELECT [AccessQuery]
   FROM [NKReports].[dbo].[DB_Settings_ACL]
   WHERE [UserName]='@UserName@' AND [TableName]='LabVesselMonitoring')
   SET @delimiter  = ','
 
-  SET @BranchCodeCheck = ( SELECT LabCode
-  from [LabProtocols].[dbo].[Ent_Lab_Entity]
-  WHERE ID = '@unid@' )
+  IF ('@PARAM3@' = 'VesselFieldFiller_Default')
+  BEGIN
+    SET @ListsData =
+  ( SELECT
+      (SELECT [CityName] +';'
+      FROM [LabProtocols].[dbo].[Ent_Laboratories]
+      WHERE (select count(nstr)
+      from [NKreports].[dbo].[Params_to_table](@AccessList, @delimiter)
+      where nstr=[LabCode])>0
+      ORDER BY [CityName]
+      for xml path('') ) as Locations
+      , (SELECT [Item]+';'
+      FROM [LabProtocols].[dbo].[Ent_Type_List]
+      WHERE [GroupTypeEng] ='VesselType'
+      for xml path('') ) as VesselTypes
+      , CASE WHEN @AccessList IS NOT NULL THEN 'true' ELSE 'false' END AS [CanIEditVessel]
+    FOR XML PATH ('RegInfo'), TYPE,root('ListData')
+      )
+  END
+  
+  IF ('@unid@'<>'' AND '@unid@'<> '@'+'unid'+'@')
+  BEGIN
+    SET @BranchCodeCheck = ( SELECT LabCode
+    from [LabProtocols].[dbo].[Ent_Lab_Entity]
+    WHERE ID = '@unid@' )
 
-	SELECT [LabProtocols].dbo.qfn_XmlToJson ((
-	  SELECT
-      (   SELECT /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@ @UserName@,@GetDate@*/ ELE.[Status]
+    SET @VesselData = 
+    (SELECT (   SELECT /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@ @UserName@,@GetDate@*/ ELE.[Status]
 	  				  , ELE.[ID]
 					  , CASE WHEN ELE.[Condition] IS NULL THEN '' ELSE ELE.[Condition] END AS Condition
 			   		  , CASE WHEN ELE.[CommissioningDate]  IS NULL THEN '' ELSE  convert(char(10),ELE.[CommissioningDate],103) END AS CommissioningDate 
@@ -33,22 +54,6 @@ BEGIN
 
       FOR XML PATH ('r0'), TYPE
       ) as [Field]
-  , ( SELECT
-        (SELECT [CityName] +';'
-        FROM [LabProtocols].[dbo].[Ent_Laboratories]
-        WHERE 
-														(select count(nstr)
-        from [NKreports].[dbo].[Params_to_table](@AccessList, @delimiter)
-        where nstr=[LabCode])>0
-        ORDER BY [CityName]
-        for xml path('')  
-									  ) as Locations
-	  , (SELECT [Item]+';'
-        FROM [LabProtocols].[dbo].[Ent_Type_List]
-        WHERE [GroupTypeEng] ='VesselType'
-        for xml path('') ) as VesselTypes
-      FOR XML PATH ('r1'), TYPE
-    ) as [Lists]
     
 , (SELECT /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@, @UserName@, @GetDate@*/
 
@@ -78,10 +83,23 @@ BEGIN
   ) AS [ChartData]
     FROM [LabProtocols].[dbo].[Ent_Lab_Entity] as ELE
     WHERE CAST(ELE.[ID] AS nvarchar(50)) = '@unid@'
-    FOR xml path(''), root																								
+    FOR xml path('RegInfo'), root('Vessel')							
+)
+  END
+
+
+  SELECT [LabProtocols].dbo.qfn_XmlToJson ((
+
+SELECT
+      CAST('<Data>'
+		  +CASE WHEN CAST(@VesselData AS nvarchar(max)) IS NOT NULL THEN CAST(@VesselData AS nvarchar(max))/**/ELSE '' END
+		  +CASE WHEN CAST(@ListsData AS nvarchar(max)) IS NOT NULL THEN CAST(@ListsData AS nvarchar(max))/**/ELSE '' END
+		+'</Data>'  
+	  AS/**/XML)
+    FOR XML path(''), type																								
 	))
   END TRY
   BEGIN CATCH
-	SELECT '@PARAM2@ отработал с ошибкой: '+ERROR_MESSAGE()+', Номер строки: '+CAST(ERROR_LINE() AS nvarchar(max));
+  SELECT '@PARAM2@ отработал с ошибкой: '+ERROR_MESSAGE()+', Номер строки: '+CAST(ERROR_LINE() AS nvarchar(max));
   END CATCH
 END

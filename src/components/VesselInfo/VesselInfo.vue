@@ -40,21 +40,35 @@ export default {
     'info-history': History,
   },
   methods: {
-    modalTogglerVM(vesselID) {
+    modalTogglerVM(payload) {
       window.scrollTo(0, 0);
       var self = this;
-
-      if (self.isBoxVisible) {
+      var firstInit = self.$store.getters.isFirstInit;
+      if (self.isBoxVisible && !firstInit) {
         self.$store.commit('MUTATE_FIELD_RESET');
         if (Highcharts.charts[0]) {
           Highcharts.charts[0].destroy();
           /* MEMO: reset charts array */
           Highcharts.charts.shift();
         }
-        self.$store.dispatch('mutateNewUnid', '@unid@');
+        self.$store.dispatch('mutateNewUnid', '@' + 'unid' + '@');
       } else {
-        if (typeof vesselID !== 'undefined') {
-          self.$store.dispatch('LOAD_VESSEL_INFO', vesselID).then(response => {
+        let ajaxDefault;
+
+        if (firstInit) {
+          ajaxDefault = { PARAM3: 'VesselFieldFiller_Default' };
+          self.$store.commit('MUTATE_FIRST_INIT', !firstInit);
+        }
+        let ajaxUNID;
+        let _unid = self.$store.getters.getCurrentUnid;
+        if (_unid !== '@' + 'unid' + '@') {
+          ajaxUNID = { unid: _unid };
+        } else {
+          self.$store.commit('MUTATE_FIELD_RESET');
+        }
+        if (typeof ajaxDefault !== 'undefined' || typeof ajaxUNID !== 'undefined') {
+          let ajaxExtend = Object.assign({}, ajaxDefault, ajaxUNID);
+          self.$store.dispatch('LOAD_VESSEL_INFO', ajaxExtend).then(response => {
             self.chartBulder(self);
           });
         }
@@ -125,11 +139,16 @@ export default {
     },
   },
   mounted() {
-    let _unid = this.$store.getters.getCurrentUnid;
     EventBus.$on('FIELD_RISE', payload => {
-      this.$store.dispatch('mutateNewUnid', payload);
+      this.$store.dispatch('mutateNewUnid', payload.unid);
       this.modalTogglerVM(payload);
     });
+  },
+  created() {
+    let unid = this.$store.getters.getCurrentUnid;
+    if (unid !== '@' + 'unid' + '@') {
+      this.modalTogglerVM();
+    }
   },
 };
 </script>
