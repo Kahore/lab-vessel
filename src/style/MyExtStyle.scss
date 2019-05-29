@@ -254,7 +254,8 @@ $info-color: #ff9900;
     display: inline-block;
     margin-top: -19px;
     margin-left: 5px;
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
   }
   &-table{
     display:inline-block;	

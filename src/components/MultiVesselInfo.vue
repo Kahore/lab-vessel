@@ -9,7 +9,7 @@
         </div>
         <!--.field-block_full -->
         <div class="closeContainer" @click="modalTogglerVM()">
-          <a id="closeIModal" class="close" href="#"></a>
+          <a id="closeIModal" class="close close__ligth" href="#"></a>
         </div>
       </div>
     </div>
@@ -23,19 +23,25 @@ export default {
   data() {
     return {
       isMultiBoxVisible: false,
-      // mock
-      chartTitle: 'chartTitle',
+      chartTitle: '',
     };
   },
   methods: {
     modalTogglerVM(payload) {
       window.scrollTo(0, 0);
       var self = this;
+      if (self.isMultiBoxVisible) {
+        self.chartTitle = '';
+        let resetChartMultiData = [];
+        self.$store.commit('LOAD_CHART_MULTI', resetChartMultiData);
+        Highcharts.charts[0].destroy();
+      } else {
+        self.chartTitle = payload.condition + ' ' + payload.location;
+        self.$store.dispatch('LOAD_CHART_MULTI', payload).then(response => {
+          self.groupChartBulder(self);
+        });
+      }
       self.isMultiBoxVisible = !self.isMultiBoxVisible;
-      self.$store.dispatch('LOAD_CHART_MULTI', payload).then(response => {
-        self.groupChartBulder(self);
-      });
-      console.log('modalTogglerVM multi');
     },
     groupChartBulder(self) {
       const options = self._prep_GroupChart_option();

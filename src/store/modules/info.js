@@ -78,6 +78,17 @@ const actions = {
       let myDataParse = ChartMulti;
       commit( 'LOAD_CHART_MULTI', myDataParse );
       resolve( myDataParse );
+      // $.ajax( {
+      //   url: './GetPageText.ashx?Id=@Nav_Backend@',
+      //   type: 'GET',
+      //   dataType: 'json',
+      //   data: { PARAM2: 'VesselChartData_Multi', Condition: payload.condition, Location: payload.location },
+      //   success: function ( resp ) {
+      //     let myDataParse = resp; /* JSON.parse( resp ) */
+      //     commit( 'LOAD_CHART_MULTI', myDataParse );
+      //     resolve( myDataParse );
+      //   }
+      // } );
     } );
   },
   Field_Save: ( { commit }, payload ) => {
