@@ -142,10 +142,12 @@ const actions = {
       //   data: payload,
       //   success: function ( resp ) {
       //     let _resp = resp; /* JSON.parse( resp ) */
-      //     commit( 'mutateNewUnid', _resp[ 0 ].unid );
-      //     commit( 'MUTATE_FIELD_HISTORY', _resp[ 0 ].HistoryPart[ 0 ] );
-      //     window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + _resp[ 0 ].unid );
-      //     resolve( _resp[ 0 ].unid );
+      //     commit( 'mutateNewUnid', _resp[0].unid );
+      //     if ( _resp[0].HistoryPart ) {
+      //       commit( 'MUTATE_FIELD_HISTORY', _resp[0].HistoryPart[0] );
+      //     }
+      //     window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + _resp[0].unid );
+      //     resolve( _resp[0].unid );
       //   }
       // } );
     } );

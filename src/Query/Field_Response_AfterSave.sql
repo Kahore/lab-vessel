@@ -10,7 +10,7 @@ BEGIN
 
   BEGIN TRY
 
-	IF ('@CommissioningDate@'<>'' and '@CommissioningDate@'<>'/' and '@CommissioningDate@'<>N'Нет данных')
+	IF ('@CommissioningDate@'<>'' and '@CommissioningDate@'<>'/' and '@CommissioningDate@'<>N'Нет данных' and '@CommissioningDate@'<>N'null')
 		BEGIN
     BEGIN TRY SET @CommissioningDate=CONVERT(date,'@CommissioningDate@',103) END TRY
 			BEGIN CATCH SELECT 'Ошибка в дате подачи заявления' END CATCH
@@ -20,7 +20,7 @@ BEGIN
     SET @CommissioningDate=NULL
   END
 
-	IF ('@CertificationDate@'<>'' and '@CertificationDate@'<>'/' and '@CertificationDate@'<>N'Нет данных')
+	IF ('@CertificationDate@'<>'' and '@CertificationDate@'<>'/' and '@CertificationDate@'<>N'Нет данных' and '@CertificationDate@'<>N'null')
 		BEGIN
     BEGIN TRY SET @CertificationDate=CONVERT(date,'@CertificationDate@',103) END TRY
 			BEGIN CATCH SELECT 'Ошибка в дате подачи заявления' END CATCH
@@ -30,7 +30,7 @@ BEGIN
     SET @CertificationDate=NULL
   END
 
-	IF ('@LastCheckDate@'<>'' and '@LastCheckDate@'<>'/' and '@LastCheckDate@'<>N'Нет данных')
+	IF ('@LastCheckDate@'<>'' and '@LastCheckDate@'<>'/' and '@LastCheckDate@'<>N'Нет данных'and '@LastCheckDate@'<>N'null')
 		BEGIN
     BEGIN TRY SET @LastCheckDate=CONVERT(date,'@LastCheckDate@',103) END TRY
 			BEGIN CATCH SELECT 'Ошибка в дате подачи заявления' END CATCH

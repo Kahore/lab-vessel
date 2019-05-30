@@ -24,30 +24,32 @@ const mutations = {
     state.Vessels = payload;
   },
   MUTATION_TABLE_REMOVE_OLD: ( state, payload ) => {
-    let conditionValOld = document.getElementById( payload ).parentElement.firstElementChild.textContent;
-    let locationValOld = document.getElementById( payload ).parentElement.parentElement.firstElementChild.textContent;
+    if ( document.getElementById( payload ) !== null ) {
+      let conditionValOld = document.getElementById( payload ).parentElement.firstElementChild.textContent;
+      let locationValOld = document.getElementById( payload ).parentElement.parentElement.firstElementChild.textContent;
 
-    let headerIndex = state.Vessels.findIndex( function ( block ) {
-      return block.Location === locationValOld;
-    } );
+      let headerIndex = state.Vessels.findIndex( function ( block ) {
+        return block.Location === locationValOld;
+      } );
 
-    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
-      return block.Condition === conditionValOld;
-    } );
-    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
-      block
-    ) {
-      return block.ID === payload;
-    } );
+      let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
+        return block.Condition === conditionValOld;
+      } );
+      let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
+        block
+      ) {
+        return block.ID === payload;
+      } );
 
-    state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.splice( vesselIndex, 1 );
-    /* MEMO: Удалить заголовок, если больше ничего нет */
-    if ( state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.length === 0 ) {
-      state.Vessels[headerIndex].ConditionDetails.splice( subHeaderIndex, 1 );
-    }
-    /* MEMO: Удалить локацию, если больше ничего нет */
-    if ( state.Vessels[headerIndex].ConditionDetails.length === 0 ) {
-      state.Vessels.splice( headerIndex, 1 );
+      state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.splice( vesselIndex, 1 );
+      /* MEMO: Удалить заголовок, если больше ничего нет */
+      if ( state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.length === 0 ) {
+        state.Vessels[headerIndex].ConditionDetails.splice( subHeaderIndex, 1 );
+      }
+      /* MEMO: Удалить локацию, если больше ничего нет */
+      if ( state.Vessels[headerIndex].ConditionDetails.length === 0 ) {
+        state.Vessels.splice( headerIndex, 1 );
+      }
     }
   },
   MUTATION_TABLE_UPDATE_ROW: ( state, payload ) => {

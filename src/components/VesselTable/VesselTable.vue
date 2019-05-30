@@ -99,7 +99,9 @@
             <template v-else-if="vd.Score == 2">
               <div v-text="vd.Score" class="vessel-block errorMsg"></div>
             </template>
-
+            <template v-else>
+              <div v-text="vd.Score" class="vessel-block"></div>
+            </template>
             <template v-if="vd.onAction==='true'">
               <div class="vessel-block">
                 <span class="awaitWhenLoad">SomeText</span>
