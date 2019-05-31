@@ -5,9 +5,9 @@ import info from './modules/info';
 import table from './modules/table';
 import shared from './modules/shared';
 
-Vue.use(Vuex);
+Vue.use( Vuex );
 
-export const store = new Vuex.Store({
+export const store = new Vuex.Store( {
   state: {},
   getters: {},
   mutations: {},
@@ -15,6 +15,6 @@ export const store = new Vuex.Store({
   modules: {
     shared,
     info,
-    table,
-  },
-});
+    table
+  }
+} );
