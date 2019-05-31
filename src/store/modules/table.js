@@ -131,6 +131,7 @@ const mutations = {
 };
 const actions = {
   loadVessels: async ( { commit }, payload ) => {
+    commit( 'CLEAR_ERROR' );
     /* NKReports */
     // $.ajax({
     //   url: './GetPageText.ashx?Id=@Nav_Backend@',
@@ -157,7 +158,7 @@ const actions = {
     //     commit('loadVessels', myDataParse);
     //   },
     //   error: function(resp) {
-    //     /* TODO: ERROR bus */
+    //     commit( 'SET_ERROR', resp.responseText );
     //   },
     // });
     /* TEST */
@@ -169,6 +170,7 @@ const actions = {
     }, 5000 );
   },
   MUTATION_TABLE_UPDATE_ROW: ( { commit }, payload ) => {
+    commit( 'CLEAR_ERROR' );
     // $.ajax({
     //   url: './GetPageText.ashx?Id=@Nav_Backend@',
     //   type: 'POST',
@@ -213,24 +215,6 @@ const actions = {
       commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
     }, 100000 );
 
-    /* old var */
-    // return new Promise( function ( resolve, reject ) {
-    //   $.ajax( {
-    //     url: './GetPageText.ashx?Id=@Nav_Backend@',
-    //     type: 'POST',
-    //     dataType: 'json',
-    //     data: { PARAM2: 'UpdateVesselInfoManually', unid: payload.unid },
-    //     complete: function ( resp ) {
-    //       let result = JSON.parse( resp );
-    //       let completeData = Object.assign( result, payload );
-    //       commit( 'MUTATION_TABLE_UPDATE_COUNT', completeData );
-    //       commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
-    //       resolve( resp );
-    //     },
-    //     error: function ( resp ) { $( '#errorMsg' ).text( resp.responseText ); }
-    //   } );
-    // } );
-
     /* new var */
     // const data = { PARAM2: 'UpdateVesselInfoManually', unid: payload.unid };
     // const result = await doAjax( '@Nav_Backend@', data ).then( ( result ) => {
@@ -253,11 +237,12 @@ const actions = {
 //           resolve( JSON.parse( resp ) );
 //         },
 //         error ( resp ) {
+//           commit( 'SET_ERROR', resp.responseText );
 //           reject( resp );
 //         }
 //       } );
 //     } catch ( error ) {
-//       console.error( error );
+//       commit( 'SET_ERROR', error );
 //     }
 //   } );
 // }

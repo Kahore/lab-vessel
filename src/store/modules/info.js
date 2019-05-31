@@ -1,5 +1,5 @@
 // import Vue from 'vue';
-import FieldDefault from '../../data/Field_Load_Default.json';
+
 import FieldVessel from '../../data/Field_Load_Vessel.json';
 import FieldAfterSave from '../../data/Field_Response_AfterSave.json';
 import ChartMulti from '../../data/Chart_Load_Multi.json';
@@ -89,64 +89,60 @@ const mutations = {
   }
 };
 const actions = {
-  loadField: ( { commit }, payload ) => {
-    commit( 'InProgress_Field', true );
-    /* NKReports */
-    // $.ajax( {
-    //   url: './GetPageText.ashx?Id=@Nav_Backend@',
-    //   type: 'GET',
-    //   dataType: 'json',
-    //   data: { PARAM2: 'Vessels_GetData_Default' },
-    //   success: function ( resp ) {
-    //     let myDataParse = resp; /* JSON.parse( resp ) */
-    //     commit( 'loadField', myDataParse );
-    //     commit( 'InProgress_Field', false );
-    //   }
-    // } );
-    /* TEST */
-    let myDataParse = FieldDefault;
-    commit( 'loadField', myDataParse );
-    commit( 'InProgress_Field', false );
-  },
   LOAD_VESSEL_INFO: ( { commit }, payload ) => {
+    commit( 'CLEAR_ERROR' );
     return new Promise( function ( resolve, reject ) {
       let myDataParse = FieldVessel;
       commit( 'loadField', myDataParse );
       resolve( myDataParse );
+      commit( 'InProgress_Field', true );
       // $.ajax( {
       //   url: './GetPageText.ashx?Id=@Nav_Backend@',
       //   type: 'GET',
       //   dataType: 'json',
-      //   data: { PARAM2: 'VesselFieldFiller', PARAM3:payload.PARAM3, unid: payload.unid },
+      //   data: { PARAM2: 'VesselFieldFiller', PARAM3: payload.PARAM3, unid: payload.unid },
       //   success: function ( resp ) {
       //     let myDataParse = resp; /* JSON.parse( resp ) */
       //     commit( 'loadField', myDataParse );
       //     resolve( myDataParse );
+      //     commit( 'InProgress_Field', false );
+      //   },
+      //   error: function ( resp ) {
+      //     commit( 'SET_ERROR', resp.responseText );
+      //     commit( 'InProgress_Field', false );
+      //     reject( resp.responseText );
       //   }
       // } );
     } );
   },
   LOAD_CHART_MULTI: ( { commit }, payload ) => {
+    commit( 'CLEAR_ERROR' );
     return new Promise( function ( resolve, reject ) {
       let myDataParse = ChartMulti;
       commit( 'LOAD_CHART_MULTI', myDataParse );
       resolve( myDataParse );
       commit( 'InProgress_MultiVesselInfo', true );
-      // $.ajax( {
-      //   url: './GetPageText.ashx?Id=@Nav_Backend@',
-      //   type: 'GET',
-      //   dataType: 'json',
-      //   data: { PARAM2: 'VesselChartData_Multi', Condition: payload.condition, Location: payload.location },
-      //   success: function ( resp ) {
-      //     let myDataParse = resp; /* JSON.parse( resp ) */
-      //     commit( 'LOAD_CHART_MULTI', myDataParse );
-      //     resolve( myDataParse );
-      //     commit( 'InProgress_MultiVesselInfo', false );
-      //   }
-      // } );
+      //   $.ajax( {
+      //     url: './GetPageText.ashx?Id=@Nav_Backend@',
+      //     type: 'GET',
+      //     dataType: 'json',
+      //     data: { PARAM2: 'VesselChartData_Multi', Condition: payload.condition, Location: payload.location },
+      //     success: function ( resp ) {
+      //       let myDataParse = resp; /* JSON.parse( resp ) */
+      //       commit( 'LOAD_CHART_MULTI', myDataParse );
+      //       resolve( myDataParse );
+      //       commit( 'InProgress_MultiVesselInfo', false );
+      //     },
+      //     error: function ( resp ) {
+      //       commit( 'SET_ERROR', resp.responseText );
+      //        commit( 'InProgress_MultiVesselInfo', false );
+      //        reject( resp.responseText );
+      //     }
+      //   } );
     } );
   },
   Field_Save: ( { commit }, payload ) => {
+    commit( 'CLEAR_ERROR' );
     return new Promise( function ( resolve, reject ) {
       commit( 'InProgress_Field', true );
       let _resp = FieldAfterSave;
@@ -168,6 +164,11 @@ const actions = {
       //     }
       //     window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + _resp[0].unid );
       //     resolve( _resp[0].unid );
+      //     commit( 'InProgress_Field', false );
+      //   },
+      //   error: function ( resp ) {
+      //     commit( 'SET_ERROR', resp.responseText );
+      //     reject( resp.responseText );
       //     commit( 'InProgress_Field', false );
       //   }
       // } );
