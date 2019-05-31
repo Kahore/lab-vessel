@@ -91,11 +91,12 @@ const mutations = {
 const actions = {
   LOAD_VESSEL_INFO: ( { commit }, payload ) => {
     commit( 'CLEAR_ERROR' );
+    commit( 'InProgress_Field', true );
     return new Promise( function ( resolve, reject ) {
       let myDataParse = FieldVessel;
       commit( 'loadField', myDataParse );
       resolve( myDataParse );
-      commit( 'InProgress_Field', true );
+      commit( 'InProgress_Field', false );
       // $.ajax( {
       //   url: './GetPageText.ashx?Id=@Nav_Backend@',
       //   type: 'GET',

@@ -4,7 +4,7 @@ import Vue from 'vue';
 import App from './App';
 import { store } from './store/store';
 Vue.config.productionTip = false;
-Vue.component('fld-textarea', {
+Vue.component( 'fld-textarea', {
   template:
     '<div class="field-block__wrapper">' +
     '<textarea class="field-block__wrapper_item" row="1" :required="isRequired" name="Field" :id="inputId" v-model="inputVal" @focus="toggleLabel($event)" @blur="toggleLabel($event)" @keyup="searchData($event)"></textarea>' +
@@ -13,42 +13,42 @@ Vue.component('fld-textarea', {
     '</div>',
   props: ['rusDesc', 'value', 'inputId', 'isRequired'],
   methods: {
-    toggleLabel(e) {
-      likeLabelV(e);
+    toggleLabel ( e ) {
+      likeLabelV( e );
       textareaAutoGrow();
     },
-    searchData(e) {},
+    searchData ( e ) {}
   },
   computed: {
     inputVal: {
-      get() {
+      get () {
         return this.value;
       },
-      set(value) {
-        this.$emit('input', value);
-      },
-    },
+      set ( value ) {
+        this.$emit( 'input', value );
+      }
+    }
   },
-  created() {
+  created () {
     const component = this;
-    this.handler = function(e) {
-      component.$emit('keyup', e);
+    this.handler = function ( e ) {
+      component.$emit( 'keyup', e );
     };
-    window.addEventListener('keyup', this.handler);
+    window.addEventListener( 'keyup', this.handler );
   },
-  updated() {
-    var thisEl = document.getElementById(this.inputId);
-    likeLabelOnCreateV(thisEl);
+  updated () {
+    var thisEl = document.getElementById( this.inputId );
+    likeLabelOnCreateV( thisEl );
     textareaAutoGrow();
   },
-  mounted() {
-    var thisEl = document.getElementById(this.inputId);
-    likeLabelOnCreateV(thisEl);
+  mounted () {
+    var thisEl = document.getElementById( this.inputId );
+    likeLabelOnCreateV( thisEl );
     textareaAutoGrow();
-  },
-});
+  }
+} );
 
-Vue.component('select-block', {
+Vue.component( 'select-block', {
   template:
     '<div class="field-block__wrapper">' +
     '<select class="field-block__wrapper_item" name="Field" :id="selectId" v-model="currentItem" :required="isRequired" @focus="toggleLabel($event)" @blur="toggleLabel($event)">' +
@@ -61,42 +61,42 @@ Vue.component('select-block', {
     '</div>',
   props: ['rusDesc', 'value', 'selectId', 'itemTypes', 'isRequired'],
   methods: {
-    toggleLabel(e) {
-      likeLabelV(e);
-    },
+    toggleLabel ( e ) {
+      likeLabelV( e );
+    }
   },
   computed: {
     currentItem: {
-      get: function() {
+      get: function () {
         return this.value;
       },
-      set: function(value) {
-        if (typeof this.itemTypesPars !== 'undefined') {
-          this.$emit('input', value);
+      set: function ( value ) {
+        if ( typeof this.itemTypesPars !== 'undefined' ) {
+          this.$emit( 'input', value );
         }
-      },
+      }
     },
-    itemTypesPars() {
-      if (typeof this.itemTypes !== 'undefined' /* && this.itemTypes.length !== 0 */) {
+    itemTypesPars () {
+      if ( typeof this.itemTypes !== 'undefined' /* && this.itemTypes.length !== 0 */ ) {
         let itemTypesTemp = this.itemTypes;
-        itemTypesTemp = itemTypesTemp.substring(0, itemTypesTemp.length - 1).split(';');
+        itemTypesTemp = itemTypesTemp.substring( 0, itemTypesTemp.length - 1 ).split( ';' );
         return itemTypesTemp;
       } else {
         return '';
       }
-    },
+    }
   },
-  updated: function() {
-    var thisEl = document.getElementById(this.selectId);
-    likeLabelOnCreateV(thisEl);
+  updated: function () {
+    var thisEl = document.getElementById( this.selectId );
+    likeLabelOnCreateV( thisEl );
   },
-  mounted() {
-    var thisEl = document.getElementById(this.selectId);
-    likeLabelOnCreateV(thisEl);
-  },
-});
+  mounted () {
+    var thisEl = document.getElementById( this.selectId );
+    likeLabelOnCreateV( thisEl );
+  }
+} );
 
-Vue.component('fld-input', {
+Vue.component( 'fld-input', {
   template:
     '<div class="field-block__wrapper">' +
     '<input class="field-block__wrapper_item" :required="isRequired" name="Field" :id="inputId" :readonly="isReadonly" v-model="inputVal" @focus="toggleLabel($event)" @blur="toggleLabel($event)" @keyup="searchData($event)"/>' +
@@ -105,132 +105,132 @@ Vue.component('fld-input', {
     '</div >',
   props: ['rusDesc', 'value', 'inputId', 'isReadonly', 'isRequired'],
   methods: {
-    toggleLabel(e) {
-      likeLabelV(e);
+    toggleLabel ( e ) {
+      likeLabelV( e );
     },
-    searchData(e) {},
+    searchData ( e ) {}
   },
   computed: {
     inputVal: {
-      get: function() {
+      get: function () {
         return this.value;
       },
-      set: function(value) {
-        this.$emit('input', value);
-      },
-    },
+      set: function ( value ) {
+        this.$emit( 'input', value );
+      }
+    }
   },
-  created: function() {
+  created: function () {
     const component = this;
-    this.handler = function(e) {
-      component.$emit('keyup', e);
+    this.handler = function ( e ) {
+      component.$emit( 'keyup', e );
     };
-    window.addEventListener('keyup', this.handler);
+    window.addEventListener( 'keyup', this.handler );
   },
-  updated: function() {
-    var thisEl = document.getElementById(this.inputId);
-    likeLabelOnCreateV(thisEl);
+  updated: function () {
+    var thisEl = document.getElementById( this.inputId );
+    likeLabelOnCreateV( thisEl );
   },
-  mounted() {
-    var thisEl = document.getElementById(this.inputId);
-    likeLabelOnCreateV(thisEl);
-  },
-});
+  mounted () {
+    var thisEl = document.getElementById( this.inputId );
+    likeLabelOnCreateV( thisEl );
+  }
+} );
 
-Vue.component('date-picker', {
+Vue.component( 'date-picker', {
   template:
     '<div class="field-block__wrapper">' +
-    '<input autocomplete="off" v-model="inputVal" class="field-block__wrapper_item" name ="Field" :id ="inputId" required @focus="toggleLabel($event)" @blur="toggleLabel($event)" />' +
+    '<input autocomplete="off" v-model="inputVal" class="field-block__wrapper_item" name ="Field" :id ="inputId" :required="isRequired"  @focus="toggleLabel($event)" @blur="toggleLabel($event)" />' +
     '<div class="likePlaceholder " v-text="rusDesc"></div>' +
     '<div class="borderPseudo"></div>' +
     '</div>',
-  props: ['dateFormat', 'value', 'inputId', 'rusDesc'],
+  props: ['dateFormat', 'value', 'inputId', 'rusDesc', 'isRequired'],
 
   methods: {
-    toggleLabel(e) {
-      likeLabelV(e);
-    },
+    toggleLabel ( e ) {
+      likeLabelV( e );
+    }
   },
   computed: {
     inputVal: {
-      get: function() {
+      get: function () {
         return this.value;
       },
-      set: function(value) {
-        this.$emit('input', value);
-      },
-    },
+      set: function ( value ) {
+        this.$emit( 'input', value );
+      }
+    }
   },
 
-  mounted: function() {
+  mounted: function () {
     var self = this;
-    var thisEl = document.getElementById(self.inputId);
+    var thisEl = document.getElementById( self.inputId );
     // eslint-disable-next-line no-undef
-    $(thisEl).datepicker({
+    $( thisEl ).datepicker( {
       dateFormat: 'dd/mm/yy' /* this.dateFormat */,
       firstDay: 1,
       changeMonth: true,
       changeYear: true,
-      onSelect: function(date) {
-        self.$emit('input', date);
-        if (date !== '') {
-          likeLabelOnCreateV(thisEl);
+      onSelect: function ( date ) {
+        self.$emit( 'input', date );
+        if ( date !== '' ) {
+          likeLabelOnCreateV( thisEl );
         }
-      },
-    });
+      }
+    } );
 
-    likeLabelOnCreateV(thisEl);
+    likeLabelOnCreateV( thisEl );
     // eslint-disable-next-line no-undef
-    $(thisEl).removeClass('hasDatepicker');
+    $( thisEl ).removeClass( 'hasDatepicker' );
   },
-  updated: function() {
+  updated: function () {
     var self = this;
-    var thisEl = document.getElementById(self.inputId);
-    likeLabelOnCreateV(thisEl);
+    var thisEl = document.getElementById( self.inputId );
+    likeLabelOnCreateV( thisEl );
   },
 
-  beforeDestroy: function() {
+  beforeDestroy: function () {
     // eslint-disable-next-line no-undef
-    $(this.$el)
-      .datepicker('hide')
-      .datepicker('destroy');
-  },
-});
+    $( this.$el )
+      .datepicker( 'hide' )
+      .datepicker( 'destroy' );
+  }
+} );
 
-function textareaAutoGrow() {
-  var inputs = document.getElementsByTagName('textarea');
-  for (var i = 0; i < inputs.length; i += 1) {
-    autoGrow(inputs[i]);
+function textareaAutoGrow () {
+  var inputs = document.getElementsByTagName( 'textarea' );
+  for ( var i = 0; i < inputs.length; i += 1 ) {
+    autoGrow( inputs[i] );
   }
 }
 
-function likeLabelV(e) {
-  e.target.nextSibling.classList.add('likeLabel');
-  if (e.target.value === '' && e.type === 'blur') {
-    e.target.nextSibling.classList.remove('likeLabel');
+function likeLabelV ( e ) {
+  e.target.nextSibling.classList.add( 'likeLabel' );
+  if ( e.target.value === '' && e.type === 'blur' ) {
+    e.target.nextSibling.classList.remove( 'likeLabel' );
   }
   textareaAutoGrow();
-  e.target.parentNode.lastElementChild.classList.toggle('borderPseudoLine');
+  e.target.parentNode.lastElementChild.classList.toggle( 'borderPseudoLine' );
 }
 
-function likeLabelOnCreateV(elem) {
-  if (elem.value !== '') {
-    elem.nextSibling.classList.add('likeLabel');
+function likeLabelOnCreateV ( elem ) {
+  if ( elem.value !== '' ) {
+    elem.nextSibling.classList.add( 'likeLabel' );
   }
 }
 
-function autoGrow(element) {
-  if (element.value.length > 1) {
+function autoGrow ( element ) {
+  if ( element.value.length > 1 ) {
     element.style.height = element.scrollHeight + 'px';
-    if (element.scrollHeight === 0) {
+    if ( element.scrollHeight === 0 ) {
       element.style.height = '24px';
     }
   }
 }
 /* eslint-disable no-new */
-new Vue({
+new Vue( {
   el: '#app',
   store,
   components: { App },
-  template: '<App/>',
-});
+  template: '<App/>'
+} );

@@ -3,6 +3,18 @@ $corp-secondary-color:gray;
 $error-color: #ff8181;
 $info-color: #ff9900;
 
+input:invalid { 
+  border-left: 2px solid $error-color; 
+}
+
+textarea:invalid {  
+  border-left: 2px solid $error-color; 
+}
+
+select:invalid { 
+  border-left: 2px solid $error-color; 
+}
+
 .layer_bg {
     Background: #000;
     opacity: 0.8;

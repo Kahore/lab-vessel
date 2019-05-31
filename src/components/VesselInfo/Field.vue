@@ -12,11 +12,21 @@
     <div class="field-container">
       <div class="field-row">
         <div class="field-block field-block_huge">
-          <fld-input rus-desc="Статус" input-id="Condition" v-model="vesselInfo.Condition"/>
+          <fld-input
+            rus-desc="Статус"
+            input-id="Condition"
+            v-model="vesselInfo.Condition"
+            :isRequired="true"
+          />
         </div>
         <!-- .field-block -->
         <div class="field-block">
-          <fld-input rus-desc="Серийный номер" input-id="Serial" v-model="vesselInfo.Serial"/>
+          <fld-input
+            rus-desc="Серийный номер"
+            input-id="Serial"
+            v-model="vesselInfo.Serial"
+            :isRequired="true"
+          />
         </div>
         <!-- .field-block -->
       </div>
@@ -30,6 +40,7 @@
             rus-desc="Дата создания"
             input-id="CommissioningDate"
             v-model="vesselInfo.CommissioningDate"
+            :isRequired="true"
           />
         </div>
         <!-- .field-block -->
@@ -71,12 +82,22 @@
 
       <div class="field-row">
         <div class="field-block">
-          <fld-input rus-desc="Состояние" input-id="Status" v-model="vesselInfo.Status" readonly/>
+          <fld-input
+            rus-desc="Состояние"
+            input-id="Status"
+            v-model="vesselInfo.Status"
+            :isReadonly="true"
+          />
         </div>
         <!-- .field-block -->
 
         <div class="field-block">
-          <fld-input rus-desc="Оценка" input-id="Score" v-model="vesselInfo.Score"/>
+          <fld-input
+            rus-desc="Оценка"
+            input-id="Score"
+            v-model="vesselInfo.Score"
+            :isRequired="true"
+          />
         </div>
         <!-- .field-block -->
 

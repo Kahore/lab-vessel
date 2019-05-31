@@ -1,4 +1,16 @@
 @charset "UTF-8";
+input:invalid {
+  border-left: 2px solid #ff8181;
+}
+
+textarea:invalid {
+  border-left: 2px solid #ff8181;
+}
+
+select:invalid {
+  border-left: 2px solid #ff8181;
+}
+
 .layer_bg {
   Background: #000;
   opacity: 0.8;
