@@ -114,6 +114,52 @@
   }
 }
 
+/* bar в таблице */
+.bar {
+  width: 100%;
+  height: 6px;
+  border-radius: 2px;
+  background-color: #cdcdcd;
+}
+
+.bar-wrapper {
+  -webkit-animation-delay: 1.56s;
+          animation-delay: 1.56s;
+}
+
+.bar-wrapper .bar {
+  -webkit-animation: loadingJ 8s cubic-bezier(0.17, 0.17, 0.17, 0.17) infinite;
+          animation: loadingJ 8s cubic-bezier(0.17, 0.17, 0.17, 0.17) infinite;
+}
+
+@-webkit-keyframes loadingJ {
+  0%,
+  100% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  50% {
+    -webkit-transform: translate(50%, 0);
+            transform: translate(50%, 0);
+    background-color: orange;
+    width: 25px;
+  }
+}
+
+@keyframes loadingJ {
+  0%,
+  100% {
+    -webkit-transform: translate(0, 0);
+            transform: translate(0, 0);
+  }
+  50% {
+    -webkit-transform: translate(50%, 0);
+            transform: translate(50%, 0);
+    background-color: orange;
+    width: 25px;
+  }
+}
+
 /*Message snack*/
 .v-snack {
   position: -webkit-sticky;

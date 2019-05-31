@@ -8,7 +8,10 @@
           title="Значение может быть задано через Мои настройки"
         >Скрыть утилизированные сосуды</label>
       </div>
-
+      <div class="bar-wrapper" v-if="isTableLoading">
+        <div class="bar"></div>
+        <p>Информация по сосудам загружается...</p>
+      </div>
       <div v-for="(vessel, index) in vessels" :key="index">
         <h3 v-text="vessel.Location"></h3>
 
@@ -186,8 +189,8 @@ export default {
     },
   },
   computed: {
-    loading() {
-      return this.$store.getters.loadingVesselsTable;
+    isTableLoading() {
+      return this.$store.getters.isLoadingVesselsTable;
     },
     vessels() {
       return this.$store.getters.GET_VESSELS_LIST;

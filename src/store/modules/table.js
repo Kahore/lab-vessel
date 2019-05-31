@@ -9,7 +9,7 @@ const state = {
   hideUtil: 'true' // '@UtilVesselFilter@',
 };
 const getters = {
-  loadingVesselsTable: state => {
+  isLoadingVesselsTable: state => {
     return state.loadingVesselsTable;
   },
   GET_VESSELS_LIST: state => {
@@ -20,6 +20,9 @@ const getters = {
   }
 };
 const mutations = {
+  InProgress_VesselTable: ( state, payload ) => {
+    state.loadingVesselsTable = payload;
+  },
   loadVessels: ( state, payload ) => {
     state.Vessels = payload;
   },
@@ -158,8 +161,12 @@ const actions = {
     //   },
     // });
     /* TEST */
-    const myDataParse = VesselData;
-    commit( 'loadVessels', myDataParse );
+    commit( 'InProgress_VesselTable', true );
+    setTimeout( () => {
+      const myDataParse = VesselData;
+      commit( 'loadVessels', myDataParse );
+      commit( 'InProgress_VesselTable', false );
+    }, 5000 );
   },
   MUTATION_TABLE_UPDATE_ROW: ( { commit }, payload ) => {
     // $.ajax({
