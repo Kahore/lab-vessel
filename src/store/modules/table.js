@@ -106,6 +106,24 @@ const mutations = {
       payload[0]
     );
     Vue.set( state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails, vesselIndex, updatedVessel );
+  },
+  MUTATION_TABLE_VESSEL_ONACTION: ( state, payload ) => {
+    let headerIndex = state.Vessels.findIndex( function ( block ) {
+      return block.Location === payload.Location;
+    } );
+    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
+      return block.Condition === payload.Condition;
+    } );
+    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
+      block
+    ) {
+      return block.ID === payload.unid;
+    } );
+    if ( state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails[vesselIndex].onAction === 'false' ) {
+      state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails[vesselIndex].onAction = 'true';
+    } else {
+      state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails[vesselIndex].onAction = 'false';
+    }
   }
 };
 const actions = {
@@ -178,45 +196,64 @@ const actions = {
   },
   MUTATION_TABLE_UPDATE_COUNT: async ( { commit }, payload ) => {
     console.log( 'TCL: payload', payload );
+    commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
 
     let result;
     result = await VesselAfterCounter;
     let completeData = Object.assign( result, payload );
-    commit( 'MUTATION_TABLE_UPDATE_COUNT', completeData );
+    setTimeout( () => {
+      commit( 'MUTATION_TABLE_UPDATE_COUNT', completeData );
+      commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
+    }, 100000 );
+
     /* old var */
     // return new Promise( function ( resolve, reject ) {
     //   $.ajax( {
-    //     url: "./GetPageText.ashx?Id=@Nav_Backend@",
-    //     type: "POST",
-    //     dataType: "json",
-    //     data: { PARAM2: "UpdateVesselInfoManually", unid: selectedId },
-    //     complete: function ( resp ) {
-    //       resolve( resp )
-    //     },
-    //     error: function ( resp ) { $( "#errorMsg" ).text( resp.responseText ); }
-    //   } );
-    // });
-
-    /* new var */
-
-    // let result;
-
-    // try {
-    //   result = await $.ajax({
     //     url: './GetPageText.ashx?Id=@Nav_Backend@',
     //     type: 'POST',
-    //     data: { PARAM2: 'UpdateVesselInfoManually', unid: payload },
-    //   });
+    //     dataType: 'json',
+    //     data: { PARAM2: 'UpdateVesselInfoManually', unid: payload.unid },
+    //     complete: function ( resp ) {
+    //       let result = JSON.parse( resp );
+    //       let completeData = Object.assign( result, payload );
+    //       commit( 'MUTATION_TABLE_UPDATE_COUNT', completeData );
+    //       commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
+    //       resolve( resp );
+    //     },
+    //     error: function ( resp ) { $( '#errorMsg' ).text( resp.responseText ); }
+    //   } );
+    // } );
 
-    //   // return result;
-    //   let completeData = Object.assign(result, payload);
-    //   commit('MUTATION_TABLE_UPDATE_ROW', completeData);
-    // } catch (error) {
-    //   console.error(error);
-    // }
+    /* new var */
+    // const data = { PARAM2: 'UpdateVesselInfoManually', unid: payload.unid };
+    // const result = await doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+    //   let completeData = Object.assign( result, payload );
+    //   commit( 'MUTATION_TABLE_UPDATE_COUNT', completeData );
+    //   commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
+    // } );
   }
 };
 
+// eslint-disable-next-line no-unused-vars
+// function doAjax ( url, ajaxData ) {
+//   return new Promise( function ( resolve, reject ) {
+//     try {
+//       $.ajax( {
+//         url: './GetPageText.ashx?Id=' + url,
+//         type: 'POST',
+//         data: ajaxData,
+//         complete: function ( resp ) {
+//           resolve( JSON.parse( resp ) );
+//         },
+//         error ( resp ) {
+//           reject( resp );
+//         }
+//       } );
+//     } catch ( error ) {
+//       console.error( error );
+//     }
+//   } );
+// }
 export default {
   state,
   getters,

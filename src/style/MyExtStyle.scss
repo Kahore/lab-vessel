@@ -14,6 +14,7 @@ $info-color: #ff9900;
     overflow: hidden;
     z-index: 500;
 }
+
 .link {
   &_string {
     cursor: pointer;
@@ -38,10 +39,11 @@ $info-color: #ff9900;
   position: absolute;
   width: 50px;
   height: 50px;
-  margin: 10% 20%;
+  margin: 0% 35%;
+  margin-top: 25%;
   &.list-ring {
-    margin: -15px -13x;
-    &  div {
+    // margin: -15px -13x;
+    & div {
       width: 15px;
       height: 15px;
       border: 3px solid $corp-primary-color;

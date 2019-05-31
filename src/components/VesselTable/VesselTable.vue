@@ -37,9 +37,16 @@
             :id="vd.ID"
             :key="index"
           >
-            <div class="vessel-block link_string">
-              <span @click="clickOnVessel(vd.ID)">{{vd.Serial}}</span>
-            </div>
+            <template v-if="vd.onAction==='true'">
+              <div class="vessel-block">
+                <span>{{vd.Serial}}</span>
+              </div>
+            </template>
+            <template v-else>
+              <div class="vessel-block link_string">
+                <span @click="clickOnVessel(vd.ID)">{{vd.Serial}}</span>
+              </div>
+            </template>
 
             <template v-if="vd.Status === 'Требуется проверка'">
               <div v-text="vd.Status" class="vessel-block errorMsg"></div>
@@ -104,7 +111,7 @@
             </template>
             <template v-if="vd.onAction==='true'">
               <div class="vessel-block">
-                <span class="awaitWhenLoad">SomeText</span>
+                <row-loader/>
               </div>
             </template>
             <template v-else>
@@ -113,7 +120,7 @@
 
             <template v-if="vd.onAction==='true'">
               <div class="vessel-block">
-                <span class="awaitWhenLoad">SomeText</span>
+                <row-loader/>
               </div>
             </template>
             <template v-else>
@@ -121,7 +128,7 @@
             </template>
             <template v-if="vd.onAction==='true'">
               <div class="vessel-block">
-                <span class="awaitWhenLoad">SomeText</span>
+                <row-loader/>
               </div>
             </template>
             <template v-else>
@@ -134,7 +141,7 @@
             <template v-else>
               <template v-if="vd.onAction==='true'">
                 <div class="vessel-block">
-                  <span class="awaitWhenLoad">SomeText</span>
+                  <row-loader/>
                 </div>
               </template>
               <template v-else>
@@ -155,7 +162,11 @@
 
 <script>
 import EventBus from '../../EventBus';
+import LDSLoaded from './VesselTableRowLoader';
 export default {
+  components: {
+    'row-loader': LDSLoaded,
+  },
   methods: {
     clickOnVessel(vesselId) {
       EventBus.$emit('FIELD_RISE', { unid: vesselId });
