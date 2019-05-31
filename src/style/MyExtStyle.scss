@@ -32,7 +32,13 @@ $info-color: #ff9900;
     }
    }
 }
-
+.noEdit {
+    width: 56%;
+    height: 18%;
+    position: absolute;
+    background: transparent;
+    z-index: 500;
+  }
 /*Слайдер загрузки*/
 .lds-ring {
   display: inline-block;
@@ -324,7 +330,8 @@ $info-color: #ff9900;
     position: absolute;
     right: 0;
     top: 0;
-    margin-right: -40px;
+    margin-top: 1px;
+    margin-right: -41px;
     width: 35px;
     height: 35px;
     cursor: pointer;

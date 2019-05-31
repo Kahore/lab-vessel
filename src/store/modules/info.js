@@ -27,10 +27,13 @@ const state = {
     ChartData: []
   },
   ChartMultiData: [],
-  loadingVesselInfo: false,
+  loadingField: false,
   firstInit: true
 };
 const getters = {
+  isLoadingField: state => {
+    return state.loadingField;
+  },
   vesselInfo: state => {
     return state.VesselInfo;
   },
@@ -52,6 +55,9 @@ const getters = {
   }
 };
 const mutations = {
+  InProgress_Field: ( state, payload ) => {
+    state.loadingField = payload;
+  },
   loadField: ( state, payload ) => {
     if ( typeof payload[0].ListData !== 'undefined' ) {
       state.Lists = payload[0].ListData[0];
@@ -77,6 +83,7 @@ const mutations = {
 };
 const actions = {
   loadField: ( { commit }, payload ) => {
+    commit( 'InProgress_Field', true );
     /* NKReports */
     // $.ajax( {
     //   url: './GetPageText.ashx?Id=@Nav_Backend@',
@@ -86,11 +93,13 @@ const actions = {
     //   success: function ( resp ) {
     //     let myDataParse = resp; /* JSON.parse( resp ) */
     //     commit( 'loadField', myDataParse );
+    //     commit( 'InProgress_Field', false );
     //   }
     // } );
     /* TEST */
     let myDataParse = FieldDefault;
     commit( 'loadField', myDataParse );
+    commit( 'InProgress_Field', false );
   },
   LOAD_VESSEL_INFO: ( { commit }, payload ) => {
     return new Promise( function ( resolve, reject ) {
@@ -130,11 +139,13 @@ const actions = {
   },
   Field_Save: ( { commit }, payload ) => {
     return new Promise( function ( resolve, reject ) {
+      commit( 'InProgress_Field', true );
       let _resp = FieldAfterSave;
       commit( 'mutateNewUnid', _resp[0].unid );
       commit( 'MUTATE_FIELD_HISTORY', _resp[0].HistoryPart[0] );
       window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + _resp[0].unid );
       resolve( _resp[0].unid );
+      commit( 'InProgress_Field', false );
       // $.ajax( {
       //   url: './GetPageText.ashx?Id=@Nav_Backend@',
       //   type: 'GET',
@@ -148,6 +159,7 @@ const actions = {
       //     }
       //     window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + _resp[0].unid );
       //     resolve( _resp[0].unid );
+      //     commit( 'InProgress_Field', false );
       //   }
       // } );
     } );

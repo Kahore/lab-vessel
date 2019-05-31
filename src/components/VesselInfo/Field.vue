@@ -1,5 +1,14 @@
 <template>
   <section>
+    <div v-if="isFieldLoading">
+      <div class="noEdit"></div>
+      <div class="lds-ring centered">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
     <div class="field-container">
       <div class="field-row">
         <div class="field-block field-block_huge">
@@ -84,7 +93,7 @@
         </div>
         <!-- .field-block -->
 
-        <div class="field-block">
+        <div class="field-block" v-if="!isFieldLoading">
           <template v-if="canIEditVessel==='true'">
             <div class="field-block__wrapper floatRContainer">
               <span name="btnSaveContainer" @click="saveAction()">
@@ -147,6 +156,9 @@ export default {
     canIEditVessel() {
       /* TODO: Fix it */
       return 'true';
+    },
+    isFieldLoading() {
+      return this.$store.getters.isLoadingField;
     },
   },
 };
