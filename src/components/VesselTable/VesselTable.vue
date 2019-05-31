@@ -158,7 +158,6 @@
           </div>
         </div>
       </div>
-      <div class="awaitLoad" id="myAwaitLoad" v-show="loading">Some text</div>
     </div>
   </section>
 </template>
