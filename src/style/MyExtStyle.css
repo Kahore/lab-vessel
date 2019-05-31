@@ -58,7 +58,8 @@
 }
 
 .lds-ring.centered {
-  margin: 0% 50%;
+  margin: 21% 41%;
+  z-index: 500;
 }
 
 .lds-ring div {

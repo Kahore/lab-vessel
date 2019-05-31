@@ -28,11 +28,15 @@ const state = {
   },
   ChartMultiData: [],
   loadingField: false,
+  loadingMultiVesselInfo: false,
   firstInit: true
 };
 const getters = {
   isLoadingField: state => {
     return state.loadingField;
+  },
+  isLoadingMultiVesselInfo: state => {
+    return state.loadingMultiVesselInfo;
   },
   vesselInfo: state => {
     return state.VesselInfo;
@@ -57,6 +61,9 @@ const getters = {
 const mutations = {
   InProgress_Field: ( state, payload ) => {
     state.loadingField = payload;
+  },
+  InProgress_MultiVesselInfo: ( state, payload ) => {
+    state.loadingMultiVesselInfo = payload;
   },
   loadField: ( state, payload ) => {
     if ( typeof payload[0].ListData !== 'undefined' ) {
@@ -124,6 +131,7 @@ const actions = {
       let myDataParse = ChartMulti;
       commit( 'LOAD_CHART_MULTI', myDataParse );
       resolve( myDataParse );
+      commit( 'InProgress_MultiVesselInfo', true );
       // $.ajax( {
       //   url: './GetPageText.ashx?Id=@Nav_Backend@',
       //   type: 'GET',
@@ -133,6 +141,7 @@ const actions = {
       //     let myDataParse = resp; /* JSON.parse( resp ) */
       //     commit( 'LOAD_CHART_MULTI', myDataParse );
       //     resolve( myDataParse );
+      //     commit( 'InProgress_MultiVesselInfo', false );
       //   }
       // } );
     } );

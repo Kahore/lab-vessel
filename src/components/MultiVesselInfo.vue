@@ -3,6 +3,14 @@
     <div id="containerChartMulti">
       <div class="layer_bg" @click="modalTogglerVM()" v-show="isMultiBoxVisible"></div>
       <div v-show="isMultiBoxVisible" class="modal_wrap_container">
+        <div v-if="isMultiVesselInfoLoading">
+          <div class="lds-ring centered">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
         <div class="field-block_full">
           <h2 v-text="chartTitle"></h2>
           <div id="containerChartHlMulti" class="mt-5per"></div>
@@ -128,6 +136,11 @@ export default {
         series: [],
       };
       return options;
+    },
+  },
+  computed: {
+    isMultiVesselInfoLoading() {
+      return this.$store.getters.isLoadingMultiVesselInfo;
     },
   },
   mounted() {
