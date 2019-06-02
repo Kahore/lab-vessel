@@ -81,7 +81,7 @@ const mutations = {
     state.ChartMultiData = payload;
   },
   MUTATE_FIELD_RESET: ( state, payload ) => {
-    state.VesselInfo = Object.assign( {}, state.DefaultInfo );
+    state.VesselInfo = JSON.parse( JSON.stringify( state.DefaultInfo ) );
     window.history.pushState( '', '', './Default?Id=@NavID@' );
   },
   MUTATE_FIELD_HISTORY: ( state, payload ) => {
