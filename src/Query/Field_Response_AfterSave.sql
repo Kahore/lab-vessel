@@ -21,8 +21,8 @@ BEGIN
     END TRY
 		BEGIN CATCH 
       SELECT 'Ошибка в дате подачи заявления' 
+      SET @iError = @iError + 1
     END CATCH
-    SET @iError = @iError + 1
   END
 	ELSE
 	BEGIN
@@ -36,8 +36,8 @@ BEGIN
       END TRY
 		BEGIN CATCH 
       SELECT 'Ошибка в дате подачи заявления' 
+      SET @iError = @iError + 1
     END CATCH
-    SET @iError = @iError + 1
   END
 	/* ELSE
 		BEGIN
@@ -51,8 +51,8 @@ BEGIN
     END TRY
 		BEGIN CATCH
       SELECT 'Ошибка в дате подачи заявления'
+      SET @iError = @iError + 1
     END CATCH
-    SET @iError = @iError + 1
   END
 	ELSE
 	BEGIN
