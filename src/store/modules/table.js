@@ -6,7 +6,7 @@ import VesselAfterCounter from '../../data/Table_Response_CounterUpd.json';
 const state = {
   Vessels: [],
   loadingVesselsTable: false,
-  hideUtil: 'true' // '@UtilVesselFilter@',
+  hideUtil: 'false' // '@UtilVesselFilter@',
 };
 const getters = {
   isLoadingVesselsTable: state => {
@@ -22,6 +22,9 @@ const getters = {
 const mutations = {
   InProgress_VesselTable: ( state, payload ) => {
     state.loadingVesselsTable = payload;
+  },
+  CLEAR_VESSELS: state => {
+    state.Vessels = [];
   },
   loadVessels: ( state, payload ) => {
     state.Vessels = payload;
@@ -127,34 +130,23 @@ const mutations = {
     } else {
       state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails[vesselIndex].onAction = 'false';
     }
+  },
+  MUTATE_FILTER_HIDE: ( state, payload ) => {
+    state.hideUtil = payload;
   }
 };
 const actions = {
   loadVessels: async ( { commit }, payload ) => {
     commit( 'CLEAR_ERROR' );
+    commit( 'CLEAR_VESSELS' );
     /* NKReports */
     // $.ajax({
     //   url: './GetPageText.ashx?Id=@Nav_Backend@',
     //   type: 'GET',
     //   dataType: 'json',
-    //   data: { PARAM2: 'Vessels_GetData' },
+    //   data: { PARAM2: 'Vessels_GetData', hideMode: payload.hideMode },
     //   success: function(resp) {
     //     var myDataParse = JSON.parse(resp);
-    //     // if (self.hideUtil === 'true') {
-    //     var array = myDataParse;
-    //     myDataParse = array.filter(
-    //       top =>
-    //         (top.ConditionDetails = top.ConditionDetails.filter(
-    //           cat =>
-    //             (cat.VesselDetails = cat.VesselDetails.filter(
-    //               i =>
-    //                 i.Status.match(/OK/) ||
-    //                 i.Status.match(/Требуется проверка/) ||
-    //                 i.Status.match(/Требуется испытание/)
-    //             )).length
-    //         )).length
-    //     );
-    //     // }
     //     commit('loadVessels', myDataParse);
     //   },
     //   error: function(resp) {
@@ -164,7 +156,14 @@ const actions = {
     /* TEST */
     commit( 'InProgress_VesselTable', true );
     setTimeout( () => {
-      const myDataParse = VesselData;
+      let myDataParse;
+      if ( payload.hideMode === 'true' ) {
+        let _data = JSON.parse( JSON.stringify( VesselData ) );
+        myDataParse = filterUtil( _data );
+      } else {
+        myDataParse = VesselData;
+      }
+      //  myDataParse = VesselData;
       commit( 'loadVessels', myDataParse );
       commit( 'InProgress_VesselTable', false );
     }, 5000 );
@@ -222,6 +221,9 @@ const actions = {
     //   commit( 'MUTATION_TABLE_UPDATE_COUNT', completeData );
     //   commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
     // } );
+  },
+  MUTATE_FILTER_HIDE: ( { commit }, payload ) => {
+    commit( 'MUTATE_FILTER_HIDE', payload );
   }
 };
 
@@ -252,3 +254,17 @@ export default {
   mutations,
   actions
 };
+/* Imitate backend filter */
+function filterUtil ( data ) {
+  let filteredData = data.slice( 0 );
+  filteredData = filteredData.filter(
+    top =>
+      ( top.ConditionDetails = top.ConditionDetails.filter(
+        cat =>
+          ( cat.VesselDetails = cat.VesselDetails.filter(
+            i => i.Status.match( /OK/ ) || i.Status.match( /Требуется проверка/ ) || i.Status.match( /Требуется испытание/ )
+          ) ).length
+      ) ).length
+  );
+  return filteredData;
+}

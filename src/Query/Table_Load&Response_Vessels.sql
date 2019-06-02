@@ -23,7 +23,8 @@ BEGIN
   SELECT DISTINCT [Location], [LocationCode] , [Condition]
   FROM [LabProtocols].[dbo].[Ent_Lab_Entity]
   WHERE 
-	   ( @isSingleResults=0 AND [LabCode] in ( SELECT nstr
+	   ( @isSingleResults=0 AND [Status] LIKE CASE WHEN '@hideMode@' = 'false' THEN '%' ELSE 'OK' END
+    AND [LabCode] in ( SELECT nstr
     FROM [NKReports].[dbo].[Params_To_Table] ( @AccessList,@delimiter ) ) )
     OR
     (@isSingleResults=1 AND [LabCode] in ( SELECT nstr
@@ -38,7 +39,8 @@ BEGIN
   SELECT DISTINCT [Location] , [LocationCode] , LabCode
   FROM [LabProtocols].[dbo].[Ent_Lab_Entity]
   WHERE 
-		( @isSingleResults=0 AND [LabCode] in ( SELECT nstr
+		( @isSingleResults=0 AND [Status] LIKE CASE WHEN '@hideMode@' = 'false' THEN '%' ELSE 'OK' END
+    AND [LabCode] in ( SELECT nstr
     FROM [NKReports].[dbo].[Params_To_Table] ( @AccessList,@delimiter ) ) )
     OR
     ( @isSingleResults=1 AND [LabCode] in ( SELECT nstr
@@ -71,7 +73,9 @@ BEGIN
         FROM [LabProtocols].[dbo].[Ent_Lab_Entity] AS ELE
 
         WHERE 
-		( @isSingleResults=0 AND ELE.[Location] = t1.[Location]
+		( @isSingleResults=0
+          AND ELE.[Status] LIKE CASE WHEN '@hideMode@' = 'false' THEN '%' ELSE 'OK' END
+          AND ELE.[Location] = t1.[Location]
           AND ELE.[LocationCode] = t1.[LocationCode]
           AND ELE.[Condition] = t2.[Condition] )
           OR

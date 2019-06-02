@@ -35,8 +35,8 @@ export default {
     'app-info': Info,
   },
   created() {
-    let unid = this.$store.getters.getCurrentUnid;
-    this.$store.dispatch('loadVessels', { unid: unid });
+    let isFiltered = this.$store.getters.GET_FILTER_HIDE;
+    this.$store.dispatch('loadVessels', { hideMode: isFiltered });
   },
 };
 </script>

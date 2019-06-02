@@ -2,9 +2,16 @@
   <section>
     <div class="vessel-container" id="vesselContainer">
       <div class="vessel-container__chb">
-        <input type="checkbox" id="checkbox" v-model="hideUtil" true-value="true" @click="load()">
+        <input
+          type="checkbox"
+          id="hideUtil"
+          v-model="hideUtil"
+          true-value="true"
+          false-value="false"
+          @click="filterUtil(hideUtil)"
+        >
         <label
-          for="checkbox"
+          for="hideUtil"
           title="Значение может быть задано через Мои настройки"
         >Скрыть утилизированные сосуды</label>
       </div>
@@ -166,10 +173,21 @@
 import EventBus from '../../EventBus';
 import LDSLoaded from './VesselTableRowLoader';
 export default {
+  // data() {
+  //   return {
+  //     hideUtil: 'true',
+  //   };
+  // },
   components: {
     'row-loader': LDSLoaded,
   },
   methods: {
+    filterUtil(filterState) {
+      /* MEMO: set in computed prop not fineshed in this monent */
+      let isFiltered;
+      filterState === 'true' ? (isFiltered = 'false') : (isFiltered = 'true');
+      this.$store.dispatch('loadVessels', { hideMode: isFiltered });
+    },
     clickOnVessel(vesselId) {
       EventBus.$emit('FIELD_RISE', { unid: vesselId });
       console.log("TCL: clickOnVessel -> EventBus.$emit('FIELD_RISE', vesselId);", vesselId);
@@ -194,8 +212,13 @@ export default {
     vessels() {
       return this.$store.getters.GET_VESSELS_LIST;
     },
-    hideUtil() {
-      return this.$store.getters.GET_FILTER_HIDE;
+    hideUtil: {
+      get() {
+        return this.$store.getters.GET_FILTER_HIDE;
+      },
+      set(value) {
+        this.$store.dispatch('MUTATE_FILTER_HIDE', value);
+      },
     },
   },
 };
