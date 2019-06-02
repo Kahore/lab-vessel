@@ -352,6 +352,7 @@ select:invalid {
   width: 110%;
   /*Когда текст немного больше блока*/
   top: -12px;
+  white-space: nowrap;
 }
 
 .lineIt {
@@ -390,7 +391,7 @@ select:invalid {
   display: inline-block;
   margin-top: -19px;
   margin-left: 5px;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -522,6 +523,7 @@ select:invalid {
 }
 
 /* media */
+/*
 @media only screen and (min-width: 600px) {
   .v-snack__wrapper {
     width: auto;
@@ -532,19 +534,27 @@ select:invalid {
   }
 }
 
-@media (min-width: 576px) {
+*/
+@media (max-width: 767px) {
   .modal_wrap_container {
+    display: block;
     width: 500px;
-    height: 600px;
-    margin-left: -10%;
+    left: 5%;
+  }
+  .field-table {
+    width: 100%;
+  }
+  .history-block {
+    width: 320px;
+    margin-left: 20%;
   }
 }
 
 @media (min-width: 768px) {
   .modal_wrap_container {
-    width: 700px;
-    height: 550px;
-    margin-left: -20%;
+    width: 900px;
+    height: 600px;
+    margin-left: -26%;
   }
 }
 
@@ -552,7 +562,7 @@ select:invalid {
   .modal_wrap_container {
     width: 900px;
     height: 600px;
-    margin-left: -10%;
+    margin-left: -15%;
   }
 }
 
