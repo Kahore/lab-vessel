@@ -1,15 +1,17 @@
 <template>
-  <div id="container" class="container">
+  <div 
+    id="container" 
+    class="container">
     <div id="center">
       <div id="content">
         <span id="ctl00_Content_ctl00_PageText">
-          <vessel-use-info></vessel-use-info>
+          <vessel-use-info/>
           <br>
-          <app-info></app-info>
+          <app-info/>
           <vessel-single-info/>
-          <vessel-multi-info></vessel-multi-info>
-          <vessel-table></vessel-table>
-          <app-error></app-error>
+          <vessel-multi-info/>
+          <vessel-table/>
+          <app-error/>
         </span>
       </div>
     </div>
@@ -36,7 +38,7 @@ export default {
   },
   created() {
     let isFiltered = this.$store.getters.GET_FILTER_HIDE;
-    this.$store.dispatch('loadVessels', { hideMode: isFiltered });
+    this.$store.dispatch( 'loadVessels', { hideMode: isFiltered } );
   },
 };
 </script>

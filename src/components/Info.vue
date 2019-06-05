@@ -1,11 +1,18 @@
 <template>
-  <div class="v-snack v-snack--top" v-if="info">
+  <div
+    v-if="info"
+    class="v-snack v-snack--top" 
+  >
     <div class="v-snack__wrapper info">
       <div class="v-snack__content">
-        <p>{{info}}</p>
+        <p>{{ info }}</p>
       </div>
-      <div @click="closeInfo()" class="closeContainer">
-        <a class="close" href="#"></a>
+      <div 
+        class="closeContainer"
+        @click="closeInfo()" >
+        <a
+          class="close"
+          href="#"/>
       </div>
     </div>
   </div>
@@ -13,16 +20,16 @@
 
 <script>
 export default {
-  name: 'Info.vue',
-  methods: {
-    closeInfo() {
-      this.$store.dispatch('CLEAR_INFO');
-    }
-  },
-  computed: {
+  name: 'Info',
+    computed: {
     info() {
       return this.$store.getters.GET_INFO;
     }
-  }
+  },
+  methods: {
+    closeInfo() {
+      this.$store.dispatch( 'CLEAR_INFO' );
+    }
+  },
 };
 </script>

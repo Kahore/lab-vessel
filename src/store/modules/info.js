@@ -20,16 +20,16 @@ const state = {
         Status: '',
         VesselType: '',
         ID: '@' + 'unid' + '@',
-        CanIEditVessel: 'true'
-      }
+        CanIEditVessel: 'true',
+      },
     ],
     History: [],
-    ChartData: []
+    ChartData: [],
   },
   ChartMultiData: [],
   loadingField: false,
   loadingMultiVesselInfo: false,
-  firstInit: true
+  firstInit: true,
 };
 const getters = {
   isLoadingField: state => {
@@ -56,7 +56,7 @@ const getters = {
     if ( state.Lists.length !== 0 ) {
       return state.Lists.VesselTypes;
     }
-  }
+  },
 };
 const mutations = {
   InProgress_Field: ( state, payload ) => {
@@ -80,19 +80,21 @@ const mutations = {
   LOAD_CHART_MULTI: ( state, payload ) => {
     state.ChartMultiData = payload;
   },
-  MUTATE_FIELD_RESET: ( state, payload ) => {
+  MUTATE_FIELD_RESET: state => {
     state.VesselInfo = JSON.parse( JSON.stringify( state.DefaultInfo ) );
     window.history.pushState( '', '', './Default?Id=@NavID@' );
   },
   MUTATE_FIELD_HISTORY: ( state, payload ) => {
     state.VesselInfo.History.unshift( payload );
-  }
+  },
 };
 const actions = {
+  // eslint-disable-next-line no-unused-vars
   LOAD_VESSEL_INFO: ( { commit }, payload ) => {
     commit( 'CLEAR_ERROR' );
     commit( 'InProgress_Field', true );
-    return new Promise( function ( resolve, reject ) {
+    // eslint-disable-next-line no-unused-vars
+    return new Promise( function( resolve, reject ) {
       let myDataParse = FieldVessel;
       commit( 'loadField', myDataParse );
       resolve( myDataParse );
@@ -116,13 +118,17 @@ const actions = {
       // } );
     } );
   },
+  // eslint-disable-next-line no-unused-vars
   LOAD_CHART_MULTI: ( { commit }, payload ) => {
     commit( 'CLEAR_ERROR' );
-    return new Promise( function ( resolve, reject ) {
+    commit( 'InProgress_MultiVesselInfo', true );
+    // eslint-disable-next-line no-unused-vars
+    return new Promise( function( resolve, reject ) {
       let myDataParse = ChartMulti;
       commit( 'LOAD_CHART_MULTI', myDataParse );
       resolve( myDataParse );
-      commit( 'InProgress_MultiVesselInfo', true );
+      commit( 'InProgress_MultiVesselInfo', false );
+      //   commit( 'InProgress_MultiVesselInfo', true );
       //   $.ajax( {
       //     url: './GetPageText.ashx?Id=@Nav_Backend@',
       //     type: 'GET',
@@ -142,9 +148,11 @@ const actions = {
       //   } );
     } );
   },
+  // eslint-disable-next-line no-unused-vars
   Field_Save: ( { commit }, payload ) => {
     commit( 'CLEAR_ERROR' );
-    return new Promise( function ( resolve, reject ) {
+    // eslint-disable-next-line no-unused-vars
+    return new Promise( function( resolve, reject ) {
       commit( 'InProgress_Field', true );
       let _resp = FieldAfterSave;
       commit( 'mutateNewUnid', _resp[0].unid );
@@ -174,12 +182,12 @@ const actions = {
       //   }
       // } );
     } );
-  }
+  },
 };
 
 export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 };

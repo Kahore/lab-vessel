@@ -1,6 +1,8 @@
 <template>
   <section>
-    <div id="chartContainer" class="chartContainer"></div>
+    <div 
+      id="chartContainer"
+      class="chartContainer"/>
   </section>
 </template>
 

@@ -1,17 +1,31 @@
 <template>
   <section>
     <div id="wrapper">
-      <span class="link_upd" @click="modalTogglerVM()">Добавить сосуд</span>
-      <div class="layer_bg" @click="modalTogglerVM()" v-show="isBoxVisible"></div>
-      <div v-show="isBoxVisible" class="modal_wrap_container">
-        <div id="createTable" class="field-table">
-          <info-field></info-field>
-          <info-chart-single></info-chart-single>
+      <span 
+        class="link_upd"
+        @click="modalTogglerVM()">Добавить сосуд</span>
+      <div 
+        v-show="isBoxVisible"
+        class="layer_bg"
+        @click="modalTogglerVM()" />
+      <div 
+        v-show="isBoxVisible"
+        class="modal_wrap_container">
+        <div 
+          id="createTable"
+          class="field-table">
+          <info-field/>
+          <info-chart-single/>
         </div>
         <!-- .field-table -->
-        <info-history></info-history>
-        <div @click="modalTogglerVM()" class="closeContainer">
-          <a id="closeIModal" class="close close__ligth" href="#"></a>
+        <info-history/>
+        <div 
+          class="closeContainer"
+          @click="modalTogglerVM()" >
+          <a 
+            id="closeIModal"
+            class="close close__ligth"
+            href="#"/>
         </div>
       </div>
       <!-- .modal_wrap_container -->
@@ -29,56 +43,72 @@ import History from './History';
 
 export default {
   name: 'VesselInfo',
-  data() {
-    return {
-      isBoxVisible: false,
-    };
-  },
   components: {
     'info-field': Field,
     'info-chart-single': Chart,
     'info-history': History,
   },
-  methods: {
-    modalTogglerVM(payload) {
-      window.scrollTo(0, 0);
+  data() {
+    return {
+      isBoxVisible: false,
+    };
+  },
+  created() {
+    let unid = this.$store.getters.getCurrentUnid;
+    if ( unid !== '@' + 'unid' + '@' ) {
+      this.modalTogglerVM();
+    }
+  },
+  mounted() {
+    EventBus.$on( 'FIELD_RISE', payload => {
+      this.$store.dispatch ( 'mutateNewUnid', payload.unid );
+      this.modalTogglerVM();
+    } );
+  },
+  methods: { 
+    modalTogglerVM() {
+      window.scrollTo( 0, 0 );
       var self = this;
       var firstInit = self.$store.getters.isFirstInit;
-      if (self.isBoxVisible && !firstInit) {
-        self.$store.commit('MUTATE_FIELD_RESET');
-        if (Highcharts.charts[0]) {
+      if ( self.isBoxVisible && !firstInit ) {
+        self.$store.commit( 'MUTATE_FIELD_RESET' );
+        // eslint-disable-next-line no-undef 
+        if ( Highcharts.charts[0] ) {
+        // eslint-disable-next-line no-undef   
           Highcharts.charts[0].destroy();
           /* MEMO: reset charts array */
+        // eslint-disable-next-line no-undef   
           Highcharts.charts.shift();
         }
-        self.$store.dispatch('mutateNewUnid', '@' + 'unid' + '@');
+        self.$store.dispatch( 'mutateNewUnid', '@' + 'unid' + '@' );
       } else {
         let ajaxDefault;
 
-        if (firstInit) {
+        if ( firstInit ) {
           ajaxDefault = { PARAM3: 'VesselFieldFiller_Default' };
-          self.$store.commit('MUTATE_FIRST_INIT', !firstInit);
+          self.$store.commit( 'MUTATE_FIRST_INIT', !firstInit );
         }
         let ajaxUNID;
         let _unid = self.$store.getters.getCurrentUnid;
-        if (_unid !== '@' + 'unid' + '@') {
+        if ( _unid !== '@' + 'unid' + '@' ) {
           ajaxUNID = { unid: _unid };
         } else {
-          self.$store.commit('MUTATE_FIELD_RESET');
+          self.$store.commit( 'MUTATE_FIELD_RESET' );
         }
-        if (typeof ajaxDefault !== 'undefined' || typeof ajaxUNID !== 'undefined') {
-          let ajaxExtend = Object.assign({}, ajaxDefault, ajaxUNID);
-          self.$store.dispatch('LOAD_VESSEL_INFO', ajaxExtend).then(response => {
-            self.chartBulder(self);
-          });
+        if ( typeof ajaxDefault !== 'undefined' || typeof ajaxUNID !== 'undefined' ) {
+          let ajaxExtend = Object.assign( {}, ajaxDefault, ajaxUNID );
+          // eslint-disable-next-line no-unused-vars
+          self.$store.dispatch( 'LOAD_VESSEL_INFO', ajaxExtend ).then( response => {
+            self.chartBulder( self );
+          } );
         }
       }
       self.isBoxVisible = !self.isBoxVisible;
-      console.log('modalTogglerVM');
     },
-    chartBulder(self) {
+    chartBulder( self ) {
       let chartData = self.$store.getters.vesselInfo.ChartData;
-      self.chart = $('#chartContainer').highcharts({
+      // eslint-disable-next-line no-undef 
+      self.chart = $( '#chartContainer' ).highcharts( {
         chart: { type: 'column' },
         colors: ['#ff9900', '#666666', '#333333', '#ff6600', '#ff3300'],
         credits: {
@@ -87,9 +117,9 @@ export default {
         },
         title: { text: null },
         xAxis: {
-          categories: chartData.map(function(e) {
+          categories: chartData.map( function( e ) {
             return e.ItemGroup;
-          }),
+          } ),
           title: { text: null },
         },
         yAxis: {
@@ -112,43 +142,31 @@ export default {
         series: [
           {
             name: 'fired',
-            data: chartData.map(function(e) {
-              return parseInt(e.ItemVal);
-            }),
+            data: chartData.map( function( e ) {
+              return parseInt( e.ItemVal );
+            } ),
           },
           {
             type: 'line',
             name: 'Pre-Lim',
             color: 'red',
             dashStyle: 'longdash',
-            data: chartData.map(function(e) {
-              return parseInt(e.PreLim);
-            }),
+            data: chartData.map( function( e ) {
+              return parseInt( e.PreLim );
+            } ),
           },
           {
             type: 'line',
             name: 'Lim',
             color: 'red',
             dashStyle: 'longdash',
-            data: chartData.map(function(e) {
-              return parseInt(e.Lim);
-            }),
+            data: chartData.map( function( e ) {
+              return parseInt( e.Lim );
+            } ),
           },
         ],
-      });
+      } );
     },
-  },
-  mounted() {
-    EventBus.$on('FIELD_RISE', payload => {
-      this.$store.dispatch('mutateNewUnid', payload.unid);
-      this.modalTogglerVM(payload);
-    });
-  },
-  created() {
-    let unid = this.$store.getters.getCurrentUnid;
-    if (unid !== '@' + 'unid' + '@') {
-      this.modalTogglerVM();
-    }
   },
 };
 </script>

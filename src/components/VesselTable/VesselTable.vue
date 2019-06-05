@@ -1,11 +1,13 @@
 <template>
   <section>
-    <div class="vessel-container" id="vesselContainer">
+    <div
+      id="vesselContainer"
+      class="vessel-container" >
       <div class="vessel-container__chb">
         <input
-          type="checkbox"
           id="hideUtil"
           v-model="hideUtil"
+          type="checkbox"
           true-value="true"
           false-value="false"
           @click="filterUtil(hideUtil)"
@@ -15,12 +17,16 @@
           title="Значение может быть задано через Мои настройки"
         >Скрыть утилизированные сосуды</label>
       </div>
-      <div class="bar-wrapper" v-if="isTableLoading">
-        <div class="bar"></div>
+      <div
+        v-if="isTableLoading"
+        class="bar-wrapper" >
+        <div class="bar"/>
         <p>Информация по сосудам загружается...</p>
       </div>
-      <div v-for="(vessel, index) in vessels" :key="index">
-        <h3 v-text="vessel.Location"></h3>
+      <div 
+        v-for="(vessel, index) in vessels"
+        :key="index">
+        <h3 v-text="vessel.Location"/>
 
         <div class="vessel-header">
           <div class="vessel-block">Серийный номер</div>
@@ -35,89 +41,111 @@
           <div class="vessel-block">Последнее обновление</div>
         </div>
 
-        <div v-for="(sub, index) in vessel.ConditionDetails" :key="index">
+        <div 
+          v-for="(sub, index) in vessel.ConditionDetails"
+          :key="index">
           <div
-            v-text="sub.Condition"
             class="vessel-header vessel-header_line link_string"
             @click="clickOnCondition(sub.Condition, vessel.Location )"
-          ></div>
+            v-text="sub.Condition" 
+          />
           <div
             v-for="(vd, index) in sub.VesselDetails"
-            class="vessel-block__row"
-            :id="vd.ID"
             :key="index"
+            :id="vd.ID"
+            class="vessel-block__row"
           >
             <template v-if="vd.onAction==='true'">
               <div class="vessel-block">
-                <span>{{vd.Serial}}</span>
+                <span>{{ vd.Serial }}</span>
               </div>
             </template>
             <template v-else>
               <div class="vessel-block link_string">
-                <span @click="clickOnVessel(vd.ID)">{{vd.Serial}}</span>
+                <span @click="clickOnVessel(vd.ID)">{{ vd.Serial }}</span>
               </div>
             </template>
 
             <template v-if="vd.Status === 'Требуется проверка'">
-              <div v-text="vd.Status" class="vessel-block errorMsg"></div>
+              <div 
+                class="vessel-block errorMsg"
+                v-text="vd.Status"/>
             </template>
 
             <template v-else-if="vd.Status === 'Требуется испытание'">
-              <div v-text="vd.Status" class="vessel-block errorMsg"></div>
+              <div
+                class="vessel-block errorMsg"
+                v-text="vd.Status"/>
             </template>
 
             <template v-else>
-              <div v-text="vd.Status" class="vessel-block"></div>
+              <div
+                class="vessel-block"
+                v-text="vd.Status"/>
             </template>
 
             <div
-              v-text="vd.CommissioningDate"
-              class="vessel-block"
               :class="vd.CommissioningDate === 'Нет данных' ? 'warning' : '' "
-            ></div>
+              class="vessel-block"
+              v-text="vd.CommissioningDate"
+            />
             <template v-if="vd.Status === 'Требуется испытание'">
               <div class="vessel-block">
-                <div v-text="vd.CertificationDate" class="errorMsg"></div>
+                <div 
+                  class="errorMsg" 
+                  v-text="vd.CertificationDate"/>
                 <strong>
-                  <div v-text="vd.CertificationCount"></div>
+                  <div v-text="vd.CertificationCount"/>
                 </strong>
               </div>
             </template>
             <template v-else>
               <div class="vessel-block">
                 <div
-                  v-text="vd.CertificationDate"
                   :class="vd.CertificationDate === 'Нет данных' ? 'warning' : '' "
-                ></div>
+                  v-text="vd.CertificationDate"
+                />
                 <strong>
-                  <div v-text="vd.CertificationCount"></div>
+                  <div v-text="vd.CertificationCount"/>
                 </strong>
               </div>
             </template>
 
             <div
-              v-text="vd.LastCheckDate"
-              class="vessel-block"
               :class="vd.LastCheckDate === 'Нет данных' ? 'warning' : '' "
-            ></div>
+              class="vessel-block"
+              v-text="vd.LastCheckDate"
+            />
 
             <template v-if="vd.Score == 5">
-              <div v-text="vd.Score" class="vessel-block ok"></div>
+              <div 
+                class="vessel-block ok"
+                v-text="vd.Score"
+              />
             </template>
 
             <template v-else-if="vd.Score == 4">
-              <div v-text="vd.Score" class="vessel-block normal"></div>
+              <div 
+                class="vessel-block normal"
+                v-text="vd.Score" 
+              />
             </template>
 
             <template v-else-if="vd.Score == 3">
-              <div v-text="vd.Score" class="vessel-block warning"></div>
+              <div 
+                class="vessel-block warning"
+                v-text="vd.Score"/>
             </template>
 
             <template v-else-if="vd.Score == 2">
-              <div v-text="vd.Score" class="vessel-block errorMsg"></div>
+              <div
+                class="vessel-block errorMsg"
+                v-text="vd.Score"/>
             </template>
             <template v-else>
-              <div v-text="vd.Score" class="vessel-block"></div>
+              <div
+                class="vessel-block"
+                v-text="vd.Score" />
             </template>
             <template v-if="vd.onAction==='true'">
               <div class="vessel-block">
@@ -125,7 +153,9 @@
               </div>
             </template>
             <template v-else>
-              <div v-text="vd.CommissioningCount" class="vessel-block"></div>
+              <div 
+                class="vessel-block"
+                v-text="vd.CommissioningCount"/>
             </template>
 
             <template v-if="vd.onAction==='true'">
@@ -134,19 +164,26 @@
               </div>
             </template>
             <template v-else>
-              <div v-text="vd.LastCheckCount" class="vessel-block"></div>
+              <div 
+                class="vessel-block" 
+                v-text="vd.LastCheckCount" />
             </template>
             <template v-if="vd.onAction==='true'">
-              <div class="vessel-block">
+              <div 
+                class="vessel-block">
                 <row-loader/>
               </div>
             </template>
             <template v-else>
-              <div v-text="vd.LastChangedBy" class="vessel-block"></div>
+              <div 
+                class="vessel-block" 
+                v-text="vd.LastChangedBy" />
             </template>
 
             <template v-if="vd.Status === 'Util'">
-              <div v-text="vd.LastAutoCounterDate" class="vessel-block"></div>
+              <div 
+                class="vessel-block" 
+                v-text="vd.LastAutoCounterDate"/>
             </template>
             <template v-else>
               <template v-if="vd.onAction==='true'">
@@ -156,10 +193,10 @@
               </template>
               <template v-else>
                 <div
-                  v-text="vd.LastAutoCounterDate"
                   class="vessel-block link_upd"
                   @click="VMUpdateInfoManually( vd.ID ,sub,vessel,index)"
-                ></div>
+                  v-text="vd.LastAutoCounterDate"
+                />
               </template>
             </template>
           </div>
@@ -181,30 +218,6 @@ export default {
   components: {
     'row-loader': LDSLoaded,
   },
-  methods: {
-    filterUtil(filterState) {
-      /* MEMO: set in computed prop not fineshed in this monent */
-      let isFiltered;
-      filterState === 'true' ? (isFiltered = 'false') : (isFiltered = 'true');
-      this.$store.dispatch('loadVessels', { hideMode: isFiltered });
-    },
-    clickOnVessel(vesselId) {
-      EventBus.$emit('FIELD_RISE', { unid: vesselId });
-      console.log("TCL: clickOnVessel -> EventBus.$emit('FIELD_RISE', vesselId);", vesselId);
-    },
-    clickOnCondition(condition, location) {
-      EventBus.$emit('MILTI_CHART_RISE', { condition: condition, location: location });
-    },
-    VMUpdateInfoManually(id, sub, vessel, index) {
-      console.log('TCL: VMUpdateInfoManually -> id,sub,vessel,index', id, sub, vessel, index);
-      this.$store.dispatch('MUTATION_TABLE_UPDATE_COUNT', {
-        unid: id,
-        Condition: sub.Condition,
-        Location: vessel.Location,
-        index,
-      });
-    },
-  },
   computed: {
     isTableLoading() {
       return this.$store.getters.isLoadingVesselsTable;
@@ -216,9 +229,33 @@ export default {
       get() {
         return this.$store.getters.GET_FILTER_HIDE;
       },
-      set(value) {
-        this.$store.dispatch('MUTATE_FILTER_HIDE', value);
+      set( value ) {
+        this.$store.dispatch( 'MUTATE_FILTER_HIDE', value );
       },
+    },
+  },
+  methods: {
+    filterUtil( filterState ) {
+      /* MEMO: set in computed prop not fineshed in this monent */
+      let isFiltered;
+      filterState === 'true' ? ( isFiltered = 'false' ) : ( isFiltered = 'true' );
+      this.$store.dispatch( 'loadVessels', { hideMode: isFiltered } );
+    },
+    clickOnVessel( vesselId ) {
+      EventBus.$emit( 'FIELD_RISE', { unid: vesselId } );
+      //  console.log( "TCL: clickOnVessel -> EventBus.$emit('FIELD_RISE', vesselId);", vesselId );
+    },
+    clickOnCondition( condition, location ) {
+      EventBus.$emit( 'MILTI_CHART_RISE', { condition: condition, location: location } );
+    },
+    VMUpdateInfoManually( id, sub, vessel, index ) {
+     // console.log( 'TCL: VMUpdateInfoManually -> id,sub,vessel,index', id, sub, vessel, index);
+      this.$store.dispatch( 'MUTATION_TABLE_UPDATE_COUNT', {
+        unid: id,
+        Condition: sub.Condition,
+        Location: vessel.Location,
+        index,
+      } );
     },
   },
 };

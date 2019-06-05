@@ -2,9 +2,15 @@
   <section>
     <i>Сервис мониторинга сосудов позволяет вести историю изменений и автоматический сбор количественных данных по эксплуатации через SLIM систему.</i>
     <br>
-    <span class="link_upd" @click="isHidden = !isHidden">Как пользоваться сервисом?</span>
+    <span
+      class="link_upd"
+      @click="isHidden = !isHidden">Как пользоваться сервисом?</span>
     <transition name="fade">
-      <div class="sampleBox" id="descriptionTable" v-if="isHidden">
+      <div 
+        v-if="isHidden"
+        id="descriptionTable"
+        class="sampleBox"
+      >
         <h4>1 СОЗДАНИЕ СОСУДА</h4>
         <ul>
           Для создания сосуда необходимо:
@@ -117,7 +123,7 @@
 
 <script>
 export default {
-  name: 'HowToUse.vue',
+  name: 'HowToUse',
   data() {
     return {
       isHidden: false,

@@ -1,11 +1,18 @@
 <template>
-  <div class="v-snack v-snack--bottom" v-if="error">
+  <div
+    v-if="error"
+    class="v-snack v-snack--bottom" 
+  >
     <div class="v-snack__wrapper error">
       <div class="v-snack__content">
-        <p>{{error}}</p>
+        <p>{{ error }}</p>
       </div>
-      <div @click="closeError()" class="closeContainer">
-        <a class="close" href="#"></a>
+      <div
+        class="closeContainer"
+        @click="closeError()" >
+        <a 
+          class="close" 
+          href="#"/>
       </div>
     </div>
   </div>
@@ -13,16 +20,16 @@
 
 <script>
 export default {
-  name: 'Error.vue',
-  methods: {
-    closeError() {
-      this.$store.dispatch('CLEAR_ERROR');
-    }
-  },
+  name: 'ErrorMsg',
   computed: {
     error() {
       return this.$store.getters.GET_ERROR;
     }
-  }
+  },
+  methods: {
+    closeError() {
+      this.$store.dispatch( 'CLEAR_ERROR' );
+    }
+  },
 };
 </script>

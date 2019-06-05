@@ -6,7 +6,7 @@ import VesselAfterCounter from '../../data/Table_Response_CounterUpd.json';
 const state = {
   Vessels: [],
   loadingVesselsTable: false,
-  hideUtil: 'false' // '@UtilVesselFilter@',
+  hideUtil: 'false', // '@UtilVesselFilter@',
 };
 const getters = {
   isLoadingVesselsTable: state => {
@@ -17,7 +17,7 @@ const getters = {
   },
   GET_FILTER_HIDE: state => {
     return state.hideUtil;
-  }
+  },
 };
 const mutations = {
   InProgress_VesselTable: ( state, payload ) => {
@@ -34,14 +34,14 @@ const mutations = {
       let conditionValOld = document.getElementById( payload ).parentElement.firstElementChild.textContent;
       let locationValOld = document.getElementById( payload ).parentElement.parentElement.firstElementChild.textContent;
 
-      let headerIndex = state.Vessels.findIndex( function ( block ) {
+      let headerIndex = state.Vessels.findIndex( function( block ) {
         return block.Location === locationValOld;
       } );
 
-      let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
+      let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function( block ) {
         return block.Condition === conditionValOld;
       } );
-      let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
+      let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function(
         block
       ) {
         return block.ID === payload;
@@ -59,17 +59,17 @@ const mutations = {
     }
   },
   MUTATION_TABLE_UPDATE_ROW: ( state, payload ) => {
-    let headerIndex = state.Vessels.findIndex( function ( block ) {
+    let headerIndex = state.Vessels.findIndex( function( block ) {
       return block.Location === payload.Location;
     } );
 
     if ( headerIndex !== -1 ) {
-      let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
+      let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function( block ) {
         return block.Condition === payload.ConditionDetails[0].Condition;
       } );
 
       if ( subHeaderIndex !== -1 ) {
-        let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
+        let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function(
           block
         ) {
           return block.ID === payload.ConditionDetails[0].VesselDetails[0].ID;
@@ -93,14 +93,14 @@ const mutations = {
     } /* headerIndex END */
   },
   MUTATION_TABLE_UPDATE_COUNT: ( state, payload ) => {
-    console.log( 'TCL: payload', payload );
-    let headerIndex = state.Vessels.findIndex( function ( block ) {
+    //  console.log( 'TCL: payload', payload );
+    let headerIndex = state.Vessels.findIndex( function( block ) {
       return block.Location === payload.Location;
     } );
-    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
+    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function( block ) {
       return block.Condition === payload.Condition;
     } );
-    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
+    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function(
       block
     ) {
       return block.ID === payload.unid;
@@ -114,13 +114,13 @@ const mutations = {
     Vue.set( state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails, vesselIndex, updatedVessel );
   },
   MUTATION_TABLE_VESSEL_ONACTION: ( state, payload ) => {
-    let headerIndex = state.Vessels.findIndex( function ( block ) {
+    let headerIndex = state.Vessels.findIndex( function( block ) {
       return block.Location === payload.Location;
     } );
-    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function ( block ) {
+    let subHeaderIndex = state.Vessels[headerIndex].ConditionDetails.findIndex( function( block ) {
       return block.Condition === payload.Condition;
     } );
-    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function (
+    let vesselIndex = state.Vessels[headerIndex].ConditionDetails[subHeaderIndex].VesselDetails.findIndex( function(
       block
     ) {
       return block.ID === payload.unid;
@@ -133,7 +133,7 @@ const mutations = {
   },
   MUTATE_FILTER_HIDE: ( state, payload ) => {
     state.hideUtil = payload;
-  }
+  },
 };
 const actions = {
   loadVessels: async ( { commit }, payload ) => {
@@ -203,7 +203,7 @@ const actions = {
     }
   },
   MUTATION_TABLE_UPDATE_COUNT: async ( { commit }, payload ) => {
-    console.log( 'TCL: payload', payload );
+    //  console.log( 'TCL: payload', payload );
     commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
 
     let result;
@@ -224,7 +224,7 @@ const actions = {
   },
   MUTATE_FILTER_HIDE: ( { commit }, payload ) => {
     commit( 'MUTATE_FILTER_HIDE', payload );
-  }
+  },
 };
 
 // eslint-disable-next-line no-unused-vars
@@ -252,10 +252,10 @@ export default {
   state,
   getters,
   mutations,
-  actions
+  actions,
 };
 /* Imitate backend filter */
-function filterUtil ( data ) {
+function filterUtil( data ) {
   let filteredData = data.slice( 0 );
   filteredData = filteredData.filter(
     top =>

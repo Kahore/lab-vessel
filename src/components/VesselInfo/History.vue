@@ -11,10 +11,10 @@
         <!-- .history-table__header-row -->
         <div>
           <div
-            class="history-table__row"
-            :id="history.ID"
             v-for="history in histories"
             :key="history.ID"
+            :id="history.ID"
+            class="history-table__row"
           >
             <div class="history-table">{{ history.Item }}</div>
             <div class="history-table">{{ history.ItemVal }}</div>
@@ -36,7 +36,7 @@
 export default {
   computed: {
     histories() {
-      if (typeof this.$store.getters.vesselInfo !== 'undefined') {
+      if ( typeof this.$store.getters.vesselInfo !== 'undefined' ) {
         return this.$store.getters.vesselInfo.History;
       } else {
         return [];

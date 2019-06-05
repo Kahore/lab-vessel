@@ -15,6 +15,6 @@ export const store = new Vuex.Store( {
   modules: {
     shared,
     info,
-    table
-  }
+    table,
+  },
 } );
