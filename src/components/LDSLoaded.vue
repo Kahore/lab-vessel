@@ -1,5 +1,7 @@
 <template>
-  <div class="lds-ring list-ring">
+  <div 
+    :class="external"
+    class="lds-ring">
     <div/>
     <div/>
     <div/>
@@ -9,6 +11,12 @@
 
 <script>
 export default {
+  props: {
+    external: {
+      type: String,
+      default: 'list-ring'
+    }
+  }
   //  name: 'rowLoader',
 };
 </script>

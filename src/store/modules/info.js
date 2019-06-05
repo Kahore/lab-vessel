@@ -95,10 +95,12 @@ const actions = {
     commit( 'InProgress_Field', true );
     // eslint-disable-next-line no-unused-vars
     return new Promise( function( resolve, reject ) {
-      let myDataParse = FieldVessel;
-      commit( 'loadField', myDataParse );
-      resolve( myDataParse );
-      commit( 'InProgress_Field', false );
+      setTimeout( () => {
+        let myDataParse = FieldVessel;
+        commit( 'loadField', myDataParse );
+        resolve( myDataParse );
+        commit( 'InProgress_Field', false );
+      }, 2000 );
       // $.ajax( {
       //   url: './GetPageText.ashx?Id=@Nav_Backend@',
       //   type: 'GET',

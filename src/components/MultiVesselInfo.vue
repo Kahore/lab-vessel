@@ -9,12 +9,7 @@
         v-show="isMultiBoxVisible" 
         class="modal_wrap_container">
         <div v-if="isMultiVesselInfoLoading">
-          <div class="lds-ring centered">
-            <div/>
-            <div/>
-            <div/>
-            <div/>
-          </div>
+          <lds-loader :external="'centered'"/>
         </div>
         <div class="field-block_full">
           <h2 v-text="chartTitle"/>

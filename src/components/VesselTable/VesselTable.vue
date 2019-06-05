@@ -149,7 +149,7 @@
             </template>
             <template v-if="vd.onAction==='true'">
               <div class="vessel-block">
-                <row-loader/>
+                <lds-loader/>
               </div>
             </template>
             <template v-else>
@@ -160,7 +160,7 @@
 
             <template v-if="vd.onAction==='true'">
               <div class="vessel-block">
-                <row-loader/>
+                <lds-loader/>
               </div>
             </template>
             <template v-else>
@@ -171,7 +171,7 @@
             <template v-if="vd.onAction==='true'">
               <div 
                 class="vessel-block">
-                <row-loader/>
+                <lds-loader/>
               </div>
             </template>
             <template v-else>
@@ -188,7 +188,7 @@
             <template v-else>
               <template v-if="vd.onAction==='true'">
                 <div class="vessel-block">
-                  <row-loader/>
+                  <lds-loader/>
                 </div>
               </template>
               <template v-else>
@@ -208,7 +208,7 @@
 
 <script>
 import EventBus from '../../EventBus';
-import LDSLoaded from './VesselTableRowLoader';
+import LDSLoaded from '../LDSLoaded';
 export default {
   // data() {
   //   return {
@@ -216,7 +216,7 @@ export default {
   //   };
   // },
   components: {
-    'row-loader': LDSLoaded,
+    'lds-loader': LDSLoaded,
   },
   computed: {
     isTableLoading() {

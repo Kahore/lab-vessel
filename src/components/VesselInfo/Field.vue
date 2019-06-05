@@ -2,12 +2,7 @@
   <section>
     <div v-if="isFieldLoading">
       <div class="noEdit"/>
-      <div class="lds-ring centered">
-        <div/>
-        <div/>
-        <div/>
-        <div/>
-      </div>
+      <lds-loader :external="'centered'"/>
     </div>
     <div class="field-container">
       <div class="field-row">
@@ -148,7 +143,11 @@
 </template>
 
 <script>
+import LDSLoaded from '../LDSLoaded';
 export default {
+    components: {
+    'lds-loader': LDSLoaded,
+  },
     computed: {
     vesselInfo() {
       // Default does not contain any value in field
