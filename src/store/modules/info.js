@@ -101,22 +101,11 @@ const actions = {
         resolve( myDataParse );
         commit( 'InProgress_Field', false );
       }, 2000 );
-      // $.ajax( {
-      //   url: './GetPageText.ashx?Id=@Nav_Backend@',
-      //   type: 'GET',
-      //   dataType: 'json',
-      //   data: { PARAM2: 'VesselFieldFiller', PARAM3: payload.PARAM3, unid: payload.unid },
-      //   success: function ( resp ) {
-      //     let myDataParse = resp; /* JSON.parse( resp ) */
-      //     commit( 'loadField', myDataParse );
-      //     resolve( myDataParse );
-      //     commit( 'InProgress_Field', false );
-      //   },
-      //   error: function ( resp ) {
-      //     commit( 'SET_ERROR', resp.responseText );
-      //     commit( 'InProgress_Field', false );
-      //     reject( resp.responseText );
-      //   }
+      // const data = {  PARAM2: 'VesselFieldFiller', PARAM3: payload.PARAM3, unid: payload.unid };
+      // const result = doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+      //   commit( 'loadField', result );
+      //   resolve( result );
+      //   commit( 'InProgress_Field', false );
       // } );
     } );
   },

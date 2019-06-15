@@ -201,9 +201,9 @@ const actions = {
       commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
     }, 100000 );
 
-    /* new var */
+    /* NKReports */
     // const data = { PARAM2: 'UpdateVesselInfoManually', unid: payload.unid };
-    // const result = await doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+    // const result = doAjax( '@Nav_Backend@', data ).then( ( result ) => {
     //   let completeData = Object.assign( result, payload );
     //   commit( 'MUTATION_TABLE_UPDATE_COUNT', completeData );
     //   commit( 'MUTATION_TABLE_VESSEL_ONACTION', payload );
