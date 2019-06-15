@@ -59,11 +59,11 @@ const getters = {
   },
 };
 const mutations = {
-  InProgress_Field: ( state, payload ) => {
-    state.loadingField = payload;
+  InProgress_Field: state => {
+    state.loadingField = !state.loadingField;
   },
-  InProgress_MultiVesselInfo: ( state, payload ) => {
-    state.loadingMultiVesselInfo = payload;
+  InProgress_MultiVesselInfo: state => {
+    state.loadingMultiVesselInfo = !state.loadingMultiVesselInfo;
   },
   loadField: ( state, payload ) => {
     if ( typeof payload[0].ListData !== 'undefined' ) {
@@ -92,20 +92,19 @@ const actions = {
   // eslint-disable-next-line no-unused-vars
   LOAD_VESSEL_INFO: ( { commit }, payload ) => {
     commit( 'CLEAR_ERROR' );
-    commit( 'InProgress_Field', true );
+    commit( 'InProgress_Field' );
     // eslint-disable-next-line no-unused-vars
     return new Promise( function( resolve, reject ) {
       setTimeout( () => {
         let myDataParse = FieldVessel;
         commit( 'loadField', myDataParse );
         resolve( myDataParse );
-        commit( 'InProgress_Field', false );
+        commit( 'InProgress_Field' );
       }, 2000 );
       // const data = {  PARAM2: 'VesselFieldFiller', PARAM3: payload.PARAM3, unid: payload.unid };
-      // const result = doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+      // const result = doAjax( '@Nav_Backend@', data, 'InProgress_Field' ).then( ( result ) => {
       //   commit( 'loadField', result );
       //   resolve( result );
-      //   commit( 'InProgress_Field', false );
       // } );
     } );
   },
@@ -120,12 +119,10 @@ const actions = {
       resolve( myDataParse );
       commit( 'InProgress_MultiVesselInfo', false );
       /* NKReports */
-      // commit( 'InProgress_MultiVesselInfo', true );
       // const data = { PARAM2: 'VesselChartData_Multi', Condition: payload.condition, Location: payload.location };
-      // const result = doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+      // const result = doAjax( '@Nav_Backend@', data, 'InProgress_MultiVesselInfo' ).then( ( result ) => {
       //   commit( 'LOAD_CHART_MULTI', result );
       //   resolve( result );
-      //   commit( 'InProgress_MultiVesselInfo', false );
       // } );
     } );
   },
@@ -134,25 +131,23 @@ const actions = {
     commit( 'CLEAR_ERROR' );
     // eslint-disable-next-line no-unused-vars
     return new Promise( function( resolve, reject ) {
-      commit( 'InProgress_Field', true );
+      commit( 'InProgress_Field' );
       let _resp = FieldAfterSave;
       commit( 'mutateNewUnid', _resp[0].unid );
       commit( 'MUTATE_FIELD_HISTORY', _resp[0].HistoryPart[0] );
       window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + _resp[0].unid );
       resolve( _resp[0].unid );
-      commit( 'InProgress_Field', false );
+      commit( 'InProgress_Field' );
       /* NKReports */
-      // commit( 'InProgress_Field', true );
       // let _data = Object.assign( {}, payload, { PARAM2: 'SaveVessel' } );
       // const data = _data;
-      // const result = doAjax( '@Nav_Backend@', data ).then( result => {
+      // const result = doAjax( '@Nav_Backend@', data, 'InProgress_Field' ).then( result => {
       //   commit( 'mutateNewUnid', result[0].unid );
       //   if ( result[0].HistoryPart ) {
       //     commit( 'MUTATE_FIELD_HISTORY', result[0].HistoryPart[0] );
       //   }
       //   window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + result[0].unid );
       //   resolve( result[0].unid );
-      //   commit( 'InProgress_Field', false );
       // } );
     } );
   },

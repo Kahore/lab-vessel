@@ -20,8 +20,8 @@ const getters = {
   },
 };
 const mutations = {
-  InProgress_VesselTable: ( state, payload ) => {
-    state.loadingVesselsTable = payload;
+  InProgress_VesselTable: state => {
+    state.loadingVesselsTable = !state.loadingVesselsTable;
   },
   CLEAR_VESSELS: state => {
     state.Vessels = [];
@@ -140,7 +140,7 @@ const actions = {
     /* TEST */
     commit( 'CLEAR_ERROR' );
     commit( 'CLEAR_VESSELS' );
-    commit( 'InProgress_VesselTable', true );
+    commit( 'InProgress_VesselTable' );
     setTimeout( () => {
       let myDataParse;
       if ( payload.hideMode === 'true' ) {
@@ -150,16 +150,14 @@ const actions = {
         myDataParse = VesselData;
       }
       commit( 'loadVessels', myDataParse );
-      commit( 'InProgress_VesselTable', false );
+      commit( 'InProgress_VesselTable' );
     }, 5000 );
     /* NKReports */
     // commit( 'CLEAR_ERROR' );
     // commit( 'CLEAR_VESSELS' );
-    // commit( 'InProgress_VesselTable', true );
     // const data = { PARAM2: 'Vessels_GetData', hideMode: payload.hideMode };
-    // const result = doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+    // const result = doAjax( '@Nav_Backend@', data, InProgress_VesselTable ).then( ( result ) => {
     //   commit( 'loadVessels', result );
-    //   commit( 'InProgress_VesselTable', false );
     // } );
   },
   MUTATION_TABLE_UPDATE_ROW: ( { commit }, payload ) => {
@@ -214,26 +212,44 @@ const actions = {
   },
 };
 
-// function doAjax ( url, ajaxData ) {
-//   return new Promise( function ( resolve, reject ) {
+// function doAjax( url, ajaxData, nameLoading ) {
+//   return new Promise( function( resolve, reject ) {
 //     try {
+//       _ajaxLoadingHelper( nameLoading );
 //       $.ajax( {
 //         url: './GetPageText.ashx?Id=' + url,
 //         type: 'POST',
 //         data: ajaxData,
-//         complete: function ( resp ) {
-//           resolve( JSON.parse( resp ) );
+//         complete: function( resp ) {
+//           let _resp = JSON.parse( resp.response );
+//           if ( typeof _resp[0].ErrorMsg !== 'undefined' ) {
+//             store.commit( 'SET_ERROR', _resp[0].ErrorMsg );
+//             reject( _resp );
+//             _ajaxLoadingHelper( nameLoading );
+//           } else {
+//             resolve( _resp );
+//             _ajaxLoadingHelper( nameLoading );
+//           }
 //         },
-//         error ( resp ) {
-//           commit( 'SET_ERROR', resp.responseText );
+//         error( resp ) {
+//           store.commit( 'SET_ERROR', resp.responseText );
 //           reject( resp );
-//         }
+//           _ajaxLoadingHelper( nameLoading );
+//         },
 //       } );
 //     } catch ( error ) {
-//       commit( 'SET_ERROR', error );
+//       store.commit( 'SET_ERROR', error );
+//       _ajaxLoadingHelper( nameLoading );
 //     }
 //   } );
 // }
+
+// function _ajaxLoadingHelper( nameLoading ) {
+//   if ( typeof nameLoading !== 'undefined' ) {
+//     store.commit( nameLoading );
+//   }
+// }
+
 export default {
   state,
   getters,

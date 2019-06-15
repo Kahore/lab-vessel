@@ -128,6 +128,8 @@ SELECT [LabProtocols].dbo.qfn_XmlToJson ((
   END TRY
 
   BEGIN CATCH
-	SELECT '@PARAM2@ отработал с ошибкой: '+ERROR_MESSAGE()+', Номер строки: '+CAST(ERROR_LINE() AS nvarchar(max));
+	  SELECT [LabProtocols].dbo.qfn_XmlToJson ((
+      SELECT '@PARAM2@ отработал с ошибкой: '+ERROR_MESSAGE()+', Номер строки: '+CAST(ERROR_LINE() AS nvarchar(max)) AS [ErrorMsg] FOR XML path('ErrorMsg'), type 
+    ))
   END CATCH
 END
