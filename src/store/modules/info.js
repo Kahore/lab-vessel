@@ -119,24 +119,14 @@ const actions = {
       commit( 'LOAD_CHART_MULTI', myDataParse );
       resolve( myDataParse );
       commit( 'InProgress_MultiVesselInfo', false );
-      //   commit( 'InProgress_MultiVesselInfo', true );
-      //   $.ajax( {
-      //     url: './GetPageText.ashx?Id=@Nav_Backend@',
-      //     type: 'GET',
-      //     dataType: 'json',
-      //     data: { PARAM2: 'VesselChartData_Multi', Condition: payload.condition, Location: payload.location },
-      //     success: function ( resp ) {
-      //       let myDataParse = resp; /* JSON.parse( resp ) */
-      //       commit( 'LOAD_CHART_MULTI', myDataParse );
-      //       resolve( myDataParse );
-      //       commit( 'InProgress_MultiVesselInfo', false );
-      //     },
-      //     error: function ( resp ) {
-      //       commit( 'SET_ERROR', resp.responseText );
-      //        commit( 'InProgress_MultiVesselInfo', false );
-      //        reject( resp.responseText );
-      //     }
-      //   } );
+      /* NKReports */
+      // commit( 'InProgress_MultiVesselInfo', true );
+      // const data = { PARAM2: 'VesselChartData_Multi', Condition: payload.condition, Location: payload.location };
+      // const result = doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+      //   commit( 'LOAD_CHART_MULTI', result );
+      //   resolve( result );
+      //   commit( 'InProgress_MultiVesselInfo', false );
+      // } );
     } );
   },
   // eslint-disable-next-line no-unused-vars
