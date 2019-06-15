@@ -169,29 +169,8 @@ const actions = {
     }, 5000 );
   },
   MUTATION_TABLE_UPDATE_ROW: ( { commit }, payload ) => {
+    /* TEST */
     commit( 'CLEAR_ERROR' );
-    // $.ajax({
-    //   url: './GetPageText.ashx?Id=@Nav_Backend@',
-    //   type: 'POST',
-    //   dataType: 'json',
-    //   data: { PARAM2: 'Vessels_GetData', unid: payload.unid },
-    //   complete: function(resp) {
-    //     var myDataParse = JSON.parse(resp.response);
-    //     /* MEMO: Мод на поиск и удаление старого значения, в случае изменения глобальной инфы по сосуду - состояния или локации */
-    //     if (typeof payload.mode !== 'undefined') {
-    //       if (typeof payload.unid !== 'undefined') {
-    //         commit('MUTATION_TABLE_REMOVE_OLD', payload.unid);
-    //       }
-    //     }
-    //     /* MEMO: Берём ответ от сервера чтобы можно было обновлять данные в таблице вне зависимости откуда пришёл запрос - для обновления счётчика или параметров */
-    //     if (typeof myDataParse[0] !== 'undefined') {
-    //       commit('MUTATION_TABLE_UPDATE_ROW', myDataParse[0]);
-    //     }
-    //   },
-    //   error: function(resp) {
-    //     commit('SET_ERROR', resp.statusText);
-    //   },
-    // });
     if ( typeof payload.mode !== 'undefined' ) {
       if ( typeof payload.unid !== 'undefined' ) {
         commit( 'MUTATION_TABLE_REMOVE_OLD', payload.unid );
@@ -201,6 +180,20 @@ const actions = {
     if ( typeof myDataParse[0] !== 'undefined' ) {
       commit( 'MUTATION_TABLE_UPDATE_ROW', myDataParse[0] );
     }
+    /* NKReports */
+    // commit( 'CLEAR_ERROR' );
+    //   const data = { PARAM2: 'Vessels_GetData', unid: payload.unid };
+    //   const result = await doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+    //   if ( typeof payload.mode !== 'undefined' ) {
+    //     if ( typeof payload.unid !== 'undefined' ) {
+    //       commit( 'MUTATION_TABLE_REMOVE_OLD', payload.unid );
+    //     }
+    //   }
+    //   /* MEMO: Берём ответ от сервера чтобы можно было обновлять данные в таблице вне зависимости откуда пришёл запрос - для обновления счётчика или параметров */
+    //   if ( typeof result[0] !== 'undefined' ) {
+    //     commit( 'MUTATION_TABLE_UPDATE_ROW', result[0] );
+    //   }
+    // } );
   },
   MUTATION_TABLE_UPDATE_COUNT: async ( { commit }, payload ) => {
     //  console.log( 'TCL: payload', payload );
@@ -227,7 +220,6 @@ const actions = {
   },
 };
 
-// eslint-disable-next-line no-unused-vars
 // function doAjax ( url, ajaxData ) {
 //   return new Promise( function ( resolve, reject ) {
 //     try {
