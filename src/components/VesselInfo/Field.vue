@@ -181,7 +181,7 @@ export default {
       let _unid = this.$store.getters.getCurrentUnid;
       let _fldData = this.$store.getters.vesselInfo.Field[0];
       let _data = Object.assign( _fldData, {
-        PARAM2: 'SaveVessel',
+        // PARAM2: 'SaveVessel',
         unid: _unid,
       } );
       //  console.log('TCL: saveAction -> _unid', _data);

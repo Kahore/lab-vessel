@@ -141,26 +141,18 @@ const actions = {
       window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + _resp[0].unid );
       resolve( _resp[0].unid );
       commit( 'InProgress_Field', false );
-      // $.ajax( {
-      //   url: './GetPageText.ashx?Id=@Nav_Backend@',
-      //   type: 'GET',
-      //   dataType: 'json',
-      //   data: payload,
-      //   success: function ( resp ) {
-      //     let _resp = resp; /* JSON.parse( resp ) */
-      //     commit( 'mutateNewUnid', _resp[0].unid );
-      //     if ( _resp[0].HistoryPart ) {
-      //       commit( 'MUTATE_FIELD_HISTORY', _resp[0].HistoryPart[0] );
-      //     }
-      //     window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + _resp[0].unid );
-      //     resolve( _resp[0].unid );
-      //     commit( 'InProgress_Field', false );
-      //   },
-      //   error: function ( resp ) {
-      //     commit( 'SET_ERROR', resp.responseText );
-      //     reject( resp.responseText );
-      //     commit( 'InProgress_Field', false );
+      /* NKReports */
+      // commit( 'InProgress_Field', true );
+      // let _data = Object.assign( {}, payload, { PARAM2: 'SaveVessel' } );
+      // const data = _data;
+      // const result = doAjax( '@Nav_Backend@', data ).then( result => {
+      //   commit( 'mutateNewUnid', result[0].unid );
+      //   if ( result[0].HistoryPart ) {
+      //     commit( 'MUTATE_FIELD_HISTORY', result[0].HistoryPart[0] );
       //   }
+      //   window.history.pushState( '', '', './Default?Id=@NavID@&unid=' + result[0].unid );
+      //   resolve( result[0].unid );
+      //   commit( 'InProgress_Field', false );
       // } );
     } );
   },
