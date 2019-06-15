@@ -137,23 +137,9 @@ const mutations = {
 };
 const actions = {
   loadVessels: async ( { commit }, payload ) => {
+    /* TEST */
     commit( 'CLEAR_ERROR' );
     commit( 'CLEAR_VESSELS' );
-    /* NKReports */
-    // $.ajax({
-    //   url: './GetPageText.ashx?Id=@Nav_Backend@',
-    //   type: 'GET',
-    //   dataType: 'json',
-    //   data: { PARAM2: 'Vessels_GetData', hideMode: payload.hideMode },
-    //   success: function(resp) {
-    //     var myDataParse = JSON.parse(resp);
-    //     commit('loadVessels', myDataParse);
-    //   },
-    //   error: function(resp) {
-    //     commit( 'SET_ERROR', resp.responseText );
-    //   },
-    // });
-    /* TEST */
     commit( 'InProgress_VesselTable', true );
     setTimeout( () => {
       let myDataParse;
@@ -163,10 +149,18 @@ const actions = {
       } else {
         myDataParse = VesselData;
       }
-      //  myDataParse = VesselData;
       commit( 'loadVessels', myDataParse );
       commit( 'InProgress_VesselTable', false );
     }, 5000 );
+    /* NKReports */
+    // commit( 'CLEAR_ERROR' );
+    // commit( 'CLEAR_VESSELS' );
+    // commit( 'InProgress_VesselTable', true );
+    // const data = { PARAM2: 'Vessels_GetData', hideMode: payload.hideMode };
+    // const result = doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+    //   commit( 'loadVessels', result );
+    //   commit( 'InProgress_VesselTable', false );
+    // } );
   },
   MUTATION_TABLE_UPDATE_ROW: ( { commit }, payload ) => {
     /* TEST */
@@ -183,7 +177,7 @@ const actions = {
     /* NKReports */
     // commit( 'CLEAR_ERROR' );
     //   const data = { PARAM2: 'Vessels_GetData', unid: payload.unid };
-    //   const result = await doAjax( '@Nav_Backend@', data ).then( ( result ) => {
+    //   const result = doAjax( '@Nav_Backend@', data ).then( ( result ) => {
     //   if ( typeof payload.mode !== 'undefined' ) {
     //     if ( typeof payload.unid !== 'undefined' ) {
     //       commit( 'MUTATION_TABLE_REMOVE_OLD', payload.unid );
