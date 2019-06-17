@@ -30,7 +30,6 @@ For a detailed explanation on how things work, check out the [guide](http://vuej
 
 This app created for internal corporative demand and achiving several goals:
 
-- Understanding total vessel quantites distribute by location
-- Manage the repair and diagnostical procedere, cause after some fired (different for each vessel type) calorimetrical vessel can be blow up and get gamage for calorimeter and lab staff
-- Prognosing needs for ordering new vessel base on linear estimates solution(hosted as UDF and started every week)
-- Builds a graph with pre-lim and limit by individual or type vessel
+- Determination of total amount of vessels distributed to locations.
+- Repair and diagnostics management, aiming to prevent vessel exploding (caused by ignitions) which can damage the calorimeter and injure the lab staff.
+- Prognosing needs for ordering new vessel based on linear solution (hosted as UDF and started every week).
