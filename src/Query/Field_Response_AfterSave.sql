@@ -110,6 +110,7 @@ BEGIN
             ,[LabCode]
             ,[LastChangedBy]
             ,[VesselType]
+            ,[LastAutoCounterDate]
             )
           VALUES
             (@NewVesselID
@@ -133,6 +134,7 @@ BEGIN
 
 						, '@UserName@'
 						, '@VesselType@'
+            , DATEADD(hour,4,GETDATE())
 						)
 
           INSERT INTO  /*POST SERVICE LAB VesselMonitoringBackend @PARAM2@, @UserName@, @GetDate@*/ [LabProtocols].[dbo].[Ent_Lab_Entity_History]
